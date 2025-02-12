@@ -4,7 +4,7 @@ btnReg.addEventListener('click', register);
 
 async function register() {
     const email = document.getElementById('email').value;
-    const name = document.getElementById('name').value;
+    const username = document.getElementById('name').value;
     const password = document.getElementById('password').value;
     const password2 = document.getElementById('password2').value;
     if (password !== password2) {
@@ -16,7 +16,7 @@ async function register() {
         headers: {
             'content-type': 'application/json'
         },
-        body: JSON.stringify({ email, name, password })
+        body: JSON.stringify({ email, username, password })
     });
 
     const data = await res.json();
