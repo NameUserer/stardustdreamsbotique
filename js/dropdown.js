@@ -41,7 +41,7 @@ async function applyFilters() {
 
 // Fetch products from the backend (all or filtered)
 async function fetchProducts(filters = {}) {
-  const url = new URL("http://localhost:3000/products"); // Replace with your backend endpoint
+  const url = new URL("https://nodejs313.dszcbaross.edu.hu"); // Replace with your backend endpoint
 
   // Append query parameters for filters if they exist
   if (filters.colors && filters.colors.length > 0) {
