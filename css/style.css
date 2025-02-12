@@ -351,6 +351,7 @@ body {
         width: 100%;
     }
     .search{
+        width: 95%;
         height: 60px;
         right: 5px;
         top: 75px;
