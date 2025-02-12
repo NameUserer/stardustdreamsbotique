@@ -6,7 +6,7 @@ async function login() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    const res = await fetch('http://192.168.10.19:3000/api/auth/login', {
+    const res = await fetch('https://nodejs313.dszcbaross.edu.hu/api/auth/login', {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
