@@ -7,6 +7,7 @@ async function register() {
     const username = document.getElementById('name').value;
     const password = document.getElementById('password').value;
     const password2 = document.getElementById('password2').value;
+    console.log(email, username, password);
     if (password !== password2) {
         return alert('A két jelszó nem egyezik!');
     }
