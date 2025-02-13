@@ -355,9 +355,10 @@ body {
         height: 60px;
         right: 5px;
         top: 75px;
+        justify-content: space-around;
     }
     .searchbar{
-        width: 250px;
+        width: 70%;
         height: 50px;
     }
     .filterbutton {

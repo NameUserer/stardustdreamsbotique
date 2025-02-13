@@ -10,7 +10,7 @@ btnReg.addEventListener('click', () => {
 });
 
 async function getProducts() {
-    const res = await fetch('http://127.0.0.1:3000/api/products', {
+    const res = await fetch('https://nodejs313.dszcbaross.edu.hu/api/auth/productsController', {
         method: 'GET',
         credentials: 'include'
     });
