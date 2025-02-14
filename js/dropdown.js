@@ -16,39 +16,38 @@ document.addEventListener("click", (e) => {
 
 // Fetch all products from the backend on page load
 window.onload = async () => {
-  const products = await fetchProducts();
+  const products = await getProducts();
   displayResults(products);
 };
 
 // Apply filters and fetch filtered results
 async function applyFilters() {
-  // Get selected colors and shapes
-  const selectedColors = Array.from(document.querySelectorAll('input[data-category="color"]:checked')).map(cb => cb.value);
-  const selectedShapes = Array.from(document.querySelectorAll('input[data-category="shape"]:checked')).map(cb => cb.value);
+  const selectedGames = Array.from(document.querySelectorAll('input[data-category="game"]:checked')).map(cb => cb.value);
+  const selectedProducts = Array.from(document.querySelectorAll('input[data-category="product"]:checked')).map(cb => cb.value);
 
   // Prepare filter query for the backend
   const query = {
-    colors: selectedColors,
-    shapes: selectedShapes
+    games: selectedGames,
+    products: selectedProducts
   };
 
   // Fetch filtered results from the backend
-  const filteredItems = await fetchProducts(query);
+  const filteredItems = await getProducts(query);
 
   displayResults(filteredItems); // Show filtered results
   filterDropdown.classList.remove("open"); // Close dropdown
 }
 
 // Fetch products from the backend (all or filtered)
-async function fetchProducts(filters = {}) {
-  const url = new URL("https://nodejs313.dszcbaross.edu.hu"); // Replace with your backend endpoint
+async function getProducts(filters = {}) {
+  const url = `https://nodejs313.dszcbaross.edu.hu/products${queryString ? "?" + queryString : ""}`; // Adjusted URL
 
   // Append query parameters for filters if they exist
-  if (filters.colors && filters.colors.length > 0) {
-    url.searchParams.append("colors", filters.colors.join(","));
+  if (filters.games && filters.games.length > 0) {
+    url.searchParams.append("games", filters.games.join(","));
   }
-  if (filters.shapes && filters.shapes.length > 0) {
-    url.searchParams.append("shapes", filters.shapes.join(","));
+  if (filters.products && filters.products.length > 0) {
+    url.searchParams.append("products", filters.products.join(","));
   }
 
   try {

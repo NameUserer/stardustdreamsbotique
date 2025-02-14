@@ -30,7 +30,7 @@ function renderProducts(products) {
         cardHeaderDiv.textContent = product.name;
 
         const cardImg = document.createElement('img');
-        cardImg.src = `http://127.0.0.1:3000/uploads/${product.profile_pic}`;
+        cardImg.src = `https://nodejs313.dszcbaross.edu.hu/uploads/${product.profile_pic}`;
         cardImg.alt = product.name;
 
         cardHeaderDiv.append(cardImg);
@@ -41,7 +41,7 @@ function renderProducts(products) {
         const picDiv = document.createElement('div');
         picDiv.classList.add('pic-div');
         const picDivImg = document.createElement('img');
-        picDivImg.src = `http://127.0.0.1:3000/uploads/${product.product}`;
+        picDivImg.src = `https://nodejs313.dszcbaross.edu.hu/uploads/${product.product}`;
         picDivImg.alt = product.product;
 
         picDiv.append(picDivImg);
@@ -76,7 +76,7 @@ function renderProducts(products) {
 
 async function wishlist(upload_id) {
     //console.log(upload_id);
-    const res = await fetch(`http:127.0.0.1:3000/api/like/${upload_id}`, {
+    const res = await fetch(`https://nodejs313.dszcbaross.edu.hu/api/like/${upload_id}`, {
         method: 'POST',
         credentials: 'include'
     });
@@ -93,7 +93,7 @@ async function wishlist(upload_id) {
 }
 
 async function removewishlist(upload_id) {
-    const res = await fetch(`http:127.0.0.1:3000/api/like/${upload_id}`, {
+    const res = await fetch(`https://nodejs313.dszcbaross.edu.hu/api/like/${upload_id}`, {
         method: 'DELETE',
         credentials: 'include'
     });
