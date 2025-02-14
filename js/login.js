@@ -20,7 +20,7 @@ async function login() {
     if (res.ok) {
         resetInputs();
         alert(data.message);
-        window.location.href = '../home.html';
+        window.location.href = 'home.html';
     } else if (data.errors) {
         let errorMessage = '';
         for (let i = 0; i < data.errors.length; i++) {

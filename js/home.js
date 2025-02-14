@@ -127,3 +127,42 @@ function toggleWishlist(id, name) {
     }
     localStorage.setItem('wishlist', JSON.stringify(wishlist));
 }
+
+function handleAccountClick() {
+    let user = localStorage.getItem("user");
+
+    if (user) {
+        Swal.fire({
+            title: "You're Logged In",
+            text: "Do you want to log out?",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonText: "Log Out",
+            cancelButtonText: "Close"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                localStorage.removeItem("user");
+                checkLoginStatus();
+                Swal.fire("Logged Out!", "You have been logged out.", "success");
+            }
+        });
+    } else {
+        // Ask if they want to Log In or Sign Up
+        Swal.fire({
+            title: "Welcome!",
+            text: "Would you like to log in or sign up?",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonText: "Log In",
+            cancelButtonText: "Sign Up",
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#28a745"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = 'login.html'; // Redirect to login page
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                window.location.href = 'registration.html'; // Redirect to sign up page
+            }
+        });
+    }
+}
