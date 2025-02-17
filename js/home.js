@@ -151,12 +151,15 @@ function handleAccountClick() {
         Swal.fire({
             title: "Welcome!",
             text: "Would you like to log in or sign up?",
-            icon: "question",
+            imageUrl: "../img/barbara.png",
+            imageWidth: 150,
+            imageHeight: 350,
+            imageAlt: "Custom image",
             showCancelButton: true,
             confirmButtonText: "Log In",
             cancelButtonText: "Sign Up",
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#28a745"
+            confirmButtonColor: "#362F67",
+            cancelButtonColor: "#D6AEE9"
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location.href = 'login.html'; // Redirect to login page
