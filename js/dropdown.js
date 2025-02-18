@@ -9,12 +9,12 @@ filterIcon.addEventListener("click", () => {
 
 // Close dropdown if clicked outside
 document.addEventListener("click", (e) => {
-  if (!filterDropdown.contains(e.target)) {
+  if (!filterDropdown.contains(e.target) && !e.target.matches('.dropdown-content input')) {
     filterDropdown.classList.remove("open");
   }
 });
 
-// Fetch all products from the backend on page load
+// Fetch all products on page load
 window.onload = async () => {
   const products = await getProducts();
   displayResults(products);
@@ -25,29 +25,25 @@ async function applyFilters() {
   const selectedGames = Array.from(document.querySelectorAll('input[data-category="game"]:checked')).map(cb => cb.value);
   const selectedProducts = Array.from(document.querySelectorAll('input[data-category="product"]:checked')).map(cb => cb.value);
 
-  // Prepare filter query for the backend
-  const query = {
-    games: selectedGames,
-    products: selectedProducts
-  };
+  // Prepare query parameters
+  const queryParams = new URLSearchParams();
+  if (selectedGames.length > 0) queryParams.append("games", selectedGames.join(","));
+  if (selectedProducts.length > 0) queryParams.append("products", selectedProducts.join(","));
 
-  // Fetch filtered results from the backend
-  const filteredItems = await getProducts(query);
+  // Fetch filtered results
+  const filteredItems = await getProducts(queryParams);
 
   displayResults(filteredItems); // Show filtered results
   filterDropdown.classList.remove("open"); // Close dropdown
 }
 
 // Fetch products from the backend (all or filtered)
-async function getProducts(filters = {}) {
-  const url = `https://nodejs313.dszcbaross.edu.hu/products${queryString ? "?" + queryString : ""}`; // Adjusted URL
-
-  // Append query parameters for filters if they exist
-  if (filters.games && filters.games.length > 0) {
-    url.searchParams.append("games", filters.games.join(","));
-  }
-  if (filters.products && filters.products.length > 0) {
-    url.searchParams.append("products", filters.products.join(","));
+async function getProducts(queryParams = null) {
+  let url = `https://nodejs313.dszcbaross.edu.hu/products`;
+  
+  // Attach query parameters if any
+  if (queryParams) {
+    url += `?${queryParams.toString()}`;
   }
 
   try {
@@ -55,7 +51,7 @@ async function getProducts(filters = {}) {
     if (!response.ok) {
       throw new Error("Failed to fetch products.");
     }
-    return await response.json(); // Assuming the response is JSON
+    return await response.json();
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
@@ -63,7 +59,7 @@ async function getProducts(filters = {}) {
 }
 
 // Display results in the frontend
-function displayResults(items) {
+/*function displayResults(items) {
   const resultsDiv = document.getElementById("results");
   if (items.length === 0) {
     resultsDiv.innerHTML = '<p>No results found. Adjust your filters and try again.</p>';
@@ -82,7 +78,7 @@ function displayResults(items) {
       </div>
     </div>
   `).join('');
-}
+}*/
 
 // Placeholder functions for wishlist and cart actions
 function addToWishlist(productId) {
