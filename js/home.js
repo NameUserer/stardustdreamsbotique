@@ -3,9 +3,9 @@ const filterIcon = filterDropdown.querySelector(".filter-icon");
 const dropdownContent = filterDropdown.querySelector(".dropdown-content");
 
 // Toggle dropdown on icon click
-filterIcon.addEventListener("click", () => {
+/*filterIcon.addEventListener("click", () => {
   filterDropdown.classList.toggle("open");
-});
+});*/
 
 // Close dropdown if clicked outside
 document.addEventListener("click", (e) => {
