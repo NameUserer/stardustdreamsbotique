@@ -16,7 +16,7 @@ document.addEventListener("click", (e) => {
 
 // Fetch all products on page load
 window.onload = async () => {
-  const products = await fetchFilteredProducts()();
+  const products = await fetchFilteredProducts();
   displayResults(products);
 };
 
