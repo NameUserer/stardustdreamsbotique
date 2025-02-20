@@ -1,16 +1,66 @@
-const btnLogin = document.getElementsByClassName('login')[0];
-const btnReg = document.getElementsByClassName('reg')[0];
+const filterDropdown = document.getElementById("filterDropdown");
+const filterIcon = filterDropdown.querySelector(".filter-icon");
+const dropdownContent = filterDropdown.querySelector(".dropdown-content");
 
-btnLogin.addEventListener('click', () => {
-    window.location.href = '../login.html';
+// Toggle dropdown on icon click
+filterIcon.addEventListener("click", () => {
+  filterDropdown.classList.toggle("open");
 });
 
-btnReg.addEventListener('click', () => {
-    window.location.href = '../registration.html';
+// Close dropdown if clicked outside
+document.addEventListener("click", (e) => {
+  if (!filterDropdown.contains(e.target) && !e.target.matches('.dropdown-content input')) {
+    filterDropdown.classList.remove("open");
+  }
 });
 
+// Fetch all products on page load
+window.onload = async () => {
+  const products = await getProducts();
+  displayResults(products);
+};
+
+// Apply filters and fetch filtered results
+async function applyFilters() {
+  const selectedGames = Array.from(document.querySelectorAll('input[data-category="game"]:checked')).map(cb => cb.value);
+  const selectedProducts = Array.from(document.querySelectorAll('input[data-category="product"]:checked')).map(cb => cb.value);
+
+  // Prepare query parameters
+  const queryParams = new URLSearchParams();
+  if (selectedGames.length > 0) queryParams.append("games", selectedGames.join(","));
+  if (selectedProducts.length > 0) queryParams.append("products", selectedProducts.join(","));
+
+  // Fetch filtered results
+  const filteredItems = await getProducts(queryParams);
+
+  displayResults(filteredItems); // Show filtered results
+  filterDropdown.classList.remove("open"); // Close dropdown
+}
+
+// Fetch products from the backend (all or filtered)
+async function getProducts(queryParams = null) {
+  let url = `https://nodejs313.dszcbaross.edu.hu/products`;
+  
+  // Attach query parameters if any
+  if (queryParams) {
+    url += `?${queryParams.toString()}`;
+  }
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Failed to fetch products.");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+}
+
+//card
 async function getProducts() {
-    const res = await fetch('https://nodejs313.dszcbaross.edu.hu/products', {
+    const res = await fetch('https://nodejs313.dszcbaross.edu.hu/api/auth/products', {
         method: 'GET',
         credentials: 'include'
     });
