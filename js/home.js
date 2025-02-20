@@ -3,9 +3,9 @@ const filterIcon = filterDropdown.querySelector(".filter-icon");
 const dropdownContent = filterDropdown.querySelector(".dropdown-content");
 
 // Toggle dropdown on icon click
-/*filterIcon.addEventListener("click", () => {
+filterIcon.addEventListener("click", () => {
   filterDropdown.classList.toggle("open");
-});*/
+});
 
 // Close dropdown if clicked outside
 document.addEventListener("click", (e) => {
@@ -16,7 +16,7 @@ document.addEventListener("click", (e) => {
 
 // Fetch all products on page load
 window.onload = async () => {
-  const products = await getProducts();
+  const products = await fetchFilteredProducts()();
   displayResults(products);
 };
 
@@ -31,14 +31,14 @@ async function applyFilters() {
   if (selectedProducts.length > 0) queryParams.append("products", selectedProducts.join(","));
 
   // Fetch filtered results
-  const filteredItems = await getProducts(queryParams);
+  const filteredItems = await fetchFilteredProducts()(queryParams);
 
   displayResults(filteredItems); // Show filtered results
   filterDropdown.classList.remove("open"); // Close dropdown
 }
 
 // Fetch products from the backend (all or filtered)
-async function getProducts(queryParams = null) {
+async function fetchFilteredProducts(queryParams = null) {
   let url = `https://nodejs313.dszcbaross.edu.hu/products`;
   
   // Attach query parameters if any
@@ -135,7 +135,7 @@ async function wishlist(upload_id) {
     console.log(data);
 
     if (res.ok) {
-        getMemes();
+        getProducts();
         //likeIcon.style.backgroundColor = '#17BD3E';
     } else {
         alert(data.error);
@@ -149,7 +149,7 @@ async function removewishlist(upload_id) {
     });
 
     if (res.ok) {
-        getMemes();
+        getProducts();
     } else {
         const data = await res.json();
         alert(data.error);
