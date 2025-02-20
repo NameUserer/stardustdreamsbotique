@@ -363,6 +363,7 @@ body {
 .setting{
     width: 100px;
     margin-top: 20px;
+    margin-right: 0;
     border-radius: 50%;
 }
 
