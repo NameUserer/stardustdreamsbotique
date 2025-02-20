@@ -369,13 +369,20 @@ body {
 .edit-button button{
     background-color: var(--main);
     color: var(--table);
-    width: 400px;
+    width: 70%;
     height: 50px;
     border-radius: 30px;
     margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
     display: block;
+}
+
+.input{
+    width: 70%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    float: right;
 }
 
 .informations a {
