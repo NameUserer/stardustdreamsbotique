@@ -24,7 +24,6 @@ window.onload = async () => {
     console.error("Error on window load:", error);
   }
 };
-});
 
 // Fetch all or filtered products
 async function getProducts(queryParams = "") {
@@ -199,6 +198,8 @@ if (index > -1) {
 }
 localStorage.setItem("wishlist", JSON.stringify(wishlist));
 }
+
+
 function handleAccountClick() {
     let user = localStorage.getItem("user");
 
