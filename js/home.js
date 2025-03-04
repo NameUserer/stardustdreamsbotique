@@ -27,7 +27,7 @@ window.onload = async () => {
 
 // Fetch all or filtered products
 async function getProducts(queryParams = "") {
-let url = `https://nodejs313.dszcbaross.edu.hu/api/products/getAllproduct`;
+let url = `https://nodejs313.dszcbaross.edu.hu/api/auth/getAllproduct`;
 
 if (queryParams) {
   url += `?${queryParams}`;
