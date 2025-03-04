@@ -12,7 +12,7 @@ async function register() {
         return alert('A két jelszó nem egyezik!');
     }
 
-    const res = await fetch('https://nodejs313.dszcbaross.edu.hu/api/auth/register', {
+    const res = await fetch('/api/auth/register', {
         method: "POST",
         headers: {
             'content-type': 'application/json'

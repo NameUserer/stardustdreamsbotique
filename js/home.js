@@ -27,7 +27,7 @@ window.onload = async () => {
 
 // Fetch all or filtered products
 async function getProducts(queryParams = "") {
-let url = `https://nodejs313.dszcbaross.edu.hu/api/products/getAllproducts`;
+let url = `/api/products/getAllproducts`;
 
 if (queryParams) {
   url += `?${queryParams}`;
@@ -94,7 +94,7 @@ for (const product of products) {
   cardHeaderDiv.textContent = product.name;
 
   const cardImg = document.createElement("img");
-  cardImg.src = `https://nodejs313.dszcbaross.edu.hu/uploads/${product.profile_pic}`;
+  cardImg.src = `/api/products/${product.profile_pic}`;
   cardImg.alt = product.name;
 
   cardHeaderDiv.append(cardImg);
@@ -106,7 +106,7 @@ for (const product of products) {
   const picDiv = document.createElement("div");
   picDiv.classList.add("pic-div");
   const picDivImg = document.createElement("img");
-  picDivImg.src = `https://nodejs313.dszcbaross.edu.hu/uploads/${product.product}`;
+  picDivImg.src = `/api/products/${product.product}`;
   picDivImg.alt = product.product;
 
   picDiv.append(picDivImg);
@@ -139,7 +139,7 @@ for (const product of products) {
 // Wishlist functions
 async function wishlist(upload_id) {
 try {
-  const res = await fetch(`https://nodejs313.dszcbaross.edu.hu/api/like/${upload_id}`, {
+  const res = await fetch(`/api/like/${upload_id}`, {
     method: "POST",
     credentials: "include",
   });
@@ -159,7 +159,7 @@ try {
 
 async function removewishlist(upload_id) {
 try {
-  const res = await fetch(`https://nodejs313.dszcbaross.edu.hu/api/like/${upload_id}`, {
+  const res = await fetch(`/api/like/${upload_id}`, {
     method: "DELETE",
     credentials: "include",
   });

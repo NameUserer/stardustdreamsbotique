@@ -39,7 +39,7 @@ async function applyFilters() {
 
 // Fetch products from the backend (all or filtered)
 async function getProducts(queryParams = null) {
-  let url = `https://nodejs313.dszcbaross.edu.hu/products`;
+  let url = `/products`;
   
   // Attach query parameters if any
   if (queryParams) {
