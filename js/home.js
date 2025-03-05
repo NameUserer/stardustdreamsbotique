@@ -95,8 +95,8 @@ function renderProducts(products) {
     cardHeaderDiv.textContent = product.product_name;
 
     const cardImg = document.createElement("img");
-    cardImg.src = `/uploads/${product.profile_pic}`;
-    cardImg.alt = product.name;
+    cardImg.src = `/uploads/${product.product}`;
+    cardImg.alt = product.product_name;
 
     cardHeaderDiv.append(cardImg);
 
@@ -107,8 +107,8 @@ function renderProducts(products) {
     const picDiv = document.createElement("div");
     picDiv.classList.add("pic-div");
     const picDivImg = document.createElement("img");
-    picDivImg.src = `/uploads${product.product}`;
-    picDivImg.alt = product.product;
+    picDivImg.src = `/uploads/${product.product}`;
+    picDivImg.alt = product.product_name;
 
     picDiv.append(picDivImg);
     cardBodyDiv.append(picDiv);
