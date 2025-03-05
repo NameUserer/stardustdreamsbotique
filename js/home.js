@@ -38,9 +38,9 @@ async function getProducts(queryParams = "") {
   try {
     const response = await fetch(url, {
       method: "GET",
-      credentials: "include",
-      mode: "cors",
+      credentials: "include"
     });
+    console.log(response);
 
     if (!response.ok) {
       throw new Error(`Failed to fetch products. Status: ${response.status}`);
