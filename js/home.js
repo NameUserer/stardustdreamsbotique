@@ -94,7 +94,7 @@ for (const product of products) {
   cardHeaderDiv.textContent = product.name;
 
   const cardImg = document.createElement("img");
-  cardImg.src = `/api/products/${product.profile_pic}`;
+  cardImg.src = `/api/products/${product.product}`;
   cardImg.alt = product.name;
 
   cardHeaderDiv.append(cardImg);
@@ -106,7 +106,7 @@ for (const product of products) {
   const picDiv = document.createElement("div");
   picDiv.classList.add("pic-div");
   const picDivImg = document.createElement("img");
-  picDivImg.src = `/api/products/${product.product}`;
+  picDivImg.src = `/api/products/${product.product_name}`;
   picDivImg.alt = product.product;
 
   picDiv.append(picDivImg);
