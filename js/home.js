@@ -81,6 +81,7 @@ function displayResults(products) {
 
 // Render product cards
 function renderProducts(products) {
+  console.log(`renderProducts: ${products}`);
   const row = document.getElementById("row");
   row.innerHTML = "";
 
@@ -91,10 +92,10 @@ function renderProducts(products) {
     // Card header
     const cardHeaderDiv = document.createElement("div");
     cardHeaderDiv.classList.add("card-header");
-    cardHeaderDiv.textContent = product.name;
+    cardHeaderDiv.textContent = product.product_name;
 
     const cardImg = document.createElement("img");
-    cardImg.src = `/api/products/${product.product}`;
+    cardImg.src = `/uploads/${product.profile_pic}`;
     cardImg.alt = product.name;
 
     cardHeaderDiv.append(cardImg);
@@ -106,7 +107,7 @@ function renderProducts(products) {
     const picDiv = document.createElement("div");
     picDiv.classList.add("pic-div");
     const picDivImg = document.createElement("img");
-    picDivImg.src = `/api/products/${product.product_name}`;
+    picDivImg.src = `/uploads${product.product}`;
     picDivImg.alt = product.product;
 
     picDiv.append(picDivImg);
