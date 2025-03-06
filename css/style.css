@@ -270,6 +270,25 @@ body {
     margin-bottom: 0;
 }
 
+#row{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    margin: 10px;
+    flex: 1 1 calc(18rem + 20px);
+    max-width: 18rem;
+}
+
+.btn.cart{
+    background-color: var(--main);
+    color: var(--table);
+}
+
 .submit-btn {
     background-color: var(--buttons);
     border: none;
