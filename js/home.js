@@ -88,53 +88,48 @@ function renderProducts(products) {
   for (const product of products) {
     const cardDiv = document.createElement("div");
     cardDiv.classList.add("card");
+    cardDiv.style.width = "18rem";
 
-    // Card header
-    const cardHeaderDiv = document.createElement("div");
-    cardHeaderDiv.classList.add("card-header");
-    cardHeaderDiv.textContent = product.product_name;
-
+    // Card Image
     const cardImg = document.createElement("img");
     cardImg.src = `/uploads/${product.product}`;
+    cardImg.classList.add("card-img-top");
     cardImg.alt = product.product_name;
-
-    cardHeaderDiv.append(cardImg);
-
-    // Card body
+    
+    // Card Body
     const cardBodyDiv = document.createElement("div");
     cardBodyDiv.classList.add("card-body");
 
-    const picDiv = document.createElement("div");
-    picDiv.classList.add("pic-div");
-    const picDivImg = document.createElement("img");
-    picDivImg.src = `/uploads/${product.product}`;
-    picDivImg.alt = product.product_name;
+    const cardTitle = document.createElement("h5");
+    cardTitle.classList.add("card-title");
+    cardTitle.textContent = product.product_name;
 
-    picDiv.append(picDivImg);
-    cardBodyDiv.append(picDiv);
+    const cardText = document.createElement("p");
+    cardText.classList.add("card-text");
+    cardText.textContent = product.description;
 
-    // Card footer
-    const cardFooterDiv = document.createElement("div");
-    cardFooterDiv.classList.add("card-footer");
+    const priceText = document.createElement("p");
+    priceText.textContent = `$${product.price}`;
+    
+    // Buy Button
+    const buyButton = document.createElement("a");
+    buyButton.href = "#";
+    buyButton.classList.add("btn", "cart");
+    buyButton.textContent = "Buy";
+    buyButton.addEventListener("click", () => addToCart(product));
 
-    const footerSpan = document.createElement("span");
-    footerSpan.textContent = product.like;
-
-    const likeIcon = document.createElement("i");
-    if (product.alreadLiked === 0) {
-      likeIcon.classList.add("fa-regular", "fa-thumbs-up");
-      likeIcon.addEventListener("click", () => wishlist(product.upload_id));
-    } else {
-      likeIcon.classList.add("fa-regular", "fa-thumbs-up", "like");
-      likeIcon.addEventListener("click", () => wishlist(product.upload_id, likeIcon));
-    }
-
-    cardFooterDiv.append(footerSpan, likeIcon);
+    // Wishlist Button
+    const wishlistButton = document.createElement("a");
+    wishlistButton.href = "#";
+    wishlistButton.classList.add("btn", "wishlist");
+    wishlistButton.textContent = "♥";
+    wishlistButton.addEventListener("click", () => addToWishlist(product));
 
     // Append elements
-    cardDiv.append(cardHeaderDiv, cardBodyDiv, cardFooterDiv);
-    row.append(cardDiv);
-  }
+    cardBodyDiv.append(cardTitle, cardText, priceText, buyButton, wishlistButton);
+    cardDiv.append(cardImg, cardBodyDiv);
+    document.getElementById("row").append(cardDiv);
+}
 }
 
 // Wishlist functions
