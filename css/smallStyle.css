@@ -21,9 +21,9 @@
         width: 100%;
     }
     .search{
-        width: 95%;
+        width: 90%;
         height: 60px;
-        right: 5px;
+        right: auto;
         top: 75px;
         justify-content: space-around;
     }
@@ -42,7 +42,7 @@
     .navbar{
         flex-direction: row;
         justify-content: space-around;
-        width: 95%;
+        width: 90%;
         height: 60px;
         top: 10px;
     }
