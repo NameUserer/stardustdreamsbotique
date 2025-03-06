@@ -89,16 +89,16 @@ function renderProducts(products) {
     const cardDiv = document.createElement("div");
     cardDiv.classList.add("card");
     cardDiv.style.width = "18rem";
-
+    
     // Card Image
     const cardImg = document.createElement("img");
-    cardImg.src = `/uploads/${product.product}`;
+    cardImg.src = `/uploads/${product.image}`;
     cardImg.classList.add("card-img-top");
     cardImg.alt = product.product_name;
     
     // Card Body
     const cardBodyDiv = document.createElement("div");
-    cardBodyDiv.classList.add("card-body");
+    cardBodyDiv.classList.add("card-body", "d-flex", "flex-column");
 
     const cardTitle = document.createElement("h5");
     cardTitle.classList.add("card-title");
@@ -110,6 +110,12 @@ function renderProducts(products) {
 
     const priceText = document.createElement("p");
     priceText.textContent = `$${product.price}`;
+    
+    cardBodyDiv.append(cardTitle, cardText, priceText);
+    
+    // Card Footer
+    const cardFooterDiv = document.createElement("div");
+    cardFooterDiv.classList.add("card-footer", "d-flex", "justify-content-between");
     
     // Buy Button
     const buyButton = document.createElement("a");
@@ -125,11 +131,12 @@ function renderProducts(products) {
     wishlistButton.textContent = "♥";
     wishlistButton.addEventListener("click", () => addToWishlist(product));
 
+    cardFooterDiv.append(buyButton, wishlistButton);
+    
     // Append elements
-    cardBodyDiv.append(cardTitle, cardText, priceText, buyButton, wishlistButton);
-    cardDiv.append(cardImg, cardBodyDiv);
+    cardDiv.append(cardImg, cardBodyDiv, cardFooterDiv);
     document.getElementById("row").append(cardDiv);
-}
+  }
 }
 
 // Wishlist functions
