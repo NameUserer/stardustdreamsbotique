@@ -4,7 +4,7 @@ backbutton.addEventListener('click', () => {
     window.location.href = '../admin.html';
 });
 
-function addProduct() {
+document.getElementById("addProductButton").addEventListener("click", async function() {
     const name = document.getElementById('productName').value;
     const description = document.getElementById('productDescription').value;
     const price = document.getElementById('productPrice').value;
@@ -17,66 +17,28 @@ function addProduct() {
         return;
     }
     
-    const reader = new FileReader();
-    reader.onload = function(event) {
-        const product = {
-            product: event.target.result,
-            product_name: name,
-            description: description,
-            price: price,
-            type_id: typeId,
-            category_id: categoryId
-        };
+    const formData = new FormData();
+    formData.append("productImage", imageInput.files[0]);
+    formData.append("product_name", name);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("type_id", typeId);
+    formData.append("category_id", categoryId);
+    
+    try {
+        const response = await fetch(`/uploadProduct/${product}`, {
+            method: "POST",
+            body: formData
+        });
         
-        const cardDiv = document.createElement("div");
-        cardDiv.classList.add("card");
-        cardDiv.style.width = "18rem";
+        if (!response.ok) {
+            throw new Error("Failed to upload product");
+        }
         
-        const cardImg = document.createElement("img");
-        cardImg.src = product.product;
-        cardImg.classList.add("card-img-top");
-        cardImg.alt = product.product_name;
-        
-        const cardBodyDiv = document.createElement("div");
-        cardBodyDiv.classList.add("card-body", "d-flex", "flex-column");
-        
-        const cardTitle = document.createElement("h5");
-        cardTitle.classList.add("card-title");
-        cardTitle.textContent = product.product_name;
-        
-        const cardText = document.createElement("p");
-        cardText.classList.add("card-text");
-        cardText.textContent = product.description;
-        
-        const priceText = document.createElement("p");
-        priceText.textContent = `$${product.price}`;
-        
-        const typeText = document.createElement("p");
-        typeText.textContent = `Type ID: ${product.type_id}`;
-        
-        const categoryText = document.createElement("p");
-        categoryText.textContent = `Category ID: ${product.category_id}`;
-        
-        cardBodyDiv.append(cardTitle, cardText, priceText, typeText, categoryText);
-        
-        const cardFooterDiv = document.createElement("div");
-        cardFooterDiv.classList.add("card-footer", "d-flex", "justify-content-between");
-        
-        const buyButton = document.createElement("a");
-        buyButton.href = "#";
-        buyButton.classList.add("btn", "cart");
-        buyButton.textContent = "Buy";
-        buyButton.addEventListener("click", () => addToCart(product));
-        
-        const wishlistButton = document.createElement("a");
-        wishlistButton.href = "#";
-        wishlistButton.classList.add("btn", "wishlist");
-        wishlistButton.textContent = "♥";
-        wishlistButton.addEventListener("click", () => addToWishlist(product));
-        
-        cardFooterDiv.append(buyButton, wishlistButton);
-        cardDiv.append(cardImg, cardBodyDiv, cardFooterDiv);
-        document.getElementById("row").append(cardDiv);
-    };
-    reader.readAsDataURL(imageInput.files[0]);
-}
+        const product = await response.json();
+        alert("Product added successfully!");
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Error adding product");
+    }
+});
