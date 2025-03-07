@@ -29,46 +29,31 @@
             </div>
 
             <div class="col-12 col-sm-12 col-lg-10 mt-5">
-                <div class="search mb-5">
-                    <div class="searchbar">
-                        <button><img src="./img/search.png" alt=""></button>
-                        <input type="text" id="search" placeholder="Termék keresése...">
-                    </div>
-                    <!-- Filter Dropdown -->
-                    <div class="filterbutton">
-                        <div class="filter-dropdown" id="filterDropdown">
-                            <div class="filter-icon" title="Open Filters"><img src="./img/filter.png" alt=""></div>
-                            <div class="dropdown-content">
-                            <!-- Filter Section -->
-                            <!--én volt sorry-->
-                                <div class="filter-section">
-                                    <h2>Hoyo Games</h2>
-                                    <label><input type="checkbox" class="filter" data-category="game" value="hi"> Honkai Impact</label><br>
-                                    <label><input type="checkbox" class="filter" data-category="game" value="gi"> Genshin Impact</label><br>
-                                    <label><input type="checkbox" class="filter" data-category="game" value="hsr"> Honkai: Star Rail</label><br>
-                                    <label><input type="checkbox" class="filter" data-category="game" value="zzz"> Zenless Zone zero</label><br>
-                                </div>
-                        
-                                <div class="filter-section">
-                                    <h2>Products</h2>
-                                    <label><input type="checkbox" class="filter" data-category="product" value="full"> Full costumes</label><br>
-                                    <label><input type="checkbox" class="filter" data-category="product" value="wig"> Wigs</label><br>
-                                    <label><input type="checkbox" class="filter" data-category="product" value="acc"> Accesories</label><br>
-                                    <label><input type="checkbox" class="filter" data-category="product" value="merch"> Merches</label>
-                                </div>
-                        
-                            <button onclick="applyFilters()">Apply Filters</button>
-                            </div>
                             </div>
                         </div>
                     </div>
-                <div class="container table">
-                    <h2>Add a Product</h2>
+                <div class="container box">
+                    <h2 class="text-center mb-5 pt-5">Add a Product</h2>
                     <input type="file" id="productImage" accept="image/*"><br>
                     <input type="text" id="productName" placeholder="Product Name"><br>
                     <textarea id="productDescription" placeholder="Product Description"></textarea><br>
                     <input type="number" id="productPrice" placeholder="Price" step="0.01"><br>
-                    <button onclick="addProduct()">Add Product</button>
+
+                    <select id="typeSelect">
+                        <option value="1">Homkai Impact</option>
+                        <option value="2">Genshin Impact</option>
+                        <option value="3">Honkai: Star Rail</option>
+                        <option value="4">Zenless Zone Zero</option>
+                    </select><br>
+                    
+                    <select id="categorySelect">
+                        <option value="1">Full costume</option>
+                        <option value="2">Wig</option>
+                        <option value="3">Accessory</option>
+                        <option value="4">Merch</option>
+                    </select><br>
+
+                    <button id="add" onclick="addProduct()">Add Product</button>
                 </div>
             </div>
         </div>
