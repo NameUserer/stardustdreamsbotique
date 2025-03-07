@@ -8,7 +8,7 @@ async function searchProducts() {
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = '';
 
-    const response = await fetch(`http://localhost:3000/products/${search}`);
+    const response = await fetch(`/products/${search}`);
 
     const products = await response.json();
 
@@ -18,25 +18,56 @@ async function searchProducts() {
         resultsDiv.appendChild(noProductsMessage);
     } else {
         products.forEach(product => {
-            const productDiv = document.createElement('div');
-            productDiv.classList.add('product');
+            const cardDiv = document.createElement("div");
+    cardDiv.classList.add("card");
+    cardDiv.style.width = "18rem";
+    
+    // Card Image
+    const cardImg = document.createElement("img");
+    cardImg.src = `/uploads/${product.product}`;
+    cardImg.classList.add("card-img-top");
+    cardImg.alt = product.product_name;
+    
+    // Card Body
+    const cardBodyDiv = document.createElement("div");
+    cardBodyDiv.classList.add("card-body", "d-flex", "flex-column");
 
-            const productName = document.createElement('h2');
-            productName.textContent = product.name;
-            productDiv.appendChild(productName);
+    const cardTitle = document.createElement("h5");
+    cardTitle.classList.add("card-title");
+    cardTitle.textContent = product.product_name;
 
-            const productDescription = document.createElement('p');
-            productDescription.textContent = product.description;
-            productDiv.appendChild(productDescription);
+    const cardText = document.createElement("p");
+    cardText.classList.add("card-text");
+    cardText.textContent = product.description;
 
-            const productPrice = document.createElement('p');
-            const strongElement = document.createElement('strong');
-            strongElement.textContent = 'Price: ';
-            productPrice.appendChild(strongElement);
-            productPrice.appendChild(document.createTextNode(`$${product.price}`));
-            productDiv.appendChild(productPrice);
+    const priceText = document.createElement("p");
+    priceText.textContent = `$${product.price}`;
+    
+    cardBodyDiv.append(cardTitle, cardText, priceText);
+    
+    // Card Footer
+    const cardFooterDiv = document.createElement("div");
+    cardFooterDiv.classList.add("card-footer", "d-flex", "justify-content-between");
+    
+    // Buy Button
+    const buyButton = document.createElement("a");
+    buyButton.href = "#";
+    buyButton.classList.add("btn", "cart");
+    buyButton.textContent = "Buy";
+    buyButton.addEventListener("click", () => addToCart(product));
 
-            resultsDiv.appendChild(productDiv);
+    // Wishlist Button
+    const wishlistButton = document.createElement("a");
+    wishlistButton.href = "#";
+    wishlistButton.classList.add("btn", "wishlist");
+    wishlistButton.textContent = "♥";
+    wishlistButton.addEventListener("click", () => addToWishlist(product));
+
+    cardFooterDiv.append(buyButton, wishlistButton);
+    
+    // Append elements
+    cardDiv.append(cardImg, cardBodyDiv, cardFooterDiv);
+    document.getElementById("row").append(cardDiv);
         });
     }
 }

@@ -394,3 +394,14 @@ body {
     position: fixed;
     bottom: 300px;
 }
+
+.add button {
+    background-color: var(--main);
+    color: var(--table);
+    font-size: 20px;
+    border-radius: 30px;
+    width: 100px;
+    height: 50px;
+    position: fixed;
+    bottom: 300px;
+}
