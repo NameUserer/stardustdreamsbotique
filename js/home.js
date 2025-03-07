@@ -201,28 +201,17 @@ function toggleWishlist(id, name) {
   }
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
 }
+document.addEventListener("DOMContentLoaded", () => {
+  const accountBtn = document.getElementById("accountBtn");
 
+  // Function to check if user is logged in (based on cookie)
+  function isLoggedIn() {
+      return document.cookie.includes("loggedIn=true");
+  }
 
-function handleAccountClick() {
-  let user = localStorage.getItem("user");
-
-  if (user) {
-    Swal.fire({
-      title: "You're Logged In",
-      text: "Do you want to log out?",
-      icon: "info",
-      showCancelButton: true,
-      confirmButtonText: "Log Out",
-      cancelButtonText: "Close"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        localStorage.removeItem("user");
-        checkLoginStatus();
-        Swal.fire("Logged Out!", "You have been logged out.", "success");
-      }
-    });
+  if (isLoggedIn()) {
+    accountBtn.onclick = () => window.location.href = "account.html";
   } else {
-    // Ask if they want to Log In or Sign Up
     Swal.fire({
       title: "Welcome!",
       text: "Would you like to log in or sign up?",
@@ -243,4 +232,4 @@ function handleAccountClick() {
       }
     });
   }
-}
+});
