@@ -201,16 +201,45 @@ function toggleWishlist(id, name) {
   }
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
 }
-document.addEventListener("DOMContentLoaded", () => {
-  const accountBtn = document.getElementById("accountBtn");
 
-  // Function to check if user is logged in (based on cookie)
-  function isLoggedIn() {
-      return document.cookie.includes("loggedIn=true");
-  }
+document.addEventListener("DOMContentLoaded", checkLoginStatus);
 
-  if (isLoggedIn()) {
-    accountBtn.onclick = () => window.location.href = "account.html";
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        let date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + value + "; path=/" + expires;
+}
+
+function getCookie(name) {
+    let nameEQ = name + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim();
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length);
+    }
+    return null;
+}
+
+function checkLoginStatus() {
+    let user = getCookie("user");
+    let accountIcon = document.querySelector(".icon img");
+
+    if (user) {
+        accountIcon.style.border = "2px solid green"; // Example visual effect
+    } else {
+        accountIcon.style.border = "none"; // Reset if not logged in
+    }
+}
+
+function handleAccountClick() {
+  let user = localStorage.getItem("user");
+
+  if (user) {
+    window.location.href = "account.html";
   } else {
     Swal.fire({
       title: "Welcome!",
@@ -232,4 +261,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-});
+}
