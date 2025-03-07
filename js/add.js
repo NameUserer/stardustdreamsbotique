@@ -26,7 +26,7 @@ document.getElementById("addProductButton").addEventListener("click", async func
     formData.append("category_id", categoryId);
     
     try {
-        const response = await fetch(`/uploadProduct/${product}`, {
+        const response = await fetch('/api/product/uploadProduct', {
             method: "POST",
             body: formData
         });
