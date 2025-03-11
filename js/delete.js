@@ -104,7 +104,7 @@ function renderProducts(products) {
 
 // Search function to filter products by name
 function fetchProducts() {
-    fetch("/api/products")
+    fetch("/api/products/getALLproduct")
       .then(response => response.json())
       .then(products => renderProducts(products))
       .catch(error => console.error("Error fetching products:", error));
