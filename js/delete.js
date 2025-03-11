@@ -103,12 +103,31 @@ function renderProducts(products) {
   }
 
 // Search function to filter products by name
-function fetchProducts() {
-    fetch("/api/products/getALLproduct")
-      .then(response => response.json())
-      .then(products => renderProducts(products))
-      .catch(error => console.error("Error fetching products:", error));
-  }
+async function getProducts(queryParams = "") {
+    let url = `/api/products/getALLproduct`;
   
-  // Initial fetch
-  fetchProducts();
+    if (queryParams) {
+      url += `?${queryParams}`;
+    }
+  
+    console.log("Fetching from:", url);
+  
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        credentials: "include"
+      });
+      console.log(response);
+  
+      if (!response.ok) {
+        throw new Error(`Failed to fetch products. Status: ${response.status}`);
+      }
+  
+      const products = await response.json();
+      console.log("Fetched products:", products);
+      return products;
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      return [];
+    }
+  }
