@@ -7,7 +7,7 @@ async function editProfileName() {
     const name = document.getElementById('name').value;
     console.log(name);
     
-    const res = await fetch('/api/editProfileName', {
+    const res = await fetch('/api/profile/editProfileName', {
         method: 'PUT',
         headers: {
             'content-type': 'application/json'

@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
             formData.append("category_id", categoryId);
             
             try {
-                const response = await fetch("/uploadProduct/upload", {
+                const response = await fetch("/api/products/uploadProduct", {
                     method: "POST",
                     body: formData
                 });
