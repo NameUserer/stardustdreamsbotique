@@ -422,7 +422,7 @@ input, textarea, select {
     font-size: 16px;
 }
 
-#add{
+.adds{
     background-color: var(--main);
     color: var(--table);
     font-size: 18px;
