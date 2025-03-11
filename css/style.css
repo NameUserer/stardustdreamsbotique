@@ -140,6 +140,7 @@ body {
 }
 
 .searchbar input {
+    width: 200px;
     border: 0;
     background-color: var(--secondary);
 }
@@ -370,13 +371,6 @@ body {
     margin-left: auto;
     margin-right: auto;
     display: block;
-}
-
-.input{
-    width: 67%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    float: right;
 }
 
 .informations a {
