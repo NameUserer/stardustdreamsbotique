@@ -57,17 +57,22 @@ async function getProducts(queryParams = "") {
 
 // Apply filters
 async function applyFilters() {
-  const selectedGames = Array.from(document.querySelectorAll('input[data-category="game"]:checked')).map(cb => cb.value);
-  const selectedProducts = Array.from(document.querySelectorAll('input[data-category="product"]:checked')).map(cb => cb.value);
+  const selectedGames = Array.from(document.querySelectorAll('input[data-category="game"]:checked'))
+    .map(cb => cb.value); // Get selected category_id values
+
+  const selectedProducts = Array.from(document.querySelectorAll('input[data-category="product"]:checked'))
+    .map(cb => cb.value); // Get selected type_id values
 
   const queryParams = new URLSearchParams();
-  if (selectedGames.length > 0) queryParams.append("games", selectedGames.join(","));
-  if (selectedProducts.length > 0) queryParams.append("products", selectedProducts.join(","));
+  
+  // Check if filters are selected and append correct query format
+  if (selectedGames.length > 0) queryParams.append("category_id", selectedGames.join(",")); 
+  if (selectedProducts.length > 0) queryParams.append("type_id", selectedProducts.join(","));
 
   try {
-    const filteredItems = await getProducts(queryParams.toString());
+    const filteredItems = await getProducts(queryParams.toString()); 
     displayResults(filteredItems);
-    document.getElementById("filterDropdown").classList.remove("open");
+    document.getElementById("filterDropdown").classList.remove("open"); 
   } catch (error) {
     console.error("Error applying filters:", error);
   }
