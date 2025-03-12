@@ -1,14 +1,14 @@
 .frontleft {
-    position: absolute;
-    bottom: 90px;
-    left: 50px;
+    position: relative;
+    bottom: 20px;
+    right: 140px;
     width: 27vw;
 }
 
 .frontright {
-    position: absolute;
+    position: relative;
     bottom: 20px;
-    right: 20px;
+    right: -100px;
     width: 23vw;
 }
 
@@ -27,6 +27,15 @@
 }
 
 @media (max-width: 768px){
+    .frontleft{
+        width: 80%;
+        right: 70px;
+    }
+    .frontright{
+        width: 80%;
+        left: 70px;
+        top: 30px;
+    }
     .character-left {
         position: absolute;
         top: -30px;

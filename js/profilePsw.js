@@ -7,7 +7,7 @@ async function editProfilePsw() {
     const psw = document.getElementById('psw').value;
     console.log(psw);
     
-    const res = await fetch('http://127.0.0.1:3000/api/editProfilePsw', {
+    const res = await fetch('/api/profile/editProfilePassword', {
         method: 'PUT',
         headers: {
             'content-type': 'application/json'

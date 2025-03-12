@@ -7,7 +7,7 @@ async function editProfileName() {
     const name = document.getElementById('name').value;
     console.log(name);
     
-    const res = await fetch('http://127.0.0.1:3000/api/editProfileName', {
+    const res = await fetch('/api/profile/editProfileAdress', {
         method: 'PUT',
         headers: {
             'content-type': 'application/json'

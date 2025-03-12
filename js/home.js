@@ -57,17 +57,22 @@ async function getProducts(queryParams = "") {
 
 // Apply filters
 async function applyFilters() {
-  const selectedGames = Array.from(document.querySelectorAll('input[data-category="game"]:checked')).map(cb => cb.value);
-  const selectedProducts = Array.from(document.querySelectorAll('input[data-category="product"]:checked')).map(cb => cb.value);
+  const selectedGames = Array.from(document.querySelectorAll('input[data-category="game"]:checked'))
+    .map(cb => cb.value); // Get selected category_id values
+
+  const selectedProducts = Array.from(document.querySelectorAll('input[data-category="product"]:checked'))
+    .map(cb => cb.value); // Get selected type_id values
 
   const queryParams = new URLSearchParams();
-  if (selectedGames.length > 0) queryParams.append("games", selectedGames.join(","));
-  if (selectedProducts.length > 0) queryParams.append("products", selectedProducts.join(","));
+  
+  // Check if filters are selected and append correct query format
+  if (selectedGames.length > 0) queryParams.append("category_id", selectedGames.join(",")); 
+  if (selectedProducts.length > 0) queryParams.append("type_id", selectedProducts.join(","));
 
   try {
-    const filteredItems = await getProducts(queryParams.toString());
+    const filteredItems = await getProducts(queryParams.toString()); 
     displayResults(filteredItems);
-    document.getElementById("filterDropdown").classList.remove("open");
+    document.getElementById("filterDropdown").classList.remove("open"); 
   } catch (error) {
     console.error("Error applying filters:", error);
   }
@@ -88,52 +93,54 @@ function renderProducts(products) {
   for (const product of products) {
     const cardDiv = document.createElement("div");
     cardDiv.classList.add("card");
-
-    // Card header
-    const cardHeaderDiv = document.createElement("div");
-    cardHeaderDiv.classList.add("card-header");
-    cardHeaderDiv.textContent = product.product_name;
-
+    cardDiv.style.width = "18rem";
+    
+    // Card Image
     const cardImg = document.createElement("img");
     cardImg.src = `/uploads/${product.product}`;
+    cardImg.classList.add("card-img-top");
     cardImg.alt = product.product_name;
-
-    cardHeaderDiv.append(cardImg);
-
-    // Card body
+    
+    // Card Body
     const cardBodyDiv = document.createElement("div");
-    cardBodyDiv.classList.add("card-body");
+    cardBodyDiv.classList.add("card-body", "d-flex", "flex-column");
 
-    const picDiv = document.createElement("div");
-    picDiv.classList.add("pic-div");
-    const picDivImg = document.createElement("img");
-    picDivImg.src = `/uploads/${product.product}`;
-    picDivImg.alt = product.product_name;
+    const cardTitle = document.createElement("h5");
+    cardTitle.classList.add("card-title");
+    cardTitle.textContent = product.product_name;
 
-    picDiv.append(picDivImg);
-    cardBodyDiv.append(picDiv);
+    const cardText = document.createElement("p");
+    cardText.classList.add("card-text");
+    cardText.textContent = product.description;
 
-    // Card footer
+    const priceText = document.createElement("p");
+    priceText.textContent = `$${product.price}`;
+    
+    cardBodyDiv.append(cardTitle, cardText, priceText);
+    
+    // Card Footer
     const cardFooterDiv = document.createElement("div");
-    cardFooterDiv.classList.add("card-footer");
+    cardFooterDiv.classList.add("card-footer", "d-flex", "justify-content-between");
+    
+    // Buy Button
+    const buyButton = document.createElement("a");
+    buyButton.href = "#";
+    buyButton.classList.add("btn", "cart");
+    buyButton.textContent = "Buy";
+    buyButton.addEventListener("click", () => addToCart(product));
 
-    const footerSpan = document.createElement("span");
-    footerSpan.textContent = product.like;
+    // Wishlist Button
+    const wishlistButton = document.createElement("a");
+    wishlistButton.href = "#";
+    wishlistButton.classList.add("btn", "wishlist");
+    wishlistButton.textContent = "♥";
+    wishlistButton.addEventListener("click", () => addToWishlist(product));
 
-    const likeIcon = document.createElement("i");
-    if (product.alreadLiked === 0) {
-      likeIcon.classList.add("fa-regular", "fa-thumbs-up");
-      likeIcon.addEventListener("click", () => wishlist(product.upload_id));
-    } else {
-      likeIcon.classList.add("fa-regular", "fa-thumbs-up", "like");
-      likeIcon.addEventListener("click", () => wishlist(product.upload_id, likeIcon));
-    }
-
-    cardFooterDiv.append(footerSpan, likeIcon);
-
+    cardFooterDiv.append(buyButton, wishlistButton);
+    
     // Append elements
-    cardDiv.append(cardHeaderDiv, cardBodyDiv, cardFooterDiv);
-    row.append(cardDiv);
+    cardDiv.append(cardImg, cardBodyDiv, cardFooterDiv);
+    document.getElementById("row").append(cardDiv);
   }
 }
 
@@ -200,27 +207,45 @@ function toggleWishlist(id, name) {
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
 }
 
+document.addEventListener("DOMContentLoaded", checkLoginStatus);
+
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        let date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + value + "; path=/" + expires;
+}
+
+function getCookie(name) {
+    let nameEQ = name + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim();
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length);
+    }
+    return null;
+}
+
+function checkLoginStatus() {
+    let user = getCookie("user");
+    let accountIcon = document.querySelector(".icon img");
+
+    if (user) {
+        accountIcon.style.border = "2px solid green"; // Example visual effect
+    } else {
+        accountIcon.style.border = "none"; // Reset if not logged in
+    }
+}
 
 function handleAccountClick() {
   let user = localStorage.getItem("user");
 
   if (user) {
-    Swal.fire({
-      title: "You're Logged In",
-      text: "Do you want to log out?",
-      icon: "info",
-      showCancelButton: true,
-      confirmButtonText: "Log Out",
-      cancelButtonText: "Close"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        localStorage.removeItem("user");
-        checkLoginStatus();
-        Swal.fire("Logged Out!", "You have been logged out.", "success");
-      }
-    });
+    window.location.href = "account.html";
   } else {
-    // Ask if they want to Log In or Sign Up
     Swal.fire({
       title: "Welcome!",
       text: "Would you like to log in or sign up?",

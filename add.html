@@ -19,38 +19,48 @@
         <div class="row">
             <div class="col-12 col-sm-12 col-lg-2 mt-5">
                 <div class="container navbar">
-                    <div class="home"><a href="home.html"><img src="./img/logo.png" alt=""></a></div>
-                    <div class="icon"><a href="mail.html"><img src="./img/mail.png" alt=""></a></div>
-                    <div class="icon"><a href="wishlist.html"><img src="./img/like.png" alt=""></a></div>
-                    <div class="icon"><a href="cart.html"><img src="./img/cart.png" alt=""></a></div>
-                    <div class="icon"><img src="./img/account.png" alt=""></div>
+                    <div class="icon" onclick="handleAccountClick()"><img src="./img/account.png" alt=""></div>
                 </div>
                 <div class="back">
                     <div>
-                        <button>back</button>
+                        <button>Back</button>
                     </div>
                 </div>
             </div>
 
             <div class="col-12 col-sm-12 col-lg-10 mt-5">
+                            </div>
+                        </div>
+                    </div>
                 <div class="container box">
-                    <main>
-                        <div class="h4 text-center">
-                            Change Address
-                        </div>
-                        <div class="input"> 
-                            <input type="text" id="name" placeholder="Country, City, Address">
-                        </div>
-                
-                        <div class="edit-button">
-                            <button type="button">Save</button>
-                        </div>
-                    </main>
+                    <h2 class="text-center mb-5 pt-5">Add a Product</h2>
+                    <input type="file" id="productImage" accept="image/*"><br>
+                    <input type="text" id="productName" placeholder="Product Name"><br>
+                    <textarea id="productDescription" placeholder="Product Description"></textarea><br>
+                    <input type="number" id="productPrice" placeholder="Price" step="0.01"><br>
+
+                    <select id="typeSelect">
+                        <option value="1">Homkai Impact</option>
+                        <option value="2">Genshin Impact</option>
+                        <option value="3">Honkai: Star Rail</option>
+                        <option value="4">Zenless Zone Zero</option>
+                    </select><br>
+                    
+                    <select id="categorySelect">
+                        <option value="1">Full costume</option>
+                        <option value="2">Wig</option>
+                        <option value="3">Accessory</option>
+                        <option value="4">Merch</option>
+                    </select><br>
+
+                    <button class="adds" id="addProductButton">Add Product</button>
+                    
                 </div>
             </div>
         </div>
     </div>
-    <script src="./js/back.js"></script>
+    <script src="./js/add.js"></script>
+    <script src="./js/search.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
