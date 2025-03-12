@@ -411,6 +411,12 @@ body {
     bottom: 240px;
 }
 
+.filter-section input {
+    width: 20px;
+    max-width: 200px;
+    display: inline;
+}
+
 input, textarea, select {
     display: block;
     width: 100%;
