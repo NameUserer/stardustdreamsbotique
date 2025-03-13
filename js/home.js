@@ -129,22 +129,12 @@ function renderProducts(products) {
     buyButton.textContent = "Buy";
     buyButton.addEventListener("click", () => addToCart(product.product_id));
 
-    // Wishlist Button (Adds/Removes from Wishlist)
+    // Wishlist Button
     const wishlistButton = document.createElement("a");
     wishlistButton.href = "#";
     wishlistButton.classList.add("btn", "wishlist");
-    wishlistButton.innerHTML = "♥";
-
-    // Check if item is already in wishlist
-    checkWishlist(product.product_id).then(isWishlisted => {
-      if (isWishlisted) {
-        wishlistButton.classList.add("active"); // Change color if in wishlist
-      }
-    });
-
-    wishlistButton.addEventListener("click", async () => {
-      await toggleWishlist(wishlistButton, product.product_id);
-    });
+    wishlistButton.textContent = "♥";
+    wishlistButton.addEventListener("click", () => addToWishlist(product.product_id));
 
     cardFooterDiv.append(buyButton, wishlistButton);
     
