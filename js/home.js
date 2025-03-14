@@ -63,7 +63,7 @@ async function applyFilters() {
   const selectedTypes = Array.from(document.querySelectorAll(".filter-section:nth-child(2) .filter:checked"))
       .map(checkbox => checkbox.value);
   
-  let url = "/filter?";
+  let url = "api/filterProducts";
   if (selectedCategories.length) url += `category_id=${selectedCategories.join(',')}&`;
   if (selectedTypes.length) url += `type_id=${selectedTypes.join(',')}`;
   
