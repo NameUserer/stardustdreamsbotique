@@ -30,10 +30,8 @@ home.addEventListener('click', () => {
     window.location.href = '../home.html';
 });
 
-document.addEventListener("DOMContentLoaded", checkLoginStatus);
-
 function handleAccountClick() {
-  
+
   let isLoggedIn = document.cookie.includes("loggedIn=true");
 
   if (isLoggedIn) {
