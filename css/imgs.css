@@ -55,16 +55,7 @@
     width: auto;
     height: auto;
     object-fit: contain;
-    background-color: inherit;
     border-radius: inherit;
-}
-
-.card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    background-color: inherit;
-    padding: 10px;
 }
 
 @media (max-width: 768px){
