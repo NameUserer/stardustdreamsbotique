@@ -8,7 +8,7 @@ async function searchProducts() {
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = '';
 
-    const response = await fetch(`/products/${search}`);
+    const response = await fetch(`/api/products/${search}`);
 
     const products = await response.json();
 
