@@ -4,7 +4,7 @@ const wl= document.getElementsByClassName('wl')[0];
 const cart= document.getElementsByClassName('cart')[0];
 
 async function isLoggedIn() {
-  const response = await fetch('/api/check-auth', { credentials: 'include' });
+  const response = await fetch('/api/auth/isLoggedIn', { credentials: 'include' });
   const data = await response.json();
   return data.loggedIn; // true vagy false
 }
