@@ -26,6 +26,18 @@
     width: 17vw;
 }
 
+.card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    border-radius: inherit;
+    background-color: inherit;
+    overflow: hidden;
+}
+
+
 .card {
     position: relative;
     width: 100%;
