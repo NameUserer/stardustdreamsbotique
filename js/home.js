@@ -57,14 +57,15 @@ async function getProducts(queryParams = "") {
 
 // Apply filters
 async function applyFilters() {
-  const category = document.getElementById("category").value;
-  const type = document.getElementById("type").value;
-  const inStock = document.getElementById("inStock").checked;
+  const selectedCategories = Array.from(document.querySelectorAll(".filter-section:nth-child(1) .filter:checked"))
+      .map(checkbox => checkbox.value);
+  
+  const selectedTypes = Array.from(document.querySelectorAll(".filter-section:nth-child(2) .filter:checked"))
+      .map(checkbox => checkbox.value);
   
   let url = "/filter?";
-  if (category) url += `category_id=${category}&`;
-  if (type) url += `type_id=${type}&`;
-  if (inStock) url += `in_stock=1`;
+  if (selectedCategories.length) url += `category_id=${selectedCategories.join(',')}&`;
+  if (selectedTypes.length) url += `type_id=${selectedTypes.join(',')}`;
   
   const response = await fetch(url);
   const products = await response.json();
