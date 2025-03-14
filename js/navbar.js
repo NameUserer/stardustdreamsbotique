@@ -3,10 +3,10 @@ const mail = document.getElementsByClassName('mail')[0];
 const wl= document.getElementsByClassName('wl')[0];
 const cart= document.getElementsByClassName('cart')[0];
 
-function isLoggedIn() {
-  console.log(document.cookie.split('; ').some(cookie => cookie.startsWith('auth_token=')));
-  
-  return document.cookie.split('; ').some(cookie => cookie.startsWith('auth_token='));
+async function isLoggedIn() {
+  const response = await fetch('/api/check-auth', { credentials: 'include' });
+  const data = await response.json();
+  return data.loggedIn; // true vagy false
 }
 
 // Function to handle restricted navigation
