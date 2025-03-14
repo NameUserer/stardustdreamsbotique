@@ -13,7 +13,7 @@ async function searchProducts() {
     const products = await response.json();
 
     if (products.length === 0) {
-        const noProductsMessage = document.createElement('p');
+        const noProductsMessage = document.createElement('h3');
         noProductsMessage.textContent = 'A termék nem található.';
         resultsDiv.appendChild(noProductsMessage);
     } else {
