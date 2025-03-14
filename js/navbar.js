@@ -4,7 +4,7 @@ const wl= document.getElementsByClassName('wl')[0];
 const cart= document.getElementsByClassName('cart')[0];
 
 function isLoggedIn() {
-    return document.cookie.includes("loggedIn=true");
+    return document.cookie.includes("auth_token");
 }
 
 // Function to handle restricted navigation
