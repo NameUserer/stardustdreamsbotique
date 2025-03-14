@@ -13,7 +13,7 @@ async function isLoggedIn() {
 // Function to handle restricted navigation
 function restrictedNav(page) {
     if (isLoggedIn()) {
-        window.location.href = `../${page}.html`;
+        //window.location.href = `../${page}.html`;
     } else {
         Swal.fire({
             icon: 'warning',
