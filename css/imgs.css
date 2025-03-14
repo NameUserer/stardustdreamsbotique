@@ -26,6 +26,14 @@
     width: 17vw;
 }
 
+.card {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    overflow: hidden;
+    border-radius: inherit;
+}
+
 .card img {
     position: absolute;
     top: 50%;
