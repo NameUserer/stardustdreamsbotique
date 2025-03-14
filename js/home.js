@@ -57,25 +57,69 @@ async function getProducts(queryParams = "") {
 
 // Apply filters
 async function applyFilters() {
-  const selectedGames = Array.from(document.querySelectorAll('input[data-category="game"]:checked'))
-    .map(cb => cb.value); // Get selected category_id values
-
-  const selectedProducts = Array.from(document.querySelectorAll('input[data-category="product"]:checked'))
-    .map(cb => cb.value); // Get selected type_id values
-
-  const queryParams = new URLSearchParams();
+  const category = document.getElementById("category").value;
+  const type = document.getElementById("type").value;
+  const inStock = document.getElementById("inStock").checked;
   
-  // Check if filters are selected and append correct query format
-  if (selectedGames.length > 0) queryParams.append("category_id", selectedGames.join(",")); 
-  if (selectedProducts.length > 0) queryParams.append("type_id", selectedProducts.join(","));
+  let url = "/filter?";
+  if (category) url += `category_id=${category}&`;
+  if (type) url += `type_id=${type}&`;
+  if (inStock) url += `in_stock=1`;
+  
+  const response = await fetch(url);
+  const products = await response.json();
+  
+  const resultsDiv = document.getElementById("results");
+  resultsDiv.innerHTML = "";
+  
+  products.forEach(product => {
+    const cardDiv = document.createElement("div");
+    cardDiv.classList.add("card");
+    cardDiv.style.width = "18rem";
 
-  try {
-    const filteredItems = await getProducts(queryParams.toString()); 
-    displayResults(filteredItems);
-    document.getElementById("filterDropdown").classList.remove("open"); 
-  } catch (error) {
-    console.error("Error applying filters:", error);
-  }
+  // Card Image
+  const cardImg = document.createElement("img");
+  cardImg.src = `/uploads/${product.product}`;
+  cardImg.classList.add("pic-div");
+  cardImg.alt = product.product_name;
+
+  // Card Body
+  const cardBodyDiv = document.createElement("div");
+  cardBodyDiv.classList.add("card-body", "d-flex", "flex-column");
+
+  const cardTitle = document.createElement("h5");
+  cardTitle.classList.add("card-title");
+  cardTitle.textContent = product.product_name;
+
+  const cardText = document.createElement("p");
+  cardText.classList.add("card-text");
+  cardText.textContent = product.description;
+
+  const priceText = document.createElement("p");
+  priceText.textContent = `$${product.price}`;
+
+  cardBodyDiv.append(cardTitle, cardText, priceText);
+
+  // Card Footer
+  const cardFooterDiv = document.createElement("div");
+  cardFooterDiv.classList.add("card-footer", "d-flex", "justify-content-between");
+
+  // Buy Button
+  const buyButton = document.createElement("a");
+  buyButton.href = "#";
+  buyButton.classList.add("btn", "cart");
+  buyButton.textContent = "Buy";
+  buyButton.addEventListener("click", () => addToCart(product));
+
+  // Wishlist Button
+  const wishlistButton = document.createElement("a");
+  wishlistButton.href = "#";
+  wishlistButton.classList.add("btn", "wishlist");
+  wishlistButton.textContent = "♥";
+  wishlistButton.addEventListener("click", () => addToWishlist(product));
+
+  cardFooterDiv.append(buyButton, wishlistButton);
+  });
 }
 
 // Display results in the UI
