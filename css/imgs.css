@@ -40,7 +40,8 @@
 .pic-div {
     position: relative;
     width: 100%;
-    padding-top: 100%;
+    height: 270px;
+    background-size: cover;
     overflow: hidden;
     border-radius: inherit;
 }
