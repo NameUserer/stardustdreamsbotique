@@ -4,6 +4,7 @@ const results = document.getElementById('results');
 button.addEventListener('click', searchProducts);
 
 async function searchProducts() {
+    document.getElementById("row").innerHTML = '';
     const search = document.getElementById('search').value;
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = '';
@@ -13,9 +14,7 @@ async function searchProducts() {
     const products = await response.json();
 
     if (products.length === 0) {
-        const noProductsMessage = document.createElement('h3');
-        noProductsMessage.textContent = 'A termék nem található.';
-        resultsDiv.appendChild(noProductsMessage);
+        alert('A termék nem található!')
     } else {
         products.forEach(product => {
             const cardDiv = document.createElement("div");
