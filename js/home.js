@@ -98,7 +98,7 @@ function renderProducts(products) {
     // Card Image
     const cardImg = document.createElement("img");
     cardImg.src = `/uploads/${product.product}`;
-    cardImg.classList.add("card-img-top");
+    cardImg.classList.add("pic-div");
     cardImg.alt = product.product_name;
     
     // Card Body

@@ -37,8 +37,7 @@
     overflow: hidden;
 }
 
-
-.card {
+.pic-div {
     position: relative;
     width: 100%;
     padding-top: 100%;
@@ -46,7 +45,7 @@
     border-radius: inherit;
 }
 
-.card img {
+.pic-div img {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -58,6 +57,14 @@
     object-fit: contain;
     background-color: inherit;
     border-radius: inherit;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: inherit;
+    padding: 10px;
 }
 
 @media (max-width: 768px){
