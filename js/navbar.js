@@ -38,7 +38,7 @@ function handleAccountClick() {
   let isLoggedIn = document.cookie.includes("loggedIn=true");
 
   if (isLoggedIn) {
-    window.location.href = "../account.html";
+    window.location.href = "../profile.html";
   } else {
     Swal.fire({
       title: "Welcome!",
