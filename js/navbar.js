@@ -7,12 +7,12 @@ async function isLoggedIn() {
   const response = await fetch('/api/auth/isLoggedIn', { credentials: 'include' });
   const data = await response.json();
   console.log(data)
-  return data.loggedIn; // true vagy false
+  return data.loggedIn;
 }
 
 // Function to handle restricted navigation
 async function restrictedNav(page) {
-  const loggedIn = await isLoggedIn(); // Megvárjuk az async válaszát
+  const loggedIn = await isLoggedIn();
   if (loggedIn) {
     window.location.href = `../${page}.html`;
   } else {
