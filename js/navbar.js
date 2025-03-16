@@ -1,7 +1,7 @@
-const home= document.getElementsByClassName('home')[0];
+const home = document.getElementsByClassName('home')[0];
 const mail = document.getElementsByClassName('mail')[0];
-const wl= document.getElementsByClassName('wl')[0];
-const cart= document.getElementsByClassName('cart')[0];
+const wl = document.getElementsByClassName('wl')[0];
+const cart = document.getElementsByClassName('cart')[0];
 
 async function isLoggedIn() {
   const response = await fetch('/api/auth/isLoggedIn', { credentials: 'include' });
@@ -11,16 +11,17 @@ async function isLoggedIn() {
 }
 
 // Function to handle restricted navigation
-function restrictedNav(page) {
-    if (isLoggedIn()) {
-        //window.location.href = `../${page}.html`;
-    } else {
-        Swal.fire({
-            icon: 'warning',
-            title: 'Access Denied',
-            text: 'You need to log in for this function to be available!',
-        });
-    }
+async function restrictedNav(page) {
+  const loggedIn = await isLoggedIn(); // Megvárjuk az async válaszát
+  if (loggedIn) {
+    window.location.href = `../${page}.html`;
+  } else {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Access Denied',
+      text: 'You need to log in for this function to be available!',
+    });
+  }
 }
 
 // Event Listeners
@@ -30,7 +31,7 @@ cart.addEventListener('click', () => restrictedNav('cart'));
 
 // Home is always accessible
 home.addEventListener('click', () => {
-    window.location.href = '../home.html';
+  window.location.href = '../home.html';
 });
 
 function handleAccountClick() {
