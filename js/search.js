@@ -15,10 +15,12 @@ async function searchProducts() {
 
     try {
         const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
         const products = await response.json();
         console.log(products);
 
-        if (products.length === 0) {
+        if (!Array.isArray(products) || products.length === 0) {
             alert('A termék nem található!');
         } else {
             document.getElementById("row").innerHTML = '';
