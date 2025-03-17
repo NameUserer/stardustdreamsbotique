@@ -34,11 +34,9 @@ home.addEventListener('click', () => {
   window.location.href = '../home.html';
 });
 
-function handleAccountClick() {
-
-  let isLoggedIn = document.cookie.includes("loggedIn=true");
-
-  if (isLoggedIn) {
+async function handleAccountClick() {
+  const loggedIn = await isLoggedIn();
+  if (loggedIn) {
     window.location.href = "../profile.html";
   } else {
     Swal.fire({
