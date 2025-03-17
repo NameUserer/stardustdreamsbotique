@@ -11,7 +11,7 @@ async function editProfilePic() {
     const formData = new FormData();
     formData.append('profile_pic', profile_pic);
 
-    const res = await fetch('http://127.0.0.1:3000/api/profile/editProfilePic', {
+    const res = await fetch('/api/profile/editProfilePic', {
         method: 'PUT',
         body: formData,
         credentials: 'include'
@@ -29,7 +29,7 @@ async function editProfilePic() {
 }
 
 async function getProfilPic() {
-    const res = await fetch('http://127.0.0.1:3000/api/profile/getProfilePic', {
+    const res = await fetch('/api/profile/getProfilePic', {
         method: 'GET',
         credentials: 'include'
     });
@@ -38,7 +38,7 @@ async function getProfilPic() {
     console.log(data);
     
     if (res.ok) {
-        const editPic = document.getElementsByClassName('edit-pic')[0];
-        editPic.style.backgroundImage = `url('http://127.0.0.1:3000/uploads/${data[0].profile_pic}')`;
+        const editPic = document.getElementsByClassName('edit-pics')[0];
+        editPic.style.backgroundImage = `url('/uploads/${data[0].profile_pic}')`;
     }
 }

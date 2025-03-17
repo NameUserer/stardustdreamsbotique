@@ -84,10 +84,8 @@
     cursor: pointer;
 }
 
-.edit-pic button i {
-    color: white;
-    background-color: inherit;
-    font-size: 1.5rem;
+.edit-pic button img {
+    width: 30px;
 }
 
 .edit-pic button:hover {
