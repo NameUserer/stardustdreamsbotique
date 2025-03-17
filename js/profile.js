@@ -3,7 +3,7 @@ const btnPic = document.getElementsByClassName('edit-pic')[0];
 
 document.addEventListener('DOMContentLoaded', getProfilPic);
 
-iconLogout.addEventListener('click', logout);
+//iconLogout.addEventListener('click', logout);
 
 btnPic.addEventListener('click', () => {
     window.location.href = '../profilePic.html';
@@ -24,7 +24,7 @@ async function getProfilPic() {
     }
 }
 
-async function logout() {
+/*async function logout() {
     const res = await fetch('/api/auth/logout', {
         method: 'POST',
         credentials: 'include'
@@ -38,4 +38,4 @@ async function logout() {
     } else {
         alert('Hiba a kijelentkezéskor');
     }
-}
+}*/
