@@ -94,7 +94,7 @@ function renderProducts(products) {
     wishlistButton.href = "#";
     wishlistButton.classList.add("btn", "wishlist");
     wishlistButton.textContent = "♥";
-    wishlistButton.addEventListener("click", () => addToWishlist(product.product_id));
+    wishlistButton.addEventListener("click", () => likeProduct(product.product_id));
 
     cardFooterDiv.append(buyButton, wishlistButton);
     
@@ -105,11 +105,11 @@ function renderProducts(products) {
 }
 
 // Wishlist functions
-async function wishlist(upload_id) {
+async function likeProduct(upload_id) {
   try {
     const res = await fetch(`/api/like/${upload_id}`, {
       method: "POST",
-      credentials: "include",
+      credentials: "include"
     });
 
     const data = await res.json();
