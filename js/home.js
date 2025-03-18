@@ -105,9 +105,9 @@ function renderProducts(products) {
 }
 
 // Wishlist functions
-async function likeProduct(upload_id) {
+async function likeProduct(product_id) {
   try {
-    const res = await fetch(`/api/like/${upload_id}`, {
+    const res = await fetch(`/api/like/${product_id}`, {
       method: "POST",
       credentials: "include"
     });
@@ -125,9 +125,9 @@ async function likeProduct(upload_id) {
   }
 }
 
-async function removewishlist(upload_id) {
+async function unlikeProduct(product_id) {
   try {
-    const res = await fetch(`/api/like/${upload_id}`, {
+    const res = await fetch(`/api/like/${product_id}`, {
       method: "DELETE",
       credentials: "include",
     });
@@ -144,7 +144,7 @@ async function removewishlist(upload_id) {
 }
 
 // Add to cart function
-function addToCart(id, name) {
+/*function addToCart(id, name) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   const item = cart.find((item) => item.id === id);
   if (item) {
@@ -153,7 +153,7 @@ function addToCart(id, name) {
     cart.push({ id, name, quantity: 1 });
   }
   localStorage.setItem("cart", JSON.stringify(cart));
-}
+}*/
 
 // Toggle wishlist function
 async function toggleWishlist(id, name) {
