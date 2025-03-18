@@ -66,6 +66,8 @@ async function loadWishlist() {
     
       cardFooterDiv.append(buyButton, wishlistButton);
       });
+
+      console.log("lefut");
       // Attach event listeners to remove buttons
       document.querySelectorAll(".remove-wishlist").forEach((button) => {
           button.addEventListener("click", (e) => {
