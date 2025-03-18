@@ -4,15 +4,15 @@ const btnEdit = document.getElementsByClassName('edit-button')[0];
 btnEdit.addEventListener('click', editProfilePsw);
 
 async function editProfilePsw() {
-    const psw = document.getElementById('psw').value;
-    console.log(psw);
+    const password = document.getElementById('psw').value;
+    console.log(password);
     
     const res = await fetch('/api/profile/editProfilePassword', {
         method: 'PUT',
         headers: {
             'content-type': 'application/json'
         },
-        body: JSON.stringify({ psw }),
+        body: JSON.stringify({ password }),
         credentials: 'include'
     });
 

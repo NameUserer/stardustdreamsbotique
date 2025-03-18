@@ -11,5 +11,5 @@ btnPsw.addEventListener('click', () => {
 });
 
 btnAddress.addEventListener('click', () => {
-    window.location.href = '../address.html';
+    window.location.href = '../profileAddress.html';
 });
