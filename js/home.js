@@ -104,10 +104,6 @@ function renderProducts(products) {
   }
 }
 
-//buyButton.addEventListener("click", () => addToCart(product.product_id, product.product_name));
-
-wishlistButton.addEventListener("click", () => toggleWishlist(product.product_id, product.product_name));
-
 // Wishlist functions
 async function wishlist(upload_id) {
   try {
