@@ -1,18 +1,18 @@
-const inputName = document.getElementById('name');
+const inputAddress = document.getElementById('address');
 const btnEdit = document.getElementsByClassName('edit-button')[0];
 
-btnEdit.addEventListener('click', editProfileName);
+btnEdit.addEventListener('click', editProfileAddress);
 
-async function editProfileName() {
-    const name = document.getElementById('name').value;
-    console.log(name);
+async function editProfileAddress() {
+    const address = document.getElementById('address').value;
+    console.log(address);
     
     const res = await fetch('/api/profile/editProfileAdress', {
         method: 'PUT',
         headers: {
             'content-type': 'application/json'
         },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ address }),
         credentials: 'include'
     });
 
@@ -37,5 +37,5 @@ async function editProfileName() {
 }
 
 function resetInputs() {
-    document.getElementById('name').value = null;
+    document.getElementById('address').value = null;
 }
