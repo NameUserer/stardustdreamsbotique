@@ -1,3 +1,20 @@
+const filterDropdown = document.getElementById("filterDropdown");
+const filterIcon = filterDropdown.querySelector(".filter-icon");
+const dropdownContent = filterDropdown.querySelector(".dropdown-content");
+
+if (filterIcon) {
+  filterIcon.addEventListener("click", () => {
+    filterDropdown.classList.toggle("open");
+  });
+}
+
+// Close dropdown if clicked outside
+document.addEventListener("click", (e) => {
+  if (filterDropdown && !filterDropdown.contains(e.target) && !e.target.matches(".dropdown-content input")) {
+    filterDropdown.classList.remove("open");
+  }
+});
+
 document.querySelectorAll('button')[1].addEventListener('click', applyFilters);
 
 // Apply filters

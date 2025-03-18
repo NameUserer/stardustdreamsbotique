@@ -1,20 +1,3 @@
-const filterDropdown = document.getElementById("filterDropdown");
-const filterIcon = filterDropdown.querySelector(".filter-icon");
-const dropdownContent = filterDropdown.querySelector(".dropdown-content");
-
-if (filterIcon) {
-  filterIcon.addEventListener("click", () => {
-    filterDropdown.classList.toggle("open");
-  });
-}
-
-// Close dropdown if clicked outside
-document.addEventListener("click", (e) => {
-  if (filterDropdown && !filterDropdown.contains(e.target) && !e.target.matches(".dropdown-content input")) {
-    filterDropdown.classList.remove("open");
-  }
-});
-
 // Fetch and display all products on page load
 window.onload = async () => {
   try {
@@ -121,6 +104,10 @@ function renderProducts(products) {
   }
 }
 
+buyButton.addEventListener("click", () => addToCart(product.product_id, product.product_name));
+
+wishlistButton.addEventListener("click", () => toggleWishlist(product.product_id, product.product_name));
+
 // Wishlist functions
 async function wishlist(upload_id) {
   try {
@@ -173,13 +160,17 @@ function addToCart(id, name) {
 }
 
 // Toggle wishlist function
-function toggleWishlist(id, name) {
+async function toggleWishlist(id, name) {
   let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
   const index = wishlist.findIndex((item) => item.id === id);
+
   if (index > -1) {
     wishlist.splice(index, 1);
+    await fetch(`/api/like/${id}`, { method: "DELETE", credentials: "include" });
   } else {
     wishlist.push({ id, name });
+    await fetch(`/api/like/${id}`, { method: "POST", credentials: "include" });
   }
+
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
 }
