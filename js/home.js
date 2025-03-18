@@ -107,7 +107,7 @@ function renderProducts(products) {
 // Wishlist functions
 async function likeProduct(product_id) {
   try {
-    const res = await fetch(`/api/like/${product_id}`, {
+    const res = await fetch(`/api/likes/${product_id}`, {
       method: "POST",
       credentials: "include"
     });
