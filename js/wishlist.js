@@ -7,7 +7,7 @@ async function loadWishlist() {
   const wishlistContainer = document.getElementById("wishlist-items");
 
   try {
-      const response = await fetch("/api/like", { credentials: "include" });
+      const response = await fetch("/api/likes/check", { credentials: "include" });
       if (!response.ok) throw new Error("Failed to fetch wishlist");
 
       const wishlist = await response.json();
@@ -46,9 +46,9 @@ async function loadWishlist() {
 }
 
 // Function to remove an item from the wishlist
-async function removeFromWishlist(productId) {
+async function unlikeProduct(productId) {
   try {
-      const response = await fetch(`/api/like/${productId}`, { method: "DELETE", credentials: "include" });
+      const response = await fetch(`/api/likes/${productId}`, { method: "DELETE", credentials: "include" });
       if (!response.ok) throw new Error("Failed to remove item");
 
       // Reload wishlist after successful removal
