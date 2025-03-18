@@ -79,7 +79,7 @@
     position: absolute;
     right: -10px;
     top: 90px;
-    background-color: var(--shipped);
+    background-color: var(--secondary);
     border: none;
     cursor: pointer;
 }

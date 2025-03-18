@@ -4,15 +4,15 @@ const btnEdit = document.getElementsByClassName('edit-button')[0];
 btnEdit.addEventListener('click', editProfileName);
 
 async function editProfileName() {
-    const name = document.getElementById('name').value;
-    console.log(name);
+    const username = document.getElementById('name').value;
+    console.log(username);
     
     const res = await fetch('/api/profile/editProfileName', {
         method: 'PUT',
         headers: {
             'content-type': 'application/json'
         },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ username }),
         credentials: 'include'
     });
 

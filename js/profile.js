@@ -24,6 +24,8 @@ async function getProfilPic() {
     }
 }
 
+document.getElementById("username").innerText = `${username}`;
+
 /*async function logout() {
     const res = await fetch('/api/auth/logout', {
         method: 'POST',
