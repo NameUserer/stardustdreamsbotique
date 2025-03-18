@@ -1,4 +1,9 @@
 const bntEdit = document.getElementsByClassName('edit-button')[0];
+const backbutton = document.getElementsByClassName('back')[0];
+
+backbutton.addEventListener('click', () => {
+    window.location.href = '../profile.html';
+});
 
 document.addEventListener('DOMContentLoaded', getProfilPic);
 
