@@ -24,18 +24,14 @@ async function getProfilPic() {
     }
 }
 
-async function getUsername() {
-    const res = await fetch('/api/profile/getUsername', {
-        method: 'GET',
-        credentials: 'include'
-    });
+function displayUsername() {
+    const username = getCookie('username'); // Get username from cookies
 
-    const data = await res.json();
-    console.log(data);
-
-    if (res.ok) {
+    if (username) {
         const usernameElement = document.getElementsByClassName('username')[0];
-        usernameElement.textContent = data[0].username;
+        usernameElement.textContent = username;
+    } else {
+        console.warn('Username not found in cookies.');
     }
 }
 
