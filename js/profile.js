@@ -28,17 +28,27 @@ async function getProfilPic() {
 }
 
 async function getUsername() {
-    const res = await fetch('/api/user/username', {
-        method: 'GET',
-        credentials: 'include'
-    });
+    try {
+        const res = await fetch('/api/user/username', {
+            method: 'GET',
+            credentials: 'include'
+        });
 
-    const data = await res.json();
-    console.log(data);
+        const data = await res.json();
+        console.log(data); // Check what the API returns
 
-    if (res.ok) {
-        const usernameElement = document.getElementsByClassName('username')[0];
-        usernameElement.textContent = data[0].username;
+        if (res.ok && data && data.username) { // Adjust this based on response structure
+            const usernameElement = document.querySelector('.username');
+            if (usernameElement) {
+                usernameElement.textContent = data.username; // Use correct property
+            } else {
+                console.warn("Element with class 'username' not found.");
+            }
+        } else {
+            console.warn("Invalid API response:", data);
+        }
+    } catch (error) {
+        console.error("Error fetching username:", error);
     }
 }
 
