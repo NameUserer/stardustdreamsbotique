@@ -23,17 +23,19 @@ async function getProfilPic() {
         editPic.style.backgroundImage = `url('/uploads/${data[0].profile_pic}')`;
     }
 }
-document.addEventListener('DOMContentLoaded', () => {
-    displayUsername();
-});
-function displayUsername() {
-    const username = getCookie('username'); // Get username from cookies
 
-    if (username) {
+async function getUsername() {
+    const res = await fetch('/api/user/username', {
+        method: 'GET',
+        credentials: 'include'
+    });
+
+    const data = await res.json();
+    console.log(data);
+
+    if (res.ok) {
         const usernameElement = document.getElementsByClassName('username')[0];
-        usernameElement.textContent = username;
-    } else {
-        console.warn('Username not found in cookies.');
+        usernameElement.textContent = data[0].username;
     }
 }
 
