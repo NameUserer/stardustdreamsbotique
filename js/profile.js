@@ -63,18 +63,18 @@ async function getAddress() {
         const data = await res.json();
         console.log(data); // Check what the API returns
 
-        if (res.ok && data && data.username) { // Adjust this based on response structure
-            const usernameElement = document.querySelector('.username');
-            if (usernameElement) {
-                usernameElement.textContent = data.username; // Use correct property
+        if (res.ok && data && data.address) { // Adjust this based on response structure
+            const addressElement = document.querySelector('.address');
+            if (addressElement) {
+                addressElement.textContent = data.address; // Use correct property
             } else {
-                console.warn("Element with class 'username' not found.");
+                console.warn("Element with class 'address' not found.");
             }
         } else {
             console.warn("Invalid API response:", data);
         }
     } catch (error) {
-        console.error("Error fetching username:", error);
+        console.error("Error fetching address:", error);
     }
 }
 
