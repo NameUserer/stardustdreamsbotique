@@ -86,9 +86,31 @@ async function loadCartItems() {
         const response = await fetch(`/api/cart/${productId}`, { method: "DELETE", credentials: "include" });
         if (!response.ok) throw new Error("Failed to remove item");
   
-        // Reload wishlist after successful removal
-        await loadWishlist();
+        // Reload cart after successful removal
+        await loadCartItems();
     } catch (error) {
         console.error("Error removing from cart:", error);
     }
   }
+
+
+  document.addEventListener("DOMContentLoaded", function () {
+    updateCartSummary();
+});
+
+function updateCartSummary() {
+    const userId = getUserId(); // You should implement how you retrieve the user ID.
+
+    fetch(`/cart/summary?user_id=${userId}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('cart-count').textContent = data.totalItems;
+            document.getElementById('cart-total').textContent = data.totalCost.toFixed(2);
+        })
+        .catch(error => console.error('Error fetching cart summary:', error));
+}
+
+function getUserId() {
+    // Replace this with actual logic to get the logged-in user ID
+    return 1;
+}
