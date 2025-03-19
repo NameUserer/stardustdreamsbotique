@@ -80,35 +80,15 @@ async function loadCartItems() {
       console.error("Error loading cart:", error);
   }
 }
-  function removeItemFromCart(id) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart = cart.filter(item => item.id !== id);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    renderCart();
+
+  async function removeItemFromCart(productId) {
+    try {
+        const response = await fetch(`/api/cart/${productId}`, { method: "DELETE", credentials: "include" });
+        if (!response.ok) throw new Error("Failed to remove item");
+  
+        // Reload wishlist after successful removal
+        await loadWishlist();
+    } catch (error) {
+        console.error("Error removing from cart:", error);
+    }
   }
-
-  function updateCheckoutBar() {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    
-    let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    let totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-    document.getElementById("cart-count").textContent = totalItems;
-    document.getElementById("cart-total").textContent = totalPrice.toFixed(2);
-}
-
-// Run on page load to update checkout bar
-document.addEventListener("DOMContentLoaded", updateCheckoutBar);
-
-function fetchCartFromDatabase() {
-  fetch("/get_cart.php") // Replace with your API endpoint
-      .then(response => response.json())
-      .then(cart => {
-          localStorage.setItem("cart", JSON.stringify(cart));
-          updateCheckoutBar();
-      })
-      .catch(error => console.error("Error fetching cart:", error));
-}
-
-// Call it when user logs in
-fetchCartFromDatabase();
