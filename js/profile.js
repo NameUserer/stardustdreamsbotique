@@ -3,6 +3,9 @@ const btnPic = document.getElementsByClassName('edit-pic')[0];
 
 document.addEventListener('DOMContentLoaded', getProfilPic);
 
+document.addEventListener('DOMContentLoaded', getUsername);
+
+
 //iconLogout.addEventListener('click', logout);
 
 btnPic.addEventListener('click', () => {
