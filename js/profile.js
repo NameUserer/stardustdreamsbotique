@@ -23,7 +23,9 @@ async function getProfilPic() {
         editPic.style.backgroundImage = `url('/uploads/${data[0].profile_pic}')`;
     }
 }
-
+document.addEventListener('DOMContentLoaded', () => {
+    displayUsername();
+});
 function displayUsername() {
     const username = getCookie('username'); // Get username from cookies
 
