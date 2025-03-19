@@ -65,6 +65,7 @@ async function loadWishlist() {
       wishlistButton.addEventListener("click", () => addToWishlist(product));
     
       cardFooterDiv.append(buyButton, wishlistButton);
+      wishlistContainer.appendChild(cardDiv);
      console.log(product);
     });
 
