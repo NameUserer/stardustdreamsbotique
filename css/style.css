@@ -452,3 +452,10 @@ input, textarea, select {
     margin-right: auto;
     display: block;
 }
+
+#wishlist-items {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap to the next line if needed */
+    gap: 20px; /* Adds spacing between cards */
+    justify-content: center; /* Centers items horizontally */
+}
