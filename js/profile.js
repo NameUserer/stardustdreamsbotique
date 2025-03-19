@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', getUsername);
 
 document.addEventListener('DOMContentLoaded', getAddress);
 
-//iconLogout.addEventListener('click', logout);
+iconLogout.addEventListener('click', logout);
 
 btnPic.addEventListener('click', () => {
     window.location.href = '../profilePic.html';
@@ -78,7 +78,7 @@ async function getAddress() {
     }
 }
 
-/*async function logout() {
+async function logout() {
     const res = await fetch('/api/auth/logout', {
         method: 'POST',
         credentials: 'include'
@@ -90,6 +90,6 @@ async function getAddress() {
         alert(data.message);
         window.location.href = '../home.html';
     } else {
-        alert('Hiba a kijelentkezéskor');
+        alert('Error, cannot log out');
     }
-}*/
+}

@@ -361,6 +361,19 @@ body {
     border-radius: 50%;
 }
 
+.setting:hover {
+    transform: scale(1.1);
+}
+
+.icon-logout {
+    width: 100px;
+    margin-bottom: -200px;
+}
+
+.icon-logout:hover {
+    transform: scale(1.1);
+}
+
 .edit-button button{
     background-color: var(--main);
     color: var(--table);
