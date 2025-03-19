@@ -24,7 +24,20 @@ async function getProfilPic() {
     }
 }
 
-document.getElementById("username").innerText = `${username}`;
+async function getUsername() {
+    const res = await fetch('/api/profile/getUsername', {
+        method: 'GET',
+        credentials: 'include'
+    });
+
+    const data = await res.json();
+    console.log(data);
+
+    if (res.ok) {
+        const usernameElement = document.getElementsByClassName('username')[0];
+        usernameElement.textContent = data[0].username;
+    }
+}
 
 /*async function logout() {
     const res = await fetch('/api/auth/logout', {
