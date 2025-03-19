@@ -18,8 +18,8 @@ async function loadWishlist() {
           return;
       }
 
-      wishlist.forEach(product => {
-        /*const cardDiv = document.createElement("div");
+      wishlist.forEach((product) => {
+        const cardDiv = document.createElement("div");
         cardDiv.classList.add("card");
         cardDiv.style.width = "18rem";
     
@@ -65,7 +65,6 @@ async function loadWishlist() {
       wishlistButton.addEventListener("click", () => addToWishlist(product));
     
       cardFooterDiv.append(buyButton, wishlistButton);
-      */
      console.log(product);
     });
 
