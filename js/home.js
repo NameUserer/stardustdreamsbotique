@@ -144,16 +144,29 @@ async function unlikeProduct(product_id) {
 }
 
 // Add to cart function
-/*function addToCart(id, name) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const item = cart.find((item) => item.id === id);
-  if (item) {
-    item.quantity += 1;
-  } else {
-    cart.push({ id, name, quantity: 1 });
+async function addToCart(product_id) {
+  try {
+    const res = await fetch(`/api/cart/${product_id}`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ quantity: 1 }) // Increment by 1 each time
+    });
+
+    const data = await res.json();
+    console.log(data);
+
+    if (res.ok) {
+      getProducts(); // Update cart display
+    } else {
+      alert(data.error);
+    }
+  } catch (error) {
+    console.error("Error adding to cart:", error);
   }
-  localStorage.setItem("cart", JSON.stringify(cart));
-}*/
+}
 
 // Toggle wishlist function
 async function toggleWishlist(id, name) {
