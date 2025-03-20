@@ -23,13 +23,15 @@
     .search{
         width: 90%;
         height: 60px;
-        right: auto;
         top: 75px;
         justify-content: space-around;
     }
     .searchbar{
         width: 70%;
         height: 50px;
+    }
+    .searchbar input {
+        width: 60%;
     }
     .filterbutton {
         width: 50px;

@@ -77,22 +77,22 @@ body {
 }
 
 .web p {
-    margin-top: 10%;
-    margin-bottom: 10%;
+    margin-top: 30px;
+    margin-bottom: 20px;
 }
 
 .app {
     background-color: var(--main);
     border-radius: 40px;
-    padding: 10px;
+    padding: 5px;
     height: 20vh;
     color: var(--table);
     text-align: center;
 }
 
 .app p {
-    margin-top: 10%;
-    margin-bottom: 10%;
+    margin-top: 30px;
+    margin-bottom: 40px;
 }
 
 .table {
@@ -352,26 +352,6 @@ body {
 
 .profile-pic img{
     width: 140px;
-}
-
-.setting{
-    width: 100px;
-    margin-top: 20px;
-    margin-right: 0;
-    border-radius: 50%;
-}
-
-.setting:hover {
-    transform: scale(1.1);
-}
-
-.icon-logout {
-    width: 90px;
-    margin-bottom: -400px;
-}
-
-.icon-logout:hover {
-    transform: scale(1.1);
 }
 
 .edit-button button{
