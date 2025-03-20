@@ -25,7 +25,7 @@ async function editProfilePsw() {
             title: 'Successfull change!',
             text: data.message,
             icon: 'success',
-            confirmButtonText: 'Go'
+            confirmButtonText: 'Ok'
         }).then(() => {
             window.location.href = '../profile.html';
         });
