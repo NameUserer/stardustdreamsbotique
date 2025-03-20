@@ -21,18 +21,39 @@ async function editProfilePsw() {
     
     if (res.ok) {
         resetInputs();
-        alert(data.message);
-        window.location.href = '../profile.html';
+        Swal.fire({
+            title: 'Successfull change!',
+            text: data.message,
+            icon: 'success',
+            confirmButtonText: 'Go'
+        }).then(() => {
+            window.location.href = '../profile.html';
+        });
     } else if (data.errors) {
         let errorMessage = '';
         for (let i = 0; i < data.errors.length; i++) {
             errorMessage += `${data.errors[i].error}\n`
         }
-        alert(errorMessage);
+        Swal.fire({
+            title: 'Error!',
+            text: errorMessage,
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     } else if (data.error) {
-        alert(data.error);
+        Swal.fire({
+            title: 'Error!',
+            text: data.error,
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     } else {
-        alert('Ismeretlen hiba');
+        Swal.fire({
+            title: 'Unknown error!',
+            text: 'Try again later.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     }
 }
 
