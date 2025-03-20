@@ -87,9 +87,22 @@ async function logout() {
     const data = await res.json();
 
     if (res.ok) {
-        alert(data.message);
-        window.location.href = '../home.html';
+        Swal.fire({
+            title: 'Successfull logged out!',
+            text: data.message,
+            imageUrl: './img/ganyu.webp',
+            imageWidth: 200,
+            imageHeight: 200,
+            confirmButtonText: 'Go'
+        }).then(() => {
+            window.location.href = '../home.html';
+        });
     } else {
-        alert('Error, cannot log out');
+        Swal.fire({
+            title: 'Error, cannot log out!',
+            text: errorMessage,
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     }
 }

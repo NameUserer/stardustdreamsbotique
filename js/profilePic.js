@@ -26,10 +26,21 @@ async function editProfilePic() {
     console.log(data);
     
     if (res.ok) {
-        alert(data.message);
-        window.location.href = '../profile.html';
+        Swal.fire({
+            title: 'Successfull change!',
+            text: data.message,
+            icon: 'success',
+            confirmButtonText: 'Ok'
+        }).then(() => {
+            window.location.href = '../profile.html';
+        });
     } else {
-        alert(data.error);
+        Swal.fire({
+            title: 'Error!',
+            text: data.error,
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     }
 }
 

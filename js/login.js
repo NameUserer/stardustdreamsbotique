@@ -19,18 +19,41 @@ async function login() {
 
     if (res.ok) {
         resetInputs();
-        alert(data.message);
-        window.location.href = 'home.html';
+        Swal.fire({
+            title: 'Successfull logged in!',
+            text: data.message,
+            imageUrl: './img/klee.png',
+            imageWidth: 200,
+            imageHeight: 200,
+            confirmButtonText: 'Go'
+        }).then(() => {
+            window.location.href = '../home.html';
+        });
     } else if (data.errors) {
         let errorMessage = '';
         for (let i = 0; i < data.errors.length; i++) {
             errorMessage += `${data.errors[i].error}\n`
         }
-        alert(errorMessage);
+        Swal.fire({
+            title: 'Error!',
+            text: errorMessage,
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     } else if (data.error) {
-        alert(data.error);
+        Swal.fire({
+            title: 'Error!',
+            text: data.error,
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     } else {
-        alert('Ismeretlen hiba');
+        Swal.fire({
+            title: 'Unknown error!',
+            text: 'Try again later.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
     }
 }
 
