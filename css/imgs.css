@@ -173,8 +173,6 @@
     }
     .setting{
         top: auto;
-        right: auto;
-        bottom: 10px;
-        left: 10px;
+        bottom: 100px;
     }    
 }
