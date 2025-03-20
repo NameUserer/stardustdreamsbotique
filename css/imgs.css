@@ -172,7 +172,11 @@
         width: 40vw;
     }
     .setting{
+        width: 60px;
         top: auto;
-        bottom: 100px;
-    }    
+        bottom: 90px;
+    }
+    .icon-logout {
+        width: 55px;
+    }
 }
