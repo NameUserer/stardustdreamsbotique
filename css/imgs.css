@@ -149,6 +149,11 @@
     transform: scale(1.1);
 }
 
+#admin-logout img{
+    position: fixed;
+
+}
+
 @media (max-width: 768px){
     .frontleft{
         width: 80%;
