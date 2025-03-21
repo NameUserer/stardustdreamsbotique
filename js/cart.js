@@ -49,23 +49,43 @@ async function loadCartItems() {
 
         // Card Footer
         const cardFooterDiv = document.createElement("div");
-        cardFooterDiv.classList.add("card-footer", "d-flex", "justify-content-between");
+        cardFooterDiv.classList.add("card-footer", "d-flex", "justify-content-between", "align-items-center");
 
-        // Buy Button
-        const buyButton = document.createElement("a");
-        buyButton.href = "#";
-        buyButton.classList.add("btn", "cart");
-        buyButton.textContent = "Buy";
-        buyButton.addEventListener("click", () => addToCart(product));
+        // Quantity Controls
+        const quantityDiv = document.createElement("div");
+        quantityDiv.classList.add("d-flex", "align-items-center");
 
-        // Wishlist Remove Button
-        const wishlistButton = document.createElement("a");
-        wishlistButton.href = "#";
-        wishlistButton.classList.add("btn", "wishlist");
-        wishlistButton.textContent = "♥";
-        wishlistButton.addEventListener("click", () => removeFromWishlist(product.product_id));
+        const minusButton = document.createElement("button");
+        minusButton.textContent = "-";
+        minusButton.classList.add("btn", "btn-sm", "btn-outline-secondary");
+        minusButton.addEventListener("click", () => {
+          if (product.quantity > 1) {
+              product.quantity--;
+              quantitySpan.textContent = product.quantity;
+          }
+});
 
-        cardFooterDiv.append(buyButton, wishlistButton);
+const quantitySpan = document.createElement("span");
+quantitySpan.textContent = product.quantity || 1;
+quantitySpan.classList.add("mx-2");
+
+const plusButton = document.createElement("button");
+plusButton.textContent = "+";
+plusButton.classList.add("btn", "btn-sm", "btn-outline-secondary");
+plusButton.addEventListener("click", () => {
+    product.quantity++;
+    quantitySpan.textContent = product.quantity;
+});
+
+quantityDiv.append(minusButton, quantitySpan, plusButton);
+
+// Remove Button
+const removeButton = document.createElement("button");
+removeButton.textContent = "Remove";
+removeButton.classList.add("btn", "btn-danger", "btn-sm");
+removeButton.addEventListener("click", () => removeFromWishlist(product.product_id));
+
+cardFooterDiv.append(quantityDiv, removeButton);
 
         // Assemble Card
         cardDiv.append(cardImg, cardBodyDiv, cardFooterDiv);
