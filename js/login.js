@@ -19,20 +19,35 @@ async function login() {
 
     if (res.ok) {
         resetInputs();
-        Swal.fire({
-            title: 'Successfull logged in!',
-            text: data.message,
-            imageUrl: './img/klee.png',
-            imageWidth: 200,
-            imageHeight: 200,
-            confirmButtonText: 'Go'
-        }).then(() => {
-            window.location.href = '../home.html';
-        });
+
+        // Check if user_id is 9 (admin)
+        if (data.user_id === 9) {
+            Swal.fire({
+                title: 'Welcome Admin!',
+                text: data.message,
+                imageUrl: './img/klee.png',
+                imageWidth: 200,
+                imageHeight: 200,
+                confirmButtonText: 'Go to Admin Page'
+            }).then(() => {
+                window.location.href = '../admin.html'; // Redirect to admin page
+            });
+        } else {
+            Swal.fire({
+                title: 'Successfully logged in!',
+                text: data.message,
+                imageUrl: './img/klee.png',
+                imageWidth: 200,
+                imageHeight: 200,
+                confirmButtonText: 'Go'
+            }).then(() => {
+                window.location.href = '../home.html'; // Redirect to user home page
+            });
+        }
     } else if (data.errors) {
         let errorMessage = '';
         for (let i = 0; i < data.errors.length; i++) {
-            errorMessage += `${data.errors[i].error}\n`
+            errorMessage += `${data.errors[i].error}\n`;
         }
         Swal.fire({
             title: 'Error!',
@@ -58,6 +73,6 @@ async function login() {
 }
 
 function resetInputs() {
-    document.getElementById('email').value = null;
-    document.getElementById('password').value = null;
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
 }
