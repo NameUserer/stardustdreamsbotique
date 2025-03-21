@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             
             const formData = new FormData();
-            formData.append("productImage", product.files[0]);
+            formData.append("productImage", product);
             formData.append("product_name", product_name);
             formData.append("description", description);
             formData.append("price", price);
