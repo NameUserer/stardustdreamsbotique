@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const type_id = document.getElementById('typeSelect').value;
             const chategory_name = document.getElementById('categorySelect').value;
             
-            if (!product_name || !description || !price || !product.files.length) {
+            if (!product_name || !description || !price || !product) {
                 alert('Please fill all fields and select an image.');
                 return;
             }
