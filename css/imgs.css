@@ -151,7 +151,9 @@
 
 #admin-logout img{
     position: fixed;
-
+    bottom: 200px;
+    right: auto;
+    left: 150px;
 }
 
 @media (max-width: 768px){
