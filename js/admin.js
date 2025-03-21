@@ -133,3 +133,49 @@ async function getProducts(queryParams = "") {
         });
     }
 }
+
+async function deleteProduct(productId) {
+    const confirmDelete = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to undo this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!"
+    });
+  
+    if (!confirmDelete.isConfirmed) {
+      return; // User canceled deletion
+    }
+  
+    try {
+      const response = await fetch(`/api/products/delete/${productId}`, {
+        method: "DELETE",
+        credentials: "include"
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Failed to delete product. Status: ${response.status}`);
+      }
+  
+      Swal.fire({
+        title: "Deleted!",
+        text: "The product has been removed.",
+        icon: "success",
+        confirmButtonColor: "#3085d6"
+      }).then(() => {
+        location.reload(); // Refresh the page to update the product list
+      });
+  
+    } catch (error) {
+      console.error("Error deleting product:", error);
+  
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to delete the product.",
+        icon: "error",
+        confirmButtonColor: "#d33"
+      });
+    }
+  }
