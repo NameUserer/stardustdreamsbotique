@@ -20,7 +20,6 @@ async function login() {
     if (res.ok) {
         resetInputs();
 
-        // Check if user_id is 9 (admin)
         if (data.user_id === 9) {
             Swal.fire({
                 title: 'Welcome Admin!',
@@ -30,7 +29,7 @@ async function login() {
                 imageHeight: 200,
                 confirmButtonText: 'Go to Admin Page'
             }).then(() => {
-                window.location.href = '../admin.html'; // Redirect to admin page
+                window.location.href = '../admin.html';
             });
         } else {
             Swal.fire({
@@ -41,7 +40,7 @@ async function login() {
                 imageHeight: 200,
                 confirmButtonText: 'Go'
             }).then(() => {
-                window.location.href = '../home.html'; // Redirect to user home page
+                window.location.href = '../home.html';
             });
         }
     } else if (data.errors) {
