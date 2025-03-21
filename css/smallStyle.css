@@ -76,4 +76,14 @@
     .info button {
         margin: 1%;
     }
+    .add button {
+        font-size: 20px;
+        border-radius: 30px;
+        width: 100px;
+        height: 50px;
+        position: fixed;
+        bottom: auto;
+        top: 1%;
+        right: 5%;
+    }
 }
