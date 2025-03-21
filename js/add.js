@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const product_name = document.getElementById('productName').value;
             const description = document.getElementById('productDescription').value;
             const price = document.getElementById('productPrice').value;
-            const product = document.getElementById('productImage');
+            const product = document.getElementById('productImage').files[0];
             const type_id = document.getElementById('typeSelect').value;
             const chategory_name = document.getElementById('categorySelect').value;
             
