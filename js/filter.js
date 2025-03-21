@@ -2,6 +2,7 @@ const filterDropdown = document.getElementById("filterDropdown");
 const filterIcon = filterDropdown.querySelector(".filter-icon");
 const dropdownContent = filterDropdown.querySelector(".dropdown-content");
 const resultsDiv = document.getElementById("results");
+const filterButton = document.getElementById("filter");
 
 if (filterIcon) {
   filterIcon.addEventListener("click", () => {
