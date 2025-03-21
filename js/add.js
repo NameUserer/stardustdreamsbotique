@@ -9,25 +9,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (addProductButton) {
         addProductButton.addEventListener("click", async function() {
-            const name = document.getElementById('productName').value;
+            const product_name = document.getElementById('productName').value;
             const description = document.getElementById('productDescription').value;
             const price = document.getElementById('productPrice').value;
-            const imageInput = document.getElementById('productImage');
-            const typeId = document.getElementById('typeSelect').value;
-            const categoryId = document.getElementById('categorySelect').value;
+            const product = document.getElementById('productImage');
+            const type_id = document.getElementById('typeSelect').value;
+            const chategory_name = document.getElementById('categorySelect').value;
             
-            if (!name || !description || !price || !imageInput.files.length) {
+            if (!product_name || !description || !price || !product.files.length) {
                 alert('Please fill all fields and select an image.');
                 return;
             }
             
             const formData = new FormData();
-            formData.append("productImage", imageInput.files[0]);
-            formData.append("product_name", name);
+            formData.append("productImage", product.files[0]);
+            formData.append("product_name", product_name);
             formData.append("description", description);
             formData.append("price", price);
-            formData.append("type_id", typeId);
-            formData.append("category_id", categoryId);
+            formData.append("type_id", type_id);
+            formData.append("category_id", chategory_name);
             
             try {
                 const response = await fetch("/api/products/uploadProduct", {
