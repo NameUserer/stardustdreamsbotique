@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", function() {
             const product = document.getElementById('productImage').files[0];
             const type_id = document.getElementById('typeSelect').value;
             const chategory_name = document.getElementById('categorySelect').value;
+            console.log(product_name, description, price, type_id, chategory_name);
+            console.log(product);         
             
             if (!product_name || !description || !price || !product) {
                 alert('Please fill all fields and select an image.');
@@ -28,6 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
             formData.append("price", price);
             formData.append("type_id", type_id);
             formData.append("category_id", chategory_name);
+            console.log(formData);
             
             try {
                 const response = await fetch("/api/products/uploadProduct", {
@@ -36,11 +39,15 @@ document.addEventListener("DOMContentLoaded", function() {
                     credentials: 'include'
                 });
                 
+                console.log(response);
+                
                 if (!response.ok) {
                     throw new Error("Failed to upload product");
                 }
                 
                 const product = await response.json();
+                console.log(product);
+                
                 alert("Product added successfully!");
             } catch (error) {
                 console.error("Error:", error);
