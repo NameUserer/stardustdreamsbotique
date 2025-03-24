@@ -32,7 +32,8 @@ document.addEventListener("DOMContentLoaded", function() {
             try {
                 const response = await fetch("/api/products/uploadProduct", {
                     method: "POST",
-                    body: formData
+                    body: formData,
+                    credentials: 'include'
                 });
                 
                 if (!response.ok) {
