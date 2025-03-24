@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
             formData.append("description", description);
             formData.append("price", price);
             formData.append("type_id", type_id);
-            formData.append("category_id", chategory_name);
+            formData.append("category_name", chategory_name);
             console.log(formData);
             
             try {
