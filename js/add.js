@@ -40,12 +40,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
                 
                 console.log(response);
+                const product = await response.json();
                 
                 if (!response.ok) {
+                    console.log(product.details);
+                    
                     throw new Error("Failed to upload product");
                 }
                 
-                const product = await response.json();
                 console.log(product);
                 
                 alert("Product added successfully!");
