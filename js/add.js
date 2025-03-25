@@ -9,8 +9,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (addProductButton) {
         addProductButton.addEventListener("click", async function() {
-            const product_name = document.getElementById('productName').textContent;
-            const description = document.getElementById('productDescription').textContent;
+            const product_name = document.getElementById('productName').value;
+            const description = document.getElementById('productDescription').value;
             const price = document.getElementById('productPrice').value;
             const product = document.getElementById('productImage').files[0];
             const type_id = document.getElementById('typeSelect').value;
