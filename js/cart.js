@@ -7,7 +7,7 @@ async function loadCartItems() {
   const cartContainer = document.getElementById("cart-items");
 
   try {
-      const response = await fetch("/api/likes/check", { credentials: "include" });
+      const response = await fetch("/api/cart-items/add", { credentials: "include" });
       if (!response.ok) throw new Error("Failed to fetch cart");
 
       const cart = await response.json();
