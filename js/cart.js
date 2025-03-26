@@ -2,23 +2,23 @@ document.addEventListener("DOMContentLoaded", async function () {
   await loadCartItems();
 });
 
-// Function to load wishlist items from the database
+// Function to load cart items from the database
 async function loadCartItems() {
-  const wishlistContainer = document.getElementById("wishlist-items");
+  const cartContainer = document.getElementById("cart-items");
 
   try {
       const response = await fetch("/api/likes/check", { credentials: "include" });
-      if (!response.ok) throw new Error("Failed to fetch wishlist");
+      if (!response.ok) throw new Error("Failed to fetch cart");
 
-      const wishlist = await response.json();
-      wishlistContainer.innerHTML = ""; // Clear previous content
+      const cart = await response.json();
+      cartContainer.innerHTML = ""; // Clear previous content
 
-      if (wishlist.length === 0) {
-          wishlistContainer.innerHTML = "<p>Your wishlist is empty.</p>";
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>Your cart is empty.</p>";
           return;
       }
 
-      wishlist.forEach((product) => {
+      wishcartlist.forEach((product) => {
         // Create Card
         const cardDiv = document.createElement("div");
         cardDiv.classList.add("card");
@@ -89,7 +89,7 @@ cardFooterDiv.append(quantityDiv, removeButton);
 
         // Assemble Card
         cardDiv.append(cardImg, cardBodyDiv, cardFooterDiv);
-        wishlistContainer.appendChild(cardDiv);
+        cartContainer.appendChild(cardDiv);
 
         console.log(product)
     });
