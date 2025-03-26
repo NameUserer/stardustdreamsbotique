@@ -118,7 +118,7 @@ cardFooterDiv.append(quantityDiv, removeButton);
     updateCartSummary();
 });
 
-function updateCartSummary() {
+/*function updateCartSummary() {
     const userId = getUserId(); // You should implement how you retrieve the user ID.
 
     fetch(`/cart/summary?user_id=${userId}`)
@@ -133,4 +133,4 @@ function updateCartSummary() {
 function getUserId() {
     // Replace this with actual logic to get the logged-in user ID
     return 1;
-}
+}*/
