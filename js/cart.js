@@ -18,7 +18,7 @@ async function loadCartItems() {
           return;
       }
 
-      wishcartlist.forEach((product) => {
+      cartlist.forEach((product) => {
         // Create Card
         const cardDiv = document.createElement("div");
         cardDiv.classList.add("card");
