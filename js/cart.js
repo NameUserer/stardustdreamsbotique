@@ -83,7 +83,7 @@ quantityDiv.append(minusButton, quantitySpan, plusButton);
 const removeButton = document.createElement("button");
 removeButton.textContent = "Remove";
 removeButton.classList.add("btn", "btn-danger", "btn-sm");
-removeButton.addEventListener("click", () => removeFromWishlist(product.product_id));
+removeButton.addEventListener("click", () => removeFromCart(product.product_id));
 
 cardFooterDiv.append(quantityDiv, removeButton);
 
@@ -103,7 +103,7 @@ cardFooterDiv.append(quantityDiv, removeButton);
 
   async function removeItemFromCart(productId) {
     try {
-        const response = await fetch(`/api/cart/${productId}`, { method: "DELETE", credentials: "include" });
+        const response = await fetch(`/api/cart/create`, { method: "DELETE", credentials: "include" });
         if (!response.ok) throw new Error("Failed to remove item");
   
         // Reload cart after successful removal
