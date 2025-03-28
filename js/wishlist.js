@@ -90,14 +90,35 @@ async function loadWishlist() {
 }
 
 // Function to remove an item from the wishlist
-async function unlikeProduct(productId) {
+async function unlikeProduct(product_id) {
   try {
-      const response = await fetch(`/api/likes/${productId}`, { method: "DELETE", credentials: "include" });
-      if (!response.ok) throw new Error("Failed to remove item");
+    const res = await fetch(`/api/like/${product_id}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
 
-      // Reload wishlist after successful removal
-      await loadWishlist();
+    if (res.ok) {
+      getProducts();
+    } else {
+      const data = await res.json();
+      alert(data.error);
+    }
   } catch (error) {
-      console.error("Error removing from wishlist:", error);
+    console.error("Error removing from wishlist:", error);
   }
+}
+
+async function toggleWishlist(id, name) {
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  const index = wishlist.findIndex((item) => item.id === id);
+
+  if (index > -1) {
+    wishlist.splice(index, 1);
+    await fetch(`/api/like/${id}`, { method: "DELETE", credentials: "include" });
+  } else {
+    wishlist.push({ id, name });
+    await fetch(`/api/like/${id}`, { method: "POST", credentials: "include" });
+  }
+
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
 }
