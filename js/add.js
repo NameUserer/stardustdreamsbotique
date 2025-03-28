@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const price = document.getElementById('productPrice').value;
             const product = document.getElementById('productImage').files[0];
             const type_id = document.getElementById('typeSelect').value;
-            const chategory_name = document.getElementById('categorySelect').value;
+            const chategory_name = document.getElementById('chategorySelect').value;
             console.log(product_name, description, price, type_id, chategory_name);
             console.log(product);         
             
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
             formData.append("description", description);
             formData.append("price", price);
             formData.append("type_id", type_id);
-            formData.append("category_name", chategory_name);
+            formData.append("chategory_name", chategory_name);
             console.log(formData);
             
             try {

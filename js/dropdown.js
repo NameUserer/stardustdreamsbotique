@@ -22,8 +22,8 @@ window.onload = async () => {
 
 // Apply filters and fetch filtered results
 async function applyFilters() {
-  const selectedGames = Array.from(document.querySelectorAll('input[data-category="game"]:checked')).map(cb => cb.value);
-  const selectedProducts = Array.from(document.querySelectorAll('input[data-category="product"]:checked')).map(cb => cb.value);
+  const selectedGames = Array.from(document.querySelectorAll('input[data-chategory="game"]:checked')).map(cb => cb.value);
+  const selectedProducts = Array.from(document.querySelectorAll('input[data-chategory="product"]:checked')).map(cb => cb.value);
 
   // Prepare query parameters
   const queryParams = new URLSearchParams();
