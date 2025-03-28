@@ -97,7 +97,7 @@ async function unlikeProduct(product_id) {
     });
 
     if (res.ok) {
-      getProducts();
+      loadWishlist();
     } else {
       const data = await res.json();
       alert(data.error);
