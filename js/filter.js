@@ -29,7 +29,7 @@ async function applyFilters() {
     
     let url = "/api/products/filter";
     const params = [];
-    if (selectedCategories.length) params.push(`category_id=${selectedCategories.join(',')}`);
+    if (selectedCategories.length) params.push(`chategory_id=${selectedCategories.join(',')}`);
     if (selectedTypes.length) params.push(`type_id=${selectedTypes.join(',')}`);
     if (params.length) url += `?${params.join('&')}`;
     
