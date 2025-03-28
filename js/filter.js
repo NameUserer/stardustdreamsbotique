@@ -21,7 +21,7 @@ filterButton.addEventListener("click", applyFilters);
 
 // Apply filters
 async function applyFilters() {
-    const selectedCategories = Array.from(document.querySelectorAll(".filter-section:nth-child(1) .filter:checked"))
+    const selectedChategories = Array.from(document.querySelectorAll(".filter-section:nth-child(1) .filter:checked"))
         .map(checkbox => checkbox.value);
     
     const selectedTypes = Array.from(document.querySelectorAll(".filter-section:nth-child(2) .filter:checked"))
@@ -29,7 +29,7 @@ async function applyFilters() {
     
     let url = "/api/products/filter";
     const params = [];
-    if (selectedCategories.length) params.push(`chategory_id=${selectedCategories.join(',')}`);
+    if (selectedChategories.length) params.push(`chategory_id=${selectedChategories.join(',')}`);
     if (selectedTypes.length) params.push(`type_id=${selectedTypes.join(',')}`);
     if (params.length) url += `?${params.join('&')}`;
     
