@@ -88,26 +88,6 @@ async function loadWishlist() {
   }
 }
 
-
-async function likeProduct(product_id) {
-  try {
-    const res = await fetch(`/api/likes/${product_id}`, {
-      method: "POST",
-      credentials: "include"
-    });
-
-    const data = await res.json();
-    console.log(data);
-
-    if (res.ok) {
-      getProducts();
-    } else {
-      alert(data.error);
-    }
-  } catch (error) {
-    console.error("Error adding to wishlist:", error);
-  }
-}
 // Function to remove an item from the wishlist
 async function unlikeProduct(product_id) {
   try {
