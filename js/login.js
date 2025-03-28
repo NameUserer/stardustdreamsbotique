@@ -19,7 +19,11 @@ async function login() {
     console.log(data);
     if (res.ok) {
         resetInputs();
-
+        const res2= await fetch('/api/auth/role', {
+            credentials: 'include'
+        })
+        const json=await res2.json();
+        alert(json)
         if (data.user_id === 9) {
             Swal.fire({
                 title: 'Welcome Admin!',
