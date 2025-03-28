@@ -56,14 +56,14 @@ async function loadWishlist() {
         buyButton.href = "#";
         buyButton.classList.add("btn", "cart");
         buyButton.textContent = "Buy";
-        buyButton.addEventListener("click", () => addToCart(product));
+        buyButton.addEventListener("click", () => addToCart(product.product_id));
 
         // Wishlist Remove Button
         const wishlistButton = document.createElement("a");
         wishlistButton.href = "#";
         wishlistButton.classList.add("btn", "wishlist");
         wishlistButton.textContent = "♥";
-        wishlistButton.addEventListener("click", () => unlikeProduct(product.product_id));
+        wishlistButton.addEventListener("click", () => likeProduct(product.product_id));
 
         cardFooterDiv.append(buyButton, wishlistButton);
 
@@ -74,7 +74,6 @@ async function loadWishlist() {
         console.log(product)
     });
 
-      console.log("lefut");
       
       // Attach event listeners to remove buttons
       document.querySelectorAll(".remove-wishlist").forEach((button) => {
@@ -92,7 +91,7 @@ async function loadWishlist() {
 // Function to remove an item from the wishlist
 async function unlikeProduct(product_id) {
   try {
-    const res = await fetch(`/api/like/${product_id}`, {
+    const res = await fetch(`/api/likes/${product_id}`, {
       method: "DELETE",
       credentials: "include",
     });
