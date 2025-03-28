@@ -63,7 +63,7 @@ async function loadWishlist() {
         wishlistButton.href = "#";
         wishlistButton.classList.add("btn", "wishlist");
         wishlistButton.textContent = "♥";
-        wishlistButton.addEventListener("click", () => removeFromWishlist(product.product_id));
+        wishlistButton.addEventListener("click", () => unlikeProduct(product.product_id));
 
         cardFooterDiv.append(buyButton, wishlistButton);
 
