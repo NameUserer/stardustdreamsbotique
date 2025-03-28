@@ -23,8 +23,7 @@ async function login() {
             credentials: 'include'
         })
         const json=await res2.json();
-        alert(json.role)
-        if (data.user_id === 9) {
+        if (json.role === "admin") {
             Swal.fire({
                 title: 'Welcome Admin!',
                 text: data.message,
