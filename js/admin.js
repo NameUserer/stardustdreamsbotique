@@ -97,11 +97,17 @@ async function getProducts(queryParams = "") {
     deleteButton.textContent = "Delete";
     deleteButton.addEventListener("click", () => deleteProduct(product.product_id));
 
-    cardFooterDiv.append(deleteButton);
-      
-      // Append elements
-      cardDiv.append(cardImg, cardBodyDiv, cardFooterDiv);
-      document.getElementById("row").append(cardDiv);
+     // Edit Button
+     const editButton = document.createElement("button");
+     editButton.classList.add("btn", "btn-primary");
+     editButton.textContent = "Edit";
+     editButton.addEventListener("click", () => editProduct(product));
+ 
+     cardFooterDiv.append(editButton, deleteButton);
+     
+     // Append elements
+     cardDiv.append(cardImg, cardBodyDiv, cardFooterDiv);
+     document.getElementById("row").append(cardDiv);
     }
   }
 
@@ -174,6 +180,97 @@ async function deleteProduct(productId) {
       Swal.fire({
         title: "Error!",
         text: "Failed to delete the product.",
+        icon: "error",
+        confirmButtonColor: "#d33"
+      });
+    }
+  }
+
+  async function editProduct(product) {
+    const { value: formValues } = await Swal.fire({
+      title: "Edit Product",
+      html: `
+        <label>Image:</label>
+        <input type="file" id="swal-input-image" class="swal2-input" accept="image/*"><br>
+        
+        <label>Name:</label>
+        <input type="text" id="swal-input-name" class="swal2-input" value="${product.product_name}"><br>
+        
+        <label>Price:</label>
+        <input type="number" id="swal-input-price" class="swal2-input" value="${product.price}" min="0"><br>
+        
+        <label>Description:</label>
+        <textarea id="swal-input-description" class="swal2-textarea">${product.description}</textarea><br>
+  
+        <label>Category:</label>
+        <select id="swal-input-category" class="swal2-select">
+          <option value="1" ${product.chategory_id === 1 ? "selected" : ""}>Category 1</option>
+          <option value="2" ${product.chategory_id === 2 ? "selected" : ""}>Category 2</option>
+          <option value="3" ${product.chategory_id === 3 ? "selected" : ""}>Category 3</option>
+          <option value="4" ${product.chategory_id === 4 ? "selected" : ""}>Category 4</option>
+        </select><br>
+        
+        <label>Type:</label>
+        <select id="swal-input-type" class="swal2-select">
+          <option value="A" ${product.type_id === "A" ? "selected" : ""}>Type A</option>
+          <option value="B" ${product.type_id === "B" ? "selected" : ""}>Type B</option>
+          <option value="C" ${product.type_id === "C" ? "selected" : ""}>Type C</option>
+          <option value="D" ${product.type_id === "D" ? "selected" : ""}>Type D</option>
+        </select>
+      `,
+      focusConfirm: false,
+      showCancelButton: true,
+      confirmButtonText: "Save Changes",
+      preConfirm: () => {
+        return {
+          image: document.getElementById("swal-input-image").files[0],
+          product_name: document.getElementById("swal-input-name").value,
+          price: document.getElementById("swal-input-price").value,
+          description: document.getElementById("swal-input-description").value,
+          chategory_id: document.getElementById("swal-input-category").value,
+          type_id: document.getElementById("swal-input-type").value,
+        };
+      }
+    });
+  
+    if (!formValues) return;
+  
+    try {
+      const formData = new FormData();
+      formData.append("product_name", formValues.product_name);
+      formData.append("price", formValues.price);
+      formData.append("description", formValues.description);
+      formData.append("chategory_id", formValues.chategory_id);
+      formData.append("type_id", formValues.type_id);
+  
+      if (formValues.image) {
+        formData.append("product", formValues.image);
+      }
+  
+      const response = await fetch(`/api/products/update/${product.product_id}`, {
+        method: "PUT",
+        credentials: "include",
+        body: formData,
+      });
+  
+      if (!response.ok) {
+        throw new Error(`Failed to update product. Status: ${response.status}`);
+      }
+  
+      Swal.fire({
+        title: "Success!",
+        text: "Product updated successfully.",
+        icon: "success",
+        confirmButtonColor: "#3085d6"
+      }).then(() => {
+        location.reload(); // Refresh the page to show updated product
+      });
+  
+    } catch (error) {
+      console.error("Error updating product:", error);
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to update the product.",
         icon: "error",
         confirmButtonColor: "#d33"
       });
