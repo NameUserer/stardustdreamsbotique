@@ -11,7 +11,6 @@ async function loadCartItems() {
       if (!response.ok) throw new Error("Failed to fetch cart");
 
       const cart = await response.json();
-      cartContainer.innerHTML = ""; // Clear previous content
 
       if (cart.length === 0) {
         cartContainer.innerHTML = "<p>Your cart is empty.</p>";
@@ -118,19 +117,14 @@ cardFooterDiv.append(quantityDiv, removeButton);
     //updateCartSummary();
 });
 
-/*function updateCartSummary() {
+function updateCartSummary() {
     const userId = getUserId(); // You should implement how you retrieve the user ID.
 
     fetch(`/cart/summary?user_id=${userId}`)
         .then(response => response.json())
         .then(data => {
-            document.getElementById('cart-count').textContent = data.totalItems;
-            document.getElementById('cart-total').textContent = data.totalCost.toFixed(2);
+            document.getElementById('items').textContent = data.totalItems;
+            document.getElementById('price').textContent = data.totalCost.toFixed(2);
         })
         .catch(error => console.error('Error fetching cart summary:', error));
 }
-
-function getUserId() {
-    // Replace this with actual logic to get the logged-in user ID
-    return 1;
-}*/
