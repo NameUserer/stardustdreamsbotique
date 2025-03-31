@@ -443,13 +443,15 @@ input, textarea, select {
 /* Footer Styling */
 .card-footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Ensures spacing between buttons */
+    align-items: center;
     padding: 10px 15px;
     background-color: #f8f9fa;
     border-top: 1px solid #ddd;
+    gap: 10px;
 }
 
-/* Buttons */
+/* Buttons - General */
 .btn {
     padding: 8px 12px;
     border-radius: 5px;
@@ -457,9 +459,14 @@ input, textarea, select {
     font-size: 0.9rem;
     font-weight: bold;
     transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1; /* Ensures buttons take available space equally */
+    text-align: center;
 }
 
-/* Delete Button */
+/* Delete Button - Left Side */
 .btn-delete {
     background-color: #dc3545;
     color: white;
@@ -470,12 +477,12 @@ input, textarea, select {
     background-color: #b52b3a;
 }
 
-/* Edit Button */
+/* Edit Button - Right Side */
 .btn-edit {
     background-color: #007bff;
     color: white;
     border: none;
-    margin-left: auto; /* Pushes to the right */
+    margin-left: auto; /* Ensures it moves to the right */
 }
 
 .btn-edit:hover {
