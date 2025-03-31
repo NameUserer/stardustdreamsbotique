@@ -247,7 +247,7 @@ async function deleteProduct(productId) {
         formData.append("product", formValues.image);
       }
   
-      const response = await fetch(`/api/products/${product.product_id}`, {
+      const response = await fetch(`/api/products/${productId}`, {
         method: "PUT",
         credentials: "include",
         body: formData,
