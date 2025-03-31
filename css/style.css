@@ -440,6 +440,7 @@ input, textarea, select {
     justify-content: center; /* Centers items horizontally */
 }
 
+/* Footer Styling */
 .card-footer {
     display: flex;
     justify-content: space-between;
@@ -448,6 +449,17 @@ input, textarea, select {
     border-top: 1px solid #ddd;
 }
 
+/* Buttons */
+.btn {
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+/* Delete Button */
 .btn-delete {
     background-color: #dc3545;
     color: white;
