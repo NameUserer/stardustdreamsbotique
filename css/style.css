@@ -404,6 +404,13 @@ body {
     bottom: 240px;
 }
 
+.btn-edit {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    margin-left: auto; /* Pushes to the right */
+}
+
 .filter-section input {
     width: 20px;
     max-width: 200px;

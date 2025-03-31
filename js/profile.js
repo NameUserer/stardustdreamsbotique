@@ -14,7 +14,7 @@ btnPic.addEventListener('click', () => {
 });
 
 async function getProfilPic() {
-    const res = await fetch('/api/profile/getProfilePic', {
+    const res = await fetch('/api/profile/pic', {
         method: 'GET',
         credentials: 'include'
     });
