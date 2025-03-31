@@ -204,18 +204,18 @@ async function deleteProduct(productId) {
   
         <label>Category:</label>
         <select id="swal-input-category" class="swal2-select">
-          <option value="1" ${product.chategory_id === 1 ? "selected" : ""}>Category 1</option>
-          <option value="2" ${product.chategory_id === 2 ? "selected" : ""}>Category 2</option>
-          <option value="3" ${product.chategory_id === 3 ? "selected" : ""}>Category 3</option>
-          <option value="4" ${product.chategory_id === 4 ? "selected" : ""}>Category 4</option>
+          <option value="1" ${product.chategory_id === 1 ? "selected" : ""}>Honkai Impact</option>
+          <option value="2" ${product.chategory_id === 2 ? "selected" : ""}>Genshin Impact</option>
+          <option value="3" ${product.chategory_id === 3 ? "selected" : ""}>Honkai: Star Rail</option>
+          <option value="4" ${product.chategory_id === 4 ? "selected" : ""}>Zenless Zone Zero</option>
         </select><br>
         
         <label>Type:</label>
         <select id="swal-input-type" class="swal2-select">
-          <option value="A" ${product.type_id === "A" ? "selected" : ""}>Type A</option>
-          <option value="B" ${product.type_id === "B" ? "selected" : ""}>Type B</option>
-          <option value="C" ${product.type_id === "C" ? "selected" : ""}>Type C</option>
-          <option value="D" ${product.type_id === "D" ? "selected" : ""}>Type D</option>
+          <option value="A" ${product.type_id === 1 ? "selected" : ""}>Full costumes</option>
+          <option value="B" ${product.type_id === 2 ? "selected" : ""}>Wigs</option>
+          <option value="C" ${product.type_id === 3 ? "selected" : ""}>Accesories</option>
+          <option value="D" ${product.type_id === 4 ? "selected" : ""}>Merches</option>
         </select>
       `,
       focusConfirm: false,
@@ -247,7 +247,7 @@ async function deleteProduct(productId) {
         formData.append("product", formValues.image);
       }
   
-      const response = await fetch(`/api/products/update/${product.product_id}`, {
+      const response = await fetch(`/api/products/${product.product_id}`, {
         method: "PUT",
         credentials: "include",
         body: formData,
