@@ -99,7 +99,7 @@ async function getProducts(queryParams = "") {
 
      // Edit Button
      const editButton = document.createElement("button");
-     editButton.classList.add("btn", "btn-primary");
+     editButton.classList.add("btn");
      editButton.textContent = "Edit";
      editButton.addEventListener("click", () => editProduct(product));
  
