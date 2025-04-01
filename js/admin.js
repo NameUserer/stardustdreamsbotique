@@ -250,6 +250,9 @@ async function deleteProduct(productId) {
       const response = await fetch(`/api/products/${product.product_id}`, {
         method: "PUT",
         credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+      },
         body: formData,
       });
   
