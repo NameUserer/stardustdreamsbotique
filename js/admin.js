@@ -212,10 +212,10 @@ async function deleteProduct(productId) {
         
         <label>Type:</label>
         <select id="swal-input-type" class="swal2-select">
-          <option value="A" ${product.type_id === 1 ? "selected" : ""}>Full costumes</option>
-          <option value="B" ${product.type_id === 2 ? "selected" : ""}>Wigs</option>
-          <option value="C" ${product.type_id === 3 ? "selected" : ""}>Accesories</option>
-          <option value="D" ${product.type_id === 4 ? "selected" : ""}>Merches</option>
+          <option value="1" ${product.type_id === 1 ? "selected" : ""}>Full costumes</option>
+          <option value="2" ${product.type_id === 2 ? "selected" : ""}>Wigs</option>
+          <option value="3" ${product.type_id === 3 ? "selected" : ""}>Accesories</option>
+          <option value="4" ${product.type_id === 4 ? "selected" : ""}>Merches</option>
         </select>
       `,
       focusConfirm: false,
@@ -240,7 +240,7 @@ async function deleteProduct(productId) {
       formData.append("product_name", formValues.product_name);
       formData.append("price", formValues.price);
       formData.append("description", formValues.description);
-      formData.append("chategory_id", formValues.chategory_id);
+      formData.append("category_id", formValues.chategory_id);
       formData.append("type_id", formValues.type_id);
       formData.append("product", formValues.image);
   
