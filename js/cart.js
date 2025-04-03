@@ -135,7 +135,7 @@ async function removeFromCart(product_id) {
           headers: {
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ product_id: cart_item_id })
+          body: JSON.stringify({ product_id: product_id })
       });
 
       if (!response.ok) throw new Error('Failed to remove item from cart');
