@@ -144,14 +144,14 @@ async function unlikeProduct(product_id) {
 }
 
 // Add to cart function
-async function addToCart(productId, quantity) {
+async function addToCart(product_id, quantity) {
   try {
       const response = await fetch('api/cart/add', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ product_id: productId, quantity: quantity })
+          body: JSON.stringify({ product_id: product_id, quantity: quantity })
       });
 
       const data = await response.json();
