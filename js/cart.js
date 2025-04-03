@@ -85,7 +85,7 @@ async function loadCartItems() {
         removeButton.textContent = "Remove";
         removeButton.classList.add("btn", "btn-danger", "btn-sm");
         removeButton.addEventListener("click", async () => {
-            await removeFromCart(product.product_id);
+            await removeFromCart(product.cart_item_id);
             cardDiv.remove();  // Remove the card from the UI
         });
 
@@ -128,14 +128,14 @@ async function updateCartQuantity(product_id, quantity) {
 }
 
 // Function to remove the item from the cart (backend integration)
-async function removeFromCart(product_id) {
+async function removeFromCart(cart_item_id) {
   try {
-      const response = await fetch(`/api/cart/remove/${product_id}`, {
+      const response = await fetch(`/api/cart/remove/${cart_item_id}`, {
           method: 'DELETE',
           headers: {
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ product_id: product_id })
+          body: JSON.stringify({ cart_item_id: cart_item_id })
       });
 
       if (!response.ok) throw new Error('Failed to remove item from cart');
