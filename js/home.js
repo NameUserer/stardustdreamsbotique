@@ -154,17 +154,16 @@ async function addToCart(product_id, quantity) {
           body: JSON.stringify({ product_id: product_id, quantity: quantity })
       });
 
-      const data = await response.json();
-      if (!response.ok) {
-          throw new Error(data.error || 'Failed to add item to cart');
+      const result = await response.json();
+      if (response.ok) {
+        console.log("Product added to cart:", result);
+      } else {
+        console.error("Error:", result.error);
       }
-      
-      alert('Item added to cart successfully!');
-  } catch (error) {
-      console.error('Error adding to cart:', error);
-      alert(error.message);
-  }
-}
+    } catch (error) {
+      console.error("Request failed:", error);
+    }
+  };
 
 
 // Toggle wishlist function
