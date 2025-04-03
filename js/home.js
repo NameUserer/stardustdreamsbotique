@@ -144,29 +144,35 @@ async function unlikeProduct(product_id) {
 }
 
 // Add to cart function
-async function addToCart(product_id) {
+async function addToCart(productId, quantity) {
+  const token = localStorage.getItem('token'); // Assuming JWT is stored here
+  if (!token) {
+      alert('You need to log in first!');
+      return;
+  }
+
   try {
-    const res = await fetch(`/api/cart/create`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ quantity: 1 }) // Increment by 1 each time
-    });
+      const response = await fetch('/cart/purchase', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ product_id: productId, quantity: quantity })
+      });
 
-    const data = await res.json();
-    console.log(data);
-
-    if (res.ok) {
-      getProducts(); // Update cart display
-    } else {
-      alert(data.error);
-    }
+      const data = await response.json();
+      if (!response.ok) {
+          throw new Error(data.error || 'Failed to add item to cart');
+      }
+      
+      alert('Item added to cart successfully!');
   } catch (error) {
-    console.error("Error adding to cart:", error);
+      console.error('Error adding to cart:', error);
+      alert(error.message);
   }
 }
+
 
 // Toggle wishlist function
 async function toggleWishlist(id, name) {
