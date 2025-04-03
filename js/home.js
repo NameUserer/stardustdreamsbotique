@@ -163,6 +163,7 @@ const purchaseProduct = async (product_id, quantity) => {
       console.log("Product added to cart:", result);
     } else {
       console.error("Error:", result.error);
+      console.log(product_id, quantity);
     }
   } catch (error) {
     console.error("Request failed:", error);
