@@ -145,12 +145,11 @@ async function unlikeProduct(product_id) {
 
 // Add to cart function
 async function addToCart(productId, quantity) {
-try {
+  try {
       const response = await fetch('/cart/purchase', {
           method: 'POST',
           headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`
+              'Content-Type': 'application/json'
           },
           body: JSON.stringify({ product_id: productId, quantity: quantity })
       });
