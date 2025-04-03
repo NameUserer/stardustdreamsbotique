@@ -130,9 +130,9 @@ async function updateCartQuantity(product_id, quantity) {
 }
 
 // Function to remove the item from the cart (backend integration)
-async function removeFromCart(cart_item_id) {
+async function removeFromCart(product_id) {
   try {
-      const response = await fetch(`/api/cart/remove/${cart_item_id}`, {
+      const response = await fetch(`/api/cart/remove/${product_id}`, {
           method: 'DELETE',
           headers: {
               'Content-Type': 'application/json',
