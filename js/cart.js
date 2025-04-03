@@ -48,7 +48,7 @@ async function loadCartItems() {
 
         // Card Footer
         const cardFooterDiv = document.createElement("div");
-        cardFooterDiv.classList.add("card-footer", "d-flex", "justify-content-between", "align-items-center");
+        cardFooterDiv.classList.add("card-footer", "d-flex", "justify-content-between");
 
         // Quantity Controls
         const quantityDiv = document.createElement("div");
@@ -57,46 +57,47 @@ async function loadCartItems() {
         const minusButton = document.createElement("button");
         minusButton.textContent = "-";
         minusButton.classList.add("btn", "btn-sm", "btn-outline-secondary");
-        minusButton.addEventListener("click", () => {
+        minusButton.addEventListener("click", async () => {
           if (product.quantity > 1) {
               product.quantity--;
               quantitySpan.textContent = product.quantity;
+              await updateCartQuantity(product.product_id, product.quantity);
           }
-});
+        });
 
-const quantitySpan = document.createElement("span");
-quantitySpan.textContent = product.quantity || 1;
-quantitySpan.classList.add("mx-2");
+        const quantitySpan = document.createElement("span");
+        quantitySpan.textContent = product.quantity || 1;
+        quantitySpan.classList.add("mx-2");
 
-const plusButton = document.createElement("button");
-plusButton.textContent = "+";
-plusButton.classList.add("btn", "btn-sm", "btn-outline-secondary");
-plusButton.addEventListener("click", () => {
-    product.quantity++;
-    quantitySpan.textContent = product.quantity;
-});
+        const plusButton = document.createElement("button");
+        plusButton.textContent = "+";
+        plusButton.classList.add("btn", "btn-sm", "btn-outline-secondary");
+        plusButton.addEventListener("click", async () => {
+            product.quantity++;
+            quantitySpan.textContent = product.quantity;
+            await updateCartQuantity(product.product_id, product.quantity);
+        });
 
-quantityDiv.append(minusButton, quantitySpan, plusButton);
+        quantityDiv.append(minusButton, quantitySpan, plusButton);
 
-// Remove Button
-const removeButton = document.createElement("button");
-removeButton.textContent = "Remove";
-removeButton.classList.add("btn", "btn-danger", "btn-sm");
-removeButton.addEventListener("click", () => removeFromCart(product.product_id));
+        // Remove Button
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Remove";
+        removeButton.classList.add("btn", "btn-danger", "btn-sm");
+        removeButton.addEventListener("click", async () => {
+            await removeFromCart(product.product_id);
+            cardDiv.remove();  // Remove the card from the UI
+        });
 
-cardFooterDiv.append(quantityDiv, removeButton);
+        cardFooterDiv.append(quantityDiv, removeButton);
 
         // Assemble Card
         cardDiv.append(cardImg, cardBodyDiv, cardFooterDiv);
         cartContainer.appendChild(cardDiv);
+      });
 
-        console.log(product)
-    });
-  
-      console.log("lefut");
-
-    } catch (error) {
-      console.error("Error loading cart:", error);
+  } catch (error) {
+    console.error("Error loading cart:", error);
   }
 }
 
@@ -117,14 +118,52 @@ cardFooterDiv.append(quantityDiv, removeButton);
     //updateCartSummary();
 });
 
-function updateCartSummary() {
-    const userId = getUserId(); // You should implement how you retrieve the user ID.
+async function updateCartQuantity(productId, newQuantity) {
+  try {
+      const response = await fetch('/api/cart/update-quantity', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              productId: productId,
+              newQuantity: newQuantity
+          })
+      });
 
-    fetch(`/cart/summary?user_id=${userId}`)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('items').textContent = data.totalItems;
-            document.getElementById('price').textContent = data.totalCost.toFixed(2);
-        })
-        .catch(error => console.error('Error fetching cart summary:', error));
+      if (!response.ok) throw new Error('Failed to update cart quantity');
+
+      const result = await response.json();
+      if (result.success) {
+          console.log('Cart quantity updated.');
+      } else {
+          console.log('Failed to update cart quantity.');
+      }
+  } catch (error) {
+      console.error('Error updating cart quantity:', error);
+  }
+}
+
+// Function to remove the item from the cart (backend integration)
+async function removeFromCart(productId) {
+  try {
+      const response = await fetch('/api/cart/remove-item', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ productId: productId })
+      });
+
+      if (!response.ok) throw new Error('Failed to remove item from cart');
+
+      const result = await response.json();
+      if (result.success) {
+          console.log('Item removed from cart.');
+      } else {
+          console.log('Failed to remove item from cart.');
+      }
+  } catch (error) {
+      console.error('Error removing item from cart:', error);
+  }
 }
