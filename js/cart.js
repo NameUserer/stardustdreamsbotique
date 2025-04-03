@@ -135,18 +135,21 @@ async function removeFromCart(cart_item_id) {
           headers: {
               'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ cart_item_id: cart_item_id })
       });
 
-      if (!response.ok) throw new Error('Failed to remove item from cart');
+      if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Failed to remove item from cart');
+      }
 
       const result = await response.json();
       if (result.success) {
-          console.log('Item removed from cart.');
+          console.log('Item successfully removed from cart');
       } else {
-          console.log('Failed to remove item from cart.');
+          console.log('Failed to remove item from cart:', result.error);
       }
   } catch (error) {
       console.error('Error removing item from cart:', error);
+      alert('Error removing item from cart. Please try again.');
   }
 }
