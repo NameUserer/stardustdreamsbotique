@@ -146,7 +146,7 @@ async function unlikeProduct(product_id) {
 // Add to cart function
 async function addToCart(productId, quantity) {
   try {
-      const response = await fetch('/cart/purchase', {
+      const response = await fetch('api/cart/add', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
