@@ -85,7 +85,7 @@ async function loadCartItems() {
         removeButton.textContent = "Remove";
         removeButton.classList.add("btn", "btn-danger", "btn-sm");
         removeButton.addEventListener("click", async () => {
-            await removeFromCart(product.product_id);
+            await removeFromCart(product.cart_item_id);
             cardDiv.remove();  // Remove the card from the UI
         });
 
