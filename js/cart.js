@@ -118,7 +118,7 @@ async function loadCartItems() {
     //updateCartSummary();
 });
 
-async function updateCartQuantity(productId, newQuantity) {
+async function updateCartQuantity(product_id, newQuantity) {
   try {
       const response = await fetch('/api/cart/update-quantity', {
           method: 'POST',
@@ -126,7 +126,7 @@ async function updateCartQuantity(productId, newQuantity) {
               'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-              productId: productId,
+              product_id: product_id,
               newQuantity: newQuantity
           })
       });
