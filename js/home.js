@@ -87,7 +87,7 @@ function renderProducts(products) {
     buyButton.href = "#";
     buyButton.classList.add("btn", "cart");
     buyButton.textContent = "Buy";
-    buyButton.addEventListener("click", () => purchaseProduct(product.product_id));
+    buyButton.addEventListener("click", () => purchaseProduct(product.product_id, product.quantity));
 
     // Wishlist Button
     const wishlistButton = document.createElement("a");
