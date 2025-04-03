@@ -87,7 +87,7 @@ function renderProducts(products) {
     buyButton.href = "#";
     buyButton.classList.add("btn", "cart");
     buyButton.textContent = "Buy";
-    buyButton.addEventListener("click", () => addToCart(product.product_id));
+    buyButton.addEventListener("click", () => purchaseProduct(product.product_id));
 
     // Wishlist Button
     const wishlistButton = document.createElement("a");
@@ -144,26 +144,30 @@ async function unlikeProduct(product_id) {
 }
 
 // Add to cart function
-async function addToCart(product_id, quantity) {
+const purchaseProduct = async (product_id, quantity) => {
   try {
-      const response = await fetch('/api/cart/add', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ product_id: product_id, quantity: quantity })
-      });
+    const response = await fetch('/api/cart/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`,
+      },
+      body: JSON.stringify({
+        product_id: product_id,
+        quantity: quantity,
+      }),
+    });
 
-      const result = await response.json();
-      if (response.ok) {
-        console.log("Product added to cart:", result);
-      } else {
-        console.error("Error:", result.error);
-      }
-    } catch (error) {
-      console.error("Request failed:", error);
+    const result = await response.json();
+    if (response.ok) {
+      console.log("Product added to cart:", result);
+    } else {
+      console.error("Error:", result.error);
     }
-  };
+  } catch (error) {
+    console.error("Request failed:", error);
+  }
+};
 
 
 // Toggle wishlist function
