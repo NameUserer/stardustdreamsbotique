@@ -18,7 +18,7 @@ async function loadCartItems() {
       }
 
       cart.forEach((product) => {
-        console.log(product.cart_item_id);
+        console.log(product.product_id );
         // Create Card
         const cardDiv = document.createElement("div");
         cardDiv.classList.add("card");
@@ -86,8 +86,8 @@ async function loadCartItems() {
         removeButton.textContent = "Remove";
         removeButton.classList.add("btn", "btn-danger", "btn-sm");
         removeButton.addEventListener("click", async () => {
-          console.log('Removing item with cart_item_id:', product.cart_item_id);  
-          await removeFromCart(product.cart_item_id);
+          console.log('Removing item with cart_item_id:', product.product_id );  
+          await removeFromCart(product.product_id );
             cardDiv.remove();
         });
 
