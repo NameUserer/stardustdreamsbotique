@@ -154,7 +154,7 @@ const purchaseProduct = async (product_id, quantity) => {
       },
       body: JSON.stringify({
         product_id: product_id,
-        quantity: quantity,
+        quantity: 1,
       }),
     });
 
