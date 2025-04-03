@@ -145,13 +145,7 @@ async function unlikeProduct(product_id) {
 
 // Add to cart function
 async function addToCart(productId, quantity) {
-  const token = localStorage.getItem('token'); // Assuming JWT is stored here
-  if (!token) {
-      alert('You need to log in first!');
-      return;
-  }
-
-  try {
+try {
       const response = await fetch('/cart/purchase', {
           method: 'POST',
           headers: {
