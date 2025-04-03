@@ -101,9 +101,9 @@ async function loadCartItems() {
   }
 }
 
-  async function removeItemFromCart(product_id) {
+  async function removeItemFromCart(cart_item_id) {
     try {
-        const response = await fetch(`/api/cart/remove/${product_id}`, { method: "DELETE", credentials: "include" });
+        const response = await fetch(`/api/cart/remove/${cart_item_id}`, { method: "DELETE", credentials: "include" });
         if (!response.ok) throw new Error("Failed to remove item");
   
         // Reload cart after successful removal
