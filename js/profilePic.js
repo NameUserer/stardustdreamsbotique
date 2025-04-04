@@ -45,7 +45,7 @@ async function editProfilePic() {
 }
 
 async function getProfilPic() {
-    const res = await fetch('/api/profile/getProfilePic', {
+    const res = await fetch('/api/profile/pic', {
         method: 'GET',
         credentials: 'include'
     });
@@ -53,7 +53,7 @@ async function getProfilPic() {
     const data = await res.json();
     console.log(data);
     
-    if (res.ok) {
+    if (res.ok && Array.isArray(data) && data.length > 0 && data[0].profile_pic) {
         const editPic = document.getElementsByClassName('edit-pics')[0];
         editPic.style.backgroundImage = `url('/uploads/${data[0].profile_pic}')`;
     }
