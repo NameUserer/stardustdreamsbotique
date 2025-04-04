@@ -211,9 +211,11 @@ document.addEventListener("DOMContentLoaded", () => {
               text: "Köszönjük a vásárlást!",
               confirmButtonText: "OK"
           }).then(() => {
-              // Üzenet megjelenítése a mail.html oldalon
-              localStorage.setItem("purchaseMessage", `Sikeresen megvásároltad! A termék(ek): ${data.products}`);
-              window.location.href = "mail.html"; // Átirányítás a mail.html-re
+              // Üzenet megjelenítése a .mail-container divben
+              const mailContainer = document.querySelector(".mail-container");
+              if (mailContainer) {
+                  mailContainer.innerHTML = `<p>Sikeresen megvásároltad! A termék(ek): ${data.products}</p>`;
+              }
           });
       })
       .catch(error => console.error("Hiba a vásárlás során:", error));
