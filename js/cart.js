@@ -181,3 +181,41 @@ document.addEventListener("DOMContentLoaded", () => {
   })
   .catch(error => console.error("Hiba a kosár betöltésekor:", error));
 });
+
+//buy
+
+document.addEventListener("DOMContentLoaded", () => {
+  const buyButton = document.querySelector(".submit-btn");
+
+  buyButton.addEventListener("click", () => {
+      fetch("/api/checkout", {
+          method: "POST",
+          credentials: "include", // Ha autentikációt használsz
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.error) {
+              Swal.fire({
+                  icon: "error",
+                  title: "Hiba!",
+                  text: data.error,
+                  confirmButtonText: "OK"
+              });
+              return;
+          }
+
+          // SweetAlert sikeres vásárlás üzenet
+          Swal.fire({
+              icon: "success",
+              title: "Sikeres vásárlás!",
+              text: "Köszönjük a vásárlást!",
+              confirmButtonText: "OK"
+          }).then(() => {
+              // Üzenet megjelenítése a mail.html oldalon
+              localStorage.setItem("purchaseMessage", `Sikeresen megvásároltad! A termék(ek): ${data.products}`);
+              window.location.href = "mail.html"; // Átirányítás a mail.html-re
+          });
+      })
+      .catch(error => console.error("Hiba a vásárlás során:", error));
+  });
+});
