@@ -155,3 +155,29 @@ async function removeFromCart(product_id) {
       alert('Error removing item from cart. Please try again.');
   }
 }
+
+
+//checkout
+
+document.addEventListener("DOMContentLoaded", () => {
+  fetch('/api/check-cart', {
+      method: 'GET',
+      credentials: 'include' // Ha sütiket használsz az autentikációhoz
+  })
+  .then(response => response.json())
+  .then(data => {
+      let totalItems = 0;
+      let totalPrice = 0;
+
+      if (data.length > 0) {
+          data.forEach(item => {
+              totalItems += item.quantity;
+              totalPrice += item.total_price;
+          });
+      }
+
+      document.getElementById("items").innerText = totalItems;
+      document.getElementById("price").innerText = `$${totalPrice.toFixed(2)}`;
+  })
+  .catch(error => console.error("Hiba a kosár betöltésekor:", error));
+});
