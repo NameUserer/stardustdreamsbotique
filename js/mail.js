@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const message = localStorage.getItem("purchaseMessage");
+    const message = sessionStorage.getItem("purchaseMessage");
     if (message) {
-        document.querySelector(".mail").innerText = message;
-        localStorage.removeItem("purchaseMessage"); // Üzenet törlése, hogy ne maradjon ott
+        document.querySelector(".mail-container").innerText = message;
     } else {
         document.querySelector(".mail-container").innerText = "Nincs új vásárlás.";
     }
