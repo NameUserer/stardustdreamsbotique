@@ -160,7 +160,7 @@ async function removeFromCart(product_id) {
 //checkout
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetch('/api/check-cart', {
+  fetch('/api/cart/check-cart', {
       method: 'GET',
       credentials: 'include' // Ha sütiket használsz az autentikációhoz
   })
@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (data.length > 0) {
           data.forEach(item => {
               totalItems += item.quantity;
-              totalPrice += item.total_price;
+              totalPrice += parseFloat(item.total_price) || 0;
           });
       }
 
