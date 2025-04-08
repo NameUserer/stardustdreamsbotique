@@ -1,11 +1,8 @@
 // Fetch and display all products on page load
 window.onload = async () => {
   try {
-    const [products, wishlist] = await Promise.all([
-      getProducts(),
-      fetchWishlistFromServer()
-    ]);
-    displayResults(products, wishlist);
+    const products = await getProducts();
+    displayResults(products);
   } catch (error) {
     console.error("Error on window load:", error);
   }
@@ -42,8 +39,9 @@ async function getProducts(queryParams = "") {
 }
 
 // Display results in the UI
-function displayResults(products, wishlist) {
-  renderProducts(products, wishlist);
+function displayResults(products) {
+  console.log("Displaying products:", products);
+  renderProducts(products);
 }
 
 // Render product cards
@@ -98,20 +96,11 @@ function renderProducts(products) {
     const wishlistButton = document.createElement("button");
     wishlistButton.classList.add("wishlist-button");
     
-    // Check if product is in wishlist from server
+    // Check if product is in wishlist and add active class if needed
     const isInWishlist = wishlist.some(item => item.id === product.product_id);
     if (isInWishlist) {
       wishlistButton.classList.add("active");
-    } else {
-      wishlistButton.classList.remove("active");
     }
-
-    wishlistButton.addEventListener("click", async function () {
-      await toggleWishlist(product.product_id, product.product_name);
-      // Re-fetch wishlist from server and re-render to reflect changes
-      const updatedWishlist = await fetchWishlistFromServer();
-      displayResults(products, updatedWishlist);
-    });
     
     // Create heart element
     const heartSpan = document.createElement("span");
@@ -201,35 +190,16 @@ const purchaseProduct = async (product_id, quantity) => {
 
 // Toggle wishlist function
 async function toggleWishlist(id, name) {
-  try {
-    const response = await fetch(`/api/likes/${id}`, {
-      method: await isInServerWishlist(id) ? "DELETE" : "POST",
-      credentials: "include"
-    });
-    if (!response.ok) {
-      const error = await response.json();
-      console.error(error.error || "Unknown error");
-    }
-  } catch (error) {
-    console.error("Error toggling wishlist:", error);
-  }
-}
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  const index = wishlist.findIndex((item) => item.id === id);
 
-async function isInServerWishlist(id) {
-  const wishlist = await fetchWishlistFromServer();
-  return wishlist.some(item => item.id === id);
-}
-
-async function fetchWishlistFromServer() {
-  try {
-    const response = await fetch("/api/likes/check", {
-      method: "GET",
-      credentials: "include"
-    });
-    if (!response.ok) throw new Error("Failed to fetch wishlist");
-    return await response.json();
-  } catch (err) {
-    console.error("Error fetching wishlist:", err);
-    return [];
+  if (index > -1) {
+    wishlist.splice(index, 1);
+    await fetch(`/api/likes/${id}`, { method: "DELETE", credentials: "include" });
+  } else {
+    wishlist.push({ id, name });
+    await fetch(`/api/likes/${id}`, { method: "POST", credentials: "include" });
   }
+
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
 }
