@@ -92,13 +92,22 @@ function renderProducts(products) {
     // Wishlist Button
     const wishlistButton = document.createElement("button");
     wishlistButton.classList.add("wishlist-button");
+    
+    // Check if product is in wishlist and add active class if needed
+    const isInWishlist = wishlist.some(item => item.id === product.product_id);
+    if (isInWishlist) {
+      wishlistButton.classList.add("active");
+    }
+    
+    // Create heart element
     const heartSpan = document.createElement("span");
     heartSpan.classList.add("heart");
     wishlistButton.appendChild(heartSpan);
     
+    // Update click handler to use your toggleWishlist function
     wishlistButton.addEventListener("click", function() {
+      toggleWishlist(product.product_id, product.product_name);
       this.classList.toggle("active");
-      likeProduct(product.product_id);
     });
 
     cardFooterDiv.append(buyButton, wishlistButton);

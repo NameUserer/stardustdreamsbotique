@@ -451,6 +451,10 @@ input, textarea, select {
     transform: scale(1.1);
   }
 
+  .wishlist-button:focus {
+    outline: none;
+  }
+
   /* Heart icon base */
 .wishlist-button .heart {
     position: relative;
