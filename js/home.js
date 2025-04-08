@@ -1,16 +1,27 @@
 // Fetch and display all products on page load
 window.onload = async () => {
   try {
+    // Always refresh products when page loads
     const products = await getProducts();
     displayResults(products);
     
-    // Add a visibility change listener to update products when returning to page
-    document.addEventListener('visibilitychange', function() {
-      if (document.visibilityState === 'visible') {
-        // Refresh products when page becomes visible again
+    // Add a storage event listener to detect changes to localStorage
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'wishlist') {
+        // Refresh products when wishlist changes in another tab/window
         getProducts().then(products => displayResults(products));
       }
     });
+    
+    // Check every second if wishlist has changed (for same-tab changes)
+    let lastWishlist = localStorage.getItem('wishlist');
+    setInterval(() => {
+      const currentWishlist = localStorage.getItem('wishlist');
+      if (currentWishlist !== lastWishlist) {
+        lastWishlist = currentWishlist;
+        getProducts().then(products => displayResults(products));
+      }
+    }, 1000);
   } catch (error) {
     console.error("Error on window load:", error);
   }
@@ -58,9 +69,9 @@ function renderProducts(products) {
   const row = document.getElementById("row");
   row.innerHTML = "";
   
-  // Always get fresh data from localStorage
+  // IMPORTANT: Always get fresh data from localStorage
   const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-  console.log("Current wishlist:", wishlist);
+  console.log("Current wishlist at render time:", wishlist);
 
   for (const product of products) {
     const cardDiv = document.createElement("div");
@@ -105,28 +116,38 @@ function renderProducts(products) {
     const wishlistButton = document.createElement("button");
     wishlistButton.classList.add("wishlist-button");
     
-    // Check if product is in wishlist and add active class if needed
-    // Ensure we're comparing the same types (convert both to strings)
+    // Create heart element
+    const heartSpan = document.createElement("span");
+    heartSpan.classList.add("heart");
+    wishlistButton.appendChild(heartSpan);
+    
+    // CRITICAL: Check if product is in wishlist and set class accordingly
     const isInWishlist = wishlist.some(item => String(item.id) === String(product.product_id));
     console.log(`Product ${product.product_id} in wishlist: ${isInWishlist}`);
     
+    // Set the initial state AFTER the element is created
     if (isInWishlist) {
       wishlistButton.classList.add("active");
     } else {
       wishlistButton.classList.remove("active");
     }
     
-    // Create heart element
-    const heartSpan = document.createElement("span");
-    heartSpan.classList.add("heart");
-    wishlistButton.appendChild(heartSpan);
-    
     // Use toggleWishlist function for click handler
     wishlistButton.addEventListener("click", function() {
       toggleWishlist(product.product_id, product.product_name)
         .then(() => {
-          // Toggle the active class after wishlist is updated
-          this.classList.toggle("active");
+          // Get fresh wishlist data after toggle
+          const updatedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+          const nowInWishlist = updatedWishlist.some(item => 
+            String(item.id) === String(product.product_id)
+          );
+          
+          // Update class based on current wishlist state
+          if (nowInWishlist) {
+            this.classList.add("active");
+          } else {
+            this.classList.remove("active");
+          }
         });
     });
 
@@ -204,7 +225,7 @@ const purchaseProduct = async (product_id, quantity) => {
   }
 };
 
-// Toggle wishlist function - now returns a promise
+// Toggle wishlist function
 async function toggleWishlist(id, name) {
   try {
     let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
@@ -214,14 +235,22 @@ async function toggleWishlist(id, name) {
     if (index > -1) {
       // Remove from wishlist
       wishlist.splice(index, 1);
-      // Changed from /api/likes/ to /api/like/ to match your unlikeProduct function
-      await fetch(`/api/like/${id}`, { method: "DELETE", credentials: "include" });
+      try {
+        await fetch(`/api/like/${id}`, { method: "DELETE", credentials: "include" });
+      } catch (apiError) {
+        console.warn("API error when removing from wishlist:", apiError);
+        // Continue anyway - we'll at least update localStorage
+      }
       console.log(`Removed product ${id} from wishlist`);
     } else {
       // Add to wishlist
       wishlist.push({ id, name });
-      // Changed from /api/likes/ to match your likeProduct function
-      await fetch(`/api/likes/${id}`, { method: "POST", credentials: "include" });
+      try {
+        await fetch(`/api/likes/${id}`, { method: "POST", credentials: "include" });
+      } catch (apiError) {
+        console.warn("API error when adding to wishlist:", apiError);
+        // Continue anyway - we'll at least update localStorage
+      }
       console.log(`Added product ${id} to wishlist`);
     }
 
