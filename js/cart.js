@@ -104,8 +104,8 @@ document.addEventListener("DOMContentLoaded", async function () {
           removeButton.textContent = "Remove";
           removeButton.classList.add("btn", "btn-danger", "btn-sm");
           removeButton.addEventListener("click", async () => {
-            console.log('Removing item with cart_item_id:', product.product_id);  
-            const success = await removeFromCart(product.product_id);
+            console.log('Removing item with cart_item_id:', product.cart_item_id);  
+            const success = await removeItemFromCart(product.cart_item_id);
             if (success) {
               cardDiv.remove();
               // Check if cart is empty after removal
@@ -157,9 +157,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   
   // Function to remove the item from the cart (backend integration)
-  async function removeItemFromCart(cartItemId) {
+  async function removeItemFromCart(cart_item_id) {
     try {
-      const response = await fetch(`/api/cart/${cartItemId}`, {
+      const response = await fetch(`/api/cart/${cart_item_id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
