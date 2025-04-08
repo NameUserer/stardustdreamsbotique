@@ -157,35 +157,27 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   
   // Function to remove the item from the cart (backend integration)
-  async function removeFromCart(product_id) {
+  async function removeItemFromCart(cartItemId) {
     try {
-        const response = await fetch(`/api/cart/remove/${product_id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-  
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'Failed to remove item from cart');
+      const response = await fetch(`/api/cart/${cartItemId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
         }
-  
-        const result = await response.json();
-        if (result.success) {
-            console.log('Item successfully removed from cart');
-            return true;
-        } else {
-            console.log('Failed to remove item from cart:', result.error);
-            return false;
-        }
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to remove item from cart');
+      }
+      
+      return data;
     } catch (error) {
-        console.error('Error removing item from cart:', error);
-        alert('Error removing item from cart. Please try again.');
-        return false;
+      console.error('Error removing item from cart:', error);
+      throw error;
     }
   }
-
 
 //checkout
 
