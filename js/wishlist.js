@@ -75,7 +75,7 @@ async function loadWishlist() {
     
     // Use toggleWishlist function for click handler
     wishlistButton.addEventListener("click", function() {
-      unlikeProduct(product.product_id, product.product_name);
+      removeFromWishlist(product.product_id, product.product_name);
       this.classList.toggle("active");
     });
 
@@ -103,22 +103,21 @@ async function loadWishlist() {
 }
 
 // Function to remove an item from the wishlist
-async function unlikeProduct(product_id) {
-  try {
-    const res = await fetch(`/api/likes/${product_id}`, {
-      method: "DELETE",
-      credentials: "include",
-    });
-
-    if (res.ok) {
-      loadWishlist();
-    } else {
-      const data = await res.json();
-      alert(data.error);
-    }
-  } catch (error) {
-    console.error("Error removing from wishlist:", error);
-  }
+function removeFromWishlist(productId) {
+  // Get current wishlist
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  
+  // Remove the product from wishlist
+  wishlist = wishlist.filter(item => item.id !== productId);
+  
+  // Update localStorage
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  
+  // Also update the server if needed
+  fetch(`/api/like/${productId}`, { 
+    method: "DELETE", 
+    credentials: "include" 
+  });
 }
 
 // Toggle wishlist function

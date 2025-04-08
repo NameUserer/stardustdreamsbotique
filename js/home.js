@@ -100,6 +100,9 @@ function renderProducts(products) {
     const isInWishlist = wishlist.some(item => item.id === product.product_id);
     if (isInWishlist) {
       wishlistButton.classList.add("active");
+    } else {
+      // Make sure to remove the active class if not in wishlist
+      wishlistButton.classList.remove("active");
     }
     
     // Create heart element
