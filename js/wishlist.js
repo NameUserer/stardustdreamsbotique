@@ -75,8 +75,7 @@ async function loadWishlist() {
     
     // Use toggleWishlist function for click handler
     wishlistButton.addEventListener("click", function() {
-      removeFromWishlist(product.product_id, product.product_name);
-      this.classList.toggle("active");
+      removeFromWishlist(product.product_id);
     });
 
         cardFooterDiv.append(buyButton, wishlistButton);
@@ -90,12 +89,12 @@ async function loadWishlist() {
 
       
       // Attach event listeners to remove buttons
-      document.querySelectorAll(".remove-wishlist").forEach((button) => {
-          button.addEventListener("click", (e) => {
-              const productId = e.target.getAttribute("data-id");
-              removeFromWishlist(productId);
-          });
-      });
+    document.querySelectorAll(".remove-wishlist").forEach((button) => {
+    button.addEventListener("click", (e) => {
+      const productId = e.target.getAttribute("data-id");
+      removeFromWishlist(productId);
+    });
+  });
 
   } catch (error) {
       console.error("Error loading wishlist:", error);
@@ -103,21 +102,22 @@ async function loadWishlist() {
 }
 
 // Function to remove an item from the wishlist
-function removeFromWishlist(productId) {
-  // Get current wishlist
-  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-  
-  // Remove the product from wishlist
-  wishlist = wishlist.filter(item => item.id !== productId);
-  
-  // Update localStorage
-  localStorage.setItem("wishlist", JSON.stringify(wishlist));
-  
-  // Also update the server if needed
-  fetch(`/api/likes/${productId}`, { 
-    method: "DELETE", 
-    credentials: "include" 
-  });
+async function removeFromWishlist(productId) {
+  try {
+    const response = await fetch(`/api/likes/${productId}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to remove item from wishlist");
+    }
+
+    // Reload the wishlist to update the UI
+    await loadWishlist();
+  } catch (error) {
+    console.error("Error removing item:", error);
+  }
 }
 
 // Toggle wishlist function
