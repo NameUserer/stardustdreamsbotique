@@ -49,6 +49,9 @@ function renderProducts(products) {
   console.log(`renderProducts: ${products}`);
   const row = document.getElementById("row");
   row.innerHTML = "";
+  
+  // Get current wishlist from localStorage - moved inside the function scope
+  const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
 
   for (const product of products) {
     const cardDiv = document.createElement("div");
@@ -80,7 +83,7 @@ function renderProducts(products) {
     
     // Card Footer
     const cardFooterDiv = document.createElement("div");
-    cardFooterDiv.classList.add("card-footer", "d-flex", "justify-content-between");
+    cardFooterDiv.classList.add("card-footer", "d-flex", "justify-content-between", "align-items-center");
     
     // Buy Button
     const buyButton = document.createElement("a");
@@ -104,7 +107,7 @@ function renderProducts(products) {
     heartSpan.classList.add("heart");
     wishlistButton.appendChild(heartSpan);
     
-    // Update click handler to use your toggleWishlist function
+    // Use toggleWishlist function for click handler
     wishlistButton.addEventListener("click", function() {
       toggleWishlist(product.product_id, product.product_name);
       this.classList.toggle("active");
