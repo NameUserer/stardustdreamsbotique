@@ -90,11 +90,16 @@ function renderProducts(products) {
     buyButton.addEventListener("click", () => purchaseProduct(product.product_id, product.quantity));
 
     // Wishlist Button
-    const wishlistButton = document.createElement("a");
-    wishlistButton.href = "#";
-    wishlistButton.classList.add("btn", "wishlist");
-    wishlistButton.textContent = "♥";
-    wishlistButton.addEventListener("click", () => likeProduct(product.product_id));
+    const wishlistButton = document.createElement("button");
+    wishlistButton.classList.add("wishlist-button");
+    const heartSpan = document.createElement("span");
+    heartSpan.classList.add("heart");
+    wishlistButton.appendChild(heartSpan);
+    
+    wishlistButton.addEventListener("click", function() {
+      this.classList.toggle("active");
+      likeProduct(product.product_id);
+    });
 
     cardFooterDiv.append(buyButton, wishlistButton);
     
