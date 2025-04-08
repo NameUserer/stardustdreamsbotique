@@ -433,6 +433,78 @@ input, textarea, select {
     display: block;
 }
 
+.wishlist-button {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    padding: 0;
+  }
+  
+  .wishlist-button:hover {
+    transform: scale(1.1);
+  }
+
+  /* Heart icon base */
+.wishlist-button .heart {
+    position: relative;
+    width: 22px;
+    height: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  /* Create the heart shape using pseudo-elements */
+  .wishlist-button .heart::before,
+  .wishlist-button .heart::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 20px;
+    background: #000; /* Black by default */
+    border-radius: 10px 10px 0 0;
+    transition: all 0.3s ease;
+  }
+  
+  .wishlist-button .heart::before {
+    left: 0;
+    transform: rotate(-45deg);
+    transform-origin: 100% 100%;
+  }
+  
+  .wishlist-button .heart::after {
+    left: 10px;
+    transform: rotate(45deg);
+    transform-origin: 0 100%;
+  }
+  
+  /* Active state (in wishlist) */
+  .wishlist-button.active {
+    position: relative;
+  }
+  
+  /* Black circle background for active state */
+  .wishlist-button.active::before {
+    content: '';
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background: #000;
+    border-radius: 50%;
+    z-index: 0;
+  }
+  
+  /* White heart when active */
+  .wishlist-button.active .heart::before,
+  .wishlist-button.active .heart::after {
+    background: #fff; /* White heart when in wishlist */
+  }
+
 #wishlist-items {
     display: flex;
     flex-wrap: wrap; /* Allows items to wrap to the next line if needed */
