@@ -114,7 +114,7 @@ function removeFromWishlist(productId) {
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
   
   // Also update the server if needed
-  fetch(`/api/like/${productId}`, { 
+  fetch(`/api/likes/${productId}`, { 
     method: "DELETE", 
     credentials: "include" 
   });
