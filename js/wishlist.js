@@ -58,12 +58,26 @@ async function loadWishlist() {
         buyButton.textContent = "Buy";
         buyButton.addEventListener("click", () => addToCart(product.product_id));
 
-        // Wishlist Remove Button
-        const wishlistButton = document.createElement("a");
-        wishlistButton.href = "#";
-        wishlistButton.classList.add("btn", "wishlist");
-        wishlistButton.textContent = "♥";
-        wishlistButton.addEventListener("click", () => unlikeProduct(product.product_id));
+        // Wishlist Button
+    const wishlistButton = document.createElement("button");
+    wishlistButton.classList.add("wishlist-button");
+    
+    // Check if product is in wishlist and add active class if needed
+    const isInWishlist = wishlist.some(item => item.id === product.product_id);
+    if (isInWishlist) {
+      wishlistButton.classList.add("active");
+    }
+    
+    // Create heart element
+    const heartSpan = document.createElement("span");
+    heartSpan.classList.add("heart");
+    wishlistButton.appendChild(heartSpan);
+    
+    // Use toggleWishlist function for click handler
+    wishlistButton.addEventListener("click", function() {
+      toggleWishlist(product.product_id, product.product_name);
+      this.classList.toggle("active");
+    });
 
         cardFooterDiv.append(buyButton, wishlistButton);
 
@@ -107,16 +121,17 @@ async function unlikeProduct(product_id) {
   }
 }
 
+// Toggle wishlist function
 async function toggleWishlist(id, name) {
   let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
   const index = wishlist.findIndex((item) => item.id === id);
 
   if (index > -1) {
     wishlist.splice(index, 1);
-    await fetch(`/api/like/${id}`, { method: "DELETE", credentials: "include" });
+    await fetch(`/api/likes/${id}`, { method: "DELETE", credentials: "include" });
   } else {
     wishlist.push({ id, name });
-    await fetch(`/api/like/${id}`, { method: "POST", credentials: "include" });
+    await fetch(`/api/likes/${id}`, { method: "POST", credentials: "include" });
   }
 
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
