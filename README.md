@@ -53,3 +53,5 @@ Ez a weboldal 17 html oldalt vett igénybe:
   15. add.html
   16. pcp.html
   17. tc.html
+
+## Funkcionalitások
