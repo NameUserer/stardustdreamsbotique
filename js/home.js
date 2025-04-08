@@ -214,11 +214,13 @@ async function toggleWishlist(id, name) {
     if (index > -1) {
       // Remove from wishlist
       wishlist.splice(index, 1);
-      await fetch(`/api/likes/${id}`, { method: "DELETE", credentials: "include" });
+      // Changed from /api/likes/ to /api/like/ to match your unlikeProduct function
+      await fetch(`/api/like/${id}`, { method: "DELETE", credentials: "include" });
       console.log(`Removed product ${id} from wishlist`);
     } else {
       // Add to wishlist
       wishlist.push({ id, name });
+      // Changed from /api/likes/ to match your likeProduct function
       await fetch(`/api/likes/${id}`, { method: "POST", credentials: "include" });
       console.log(`Added product ${id} to wishlist`);
     }
