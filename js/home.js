@@ -195,10 +195,10 @@ async function toggleWishlist(id, name) {
 
   if (index > -1) {
     wishlist.splice(index, 1);
-    await fetch(`/api/like/${id}`, { method: "DELETE", credentials: "include" });
+    await fetch(`/api/likes/${id}`, { method: "DELETE", credentials: "include" });
   } else {
     wishlist.push({ id, name });
-    await fetch(`/api/like/${id}`, { method: "POST", credentials: "include" });
+    await fetch(`/api/likes/${id}`, { method: "POST", credentials: "include" });
   }
 
   localStorage.setItem("wishlist", JSON.stringify(wishlist));
