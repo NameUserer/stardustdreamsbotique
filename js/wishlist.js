@@ -75,7 +75,7 @@ async function loadWishlist() {
     
     // Use toggleWishlist function for click handler
     wishlistButton.addEventListener("click", function() {
-      toggleWishlist(product.product_id, product.product_name);
+      unlikeProduct(product.product_id, product.product_name);
       this.classList.toggle("active");
     });
 
