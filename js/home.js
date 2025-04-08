@@ -3,6 +3,14 @@ window.onload = async () => {
   try {
     const products = await getProducts();
     displayResults(products);
+    
+    // Add a visibility change listener to update products when returning to page
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'visible') {
+        // Refresh products when page becomes visible again
+        getProducts().then(products => displayResults(products));
+      }
+    });
   } catch (error) {
     console.error("Error on window load:", error);
   }
@@ -50,8 +58,9 @@ function renderProducts(products) {
   const row = document.getElementById("row");
   row.innerHTML = "";
   
-  // Get current wishlist from localStorage - moved inside the function scope
+  // Always get fresh data from localStorage
   const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  console.log("Current wishlist:", wishlist);
 
   for (const product of products) {
     const cardDiv = document.createElement("div");
@@ -97,9 +106,14 @@ function renderProducts(products) {
     wishlistButton.classList.add("wishlist-button");
     
     // Check if product is in wishlist and add active class if needed
-    const isInWishlist = wishlist.some(item => item.id === product.product_id);
+    // Ensure we're comparing the same types (convert both to strings)
+    const isInWishlist = wishlist.some(item => String(item.id) === String(product.product_id));
+    console.log(`Product ${product.product_id} in wishlist: ${isInWishlist}`);
+    
     if (isInWishlist) {
       wishlistButton.classList.add("active");
+    } else {
+      wishlistButton.classList.remove("active");
     }
     
     // Create heart element
@@ -109,8 +123,11 @@ function renderProducts(products) {
     
     // Use toggleWishlist function for click handler
     wishlistButton.addEventListener("click", function() {
-      toggleWishlist(product.product_id, product.product_name);
-      this.classList.toggle("active");
+      toggleWishlist(product.product_id, product.product_name)
+        .then(() => {
+          // Toggle the active class after wishlist is updated
+          this.classList.toggle("active");
+        });
     });
 
     cardFooterDiv.append(buyButton, wishlistButton);
@@ -187,19 +204,33 @@ const purchaseProduct = async (product_id, quantity) => {
   }
 };
 
-
-// Toggle wishlist function
+// Toggle wishlist function - now returns a promise
 async function toggleWishlist(id, name) {
-  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-  const index = wishlist.findIndex((item) => item.id === id);
+  try {
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    const index = wishlist.findIndex((item) => String(item.id) === String(id));
+    console.log(`Toggling wishlist for product ${id}, found at index ${index}`);
 
-  if (index > -1) {
-    wishlist.splice(index, 1);
-    await fetch(`/api/likes/${id}`, { method: "DELETE", credentials: "include" });
-  } else {
-    wishlist.push({ id, name });
-    await fetch(`/api/likes/${id}`, { method: "POST", credentials: "include" });
+    if (index > -1) {
+      // Remove from wishlist
+      wishlist.splice(index, 1);
+      await fetch(`/api/likes/${id}`, { method: "DELETE", credentials: "include" });
+      console.log(`Removed product ${id} from wishlist`);
+    } else {
+      // Add to wishlist
+      wishlist.push({ id, name });
+      await fetch(`/api/likes/${id}`, { method: "POST", credentials: "include" });
+      console.log(`Added product ${id} to wishlist`);
+    }
+
+    // Update localStorage with the latest wishlist
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+    console.log("Updated wishlist:", wishlist);
+    
+    // Return the updated wishlist
+    return wishlist;
+  } catch (error) {
+    console.error("Error toggling wishlist:", error);
+    throw error;
   }
-
-  localStorage.setItem("wishlist", JSON.stringify(wishlist));
 }
