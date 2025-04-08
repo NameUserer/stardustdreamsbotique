@@ -443,8 +443,8 @@ input, textarea, select {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.2s ease;
     padding: 0;
+    transition: transform 0.2s ease;
   }
   
   .wishlist-button:hover {
@@ -455,58 +455,44 @@ input, textarea, select {
     outline: none;
   }
   
-  /* Heart icon using a single element with clip-path */
+  /* Heart icon base */
   .wishlist-button .heart {
     position: relative;
     width: 24px;
-    height: 24px;
-    background-color: #000;
-    transform: rotate(-45deg);
-    transition: all 0.3s ease;
-    clip-path: polygon(
-      0% 0%, 100% 0%, 100% 75%, 
-      75% 75%, 75% 100%, 50% 75%, 
-      25% 100%, 25% 75%, 0% 75%
-    );
+    height: 22px;
+    margin-top: 3px;
   }
   
-  /* Alternative using a classic heart shape with before/after */
-  .wishlist-button .heart-classic {
-    position: relative;
-    width: 22px;
-    height: 20px;
-    transition: all 0.3s ease;
-  }
-  
-  .wishlist-button .heart-classic:before,
-  .wishlist-button .heart-classic:after {
-    content: '';
+  /* Create the heart shape using pseudo-elements */
+  .wishlist-button .heart:before,
+  .wishlist-button .heart:after {
     position: absolute;
-    top: 0;
-    width: 12px;
-    height: 18px;
-    background: #000;
-    border-radius: 12px 12px 0 0;
+    content: "";
+    width: 13px;
+    height: 20px;
+    background: #000; /* Black by default */
+    border-radius: 13px 13px 0 0; /* make the top edge round */
     transition: all 0.3s ease;
   }
   
-  .wishlist-button .heart-classic:before {
-    left: 5px;
-    transform: rotate(-45deg);
-    transform-origin: 100% 100%;
+  .wishlist-button .heart:before {
+    left: 12px;
+    transform: rotate(-45deg); /* counter clockwise rotation */
+    transform-origin: 0 100%; /* rotate around bottom-left corner */
   }
   
-  .wishlist-button .heart-classic:after {
-    left: 5px;
-    transform: rotate(45deg);
-    transform-origin: 0 100%;
+  .wishlist-button .heart:after {
+    left: 0;
+    transform: rotate(45deg); /* clockwise rotation */
+    transform-origin: 100% 100%; /* rotate around bottom-right corner */
   }
   
-  /* Active state (in wishlist) - circular background */
+  /* Active state (in wishlist) */
   .wishlist-button.active {
     position: relative;
   }
   
+  /* Black circle background for active state */
   .wishlist-button.active::before {
     content: '';
     position: absolute;
@@ -518,10 +504,10 @@ input, textarea, select {
   }
   
   /* White heart when active */
-  .wishlist-button.active .heart,
-  .wishlist-button.active .heart-classic:before,
-  .wishlist-button.active .heart-classic:after {
-    background: #fff;
+  .wishlist-button.active .heart:before,
+  .wishlist-button.active .heart:after {
+    background: #fff; /* White heart when in wishlist */
+    z-index: 1;
   }
 
 #wishlist-items {
