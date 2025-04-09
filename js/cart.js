@@ -170,15 +170,13 @@ document.addEventListener("DOMContentLoaded", async function () {
       });
       console.log('/api/cart/deleteCartItem/${product_id} eredménye:');
       console.log(response);
-      
-      const data = await response.json();
-      console.log(data);
+    
       
       if (!response.ok) {
         throw new Error(data.error || 'Failed to remove item from cart');
       }
       
-      return data;
+      return 'success';
     } catch (error) {
       console.error('Error removing item from cart:', error);
       throw error;
