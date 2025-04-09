@@ -71,8 +71,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                 
                 // If server update failed, revert the UI
                 if (!success) {
-                  product.quantity++;
-                  quantitySpan.textContent = product.quantity;
+                  // product.quantity++;
+                  // quantitySpan.textContent = product.quantity;
+                  loadCartItems();
                 }
             }
           });
@@ -94,8 +95,9 @@ document.addEventListener("DOMContentLoaded", async function () {
               
               // If server update failed, revert the UI
               if (!success) {
-                product.quantity--;
-                quantitySpan.textContent = product.quantity;
+                // product.quantity--;
+                // quantitySpan.textContent = product.quantity;
+                loadCartItems();
               }
           });
   
