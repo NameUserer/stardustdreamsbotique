@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Function to remove the item from the cart (backend integration)
   async function removeItemFromCart(product_id) {
     try {
-      const response = await fetch(`/api/cart/${product_id}`, {
+      const response = await fetch(`/api/cart/deleteCartItem/${product_id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
