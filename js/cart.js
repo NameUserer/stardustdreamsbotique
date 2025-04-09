@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 if (!success) {
                   // product.quantity++;
                   // quantitySpan.textContent = product.quantity;
-                  loadCartItems();
+                  location.reload(true);
                 }
             }
           });
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", async function () {
               if (!success) {
                 // product.quantity--;
                 // quantitySpan.textContent = product.quantity;
-                loadCartItems();
+                location.reload(true);
               }
           });
   
