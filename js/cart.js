@@ -130,6 +130,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
   
   async function updateCartQuantity(product_id, quantity) {
+    console.log(`updataCartQuantity: ${product_id}, ${quantity}`);
+    
     try {
         const response = await fetch('/api/cart/update-quantity', {
             method: 'POST',
