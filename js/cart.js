@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   
         cart.forEach((product) => {
           console.log(product.product_id);
+          console.log(product);
+          
           // Create Card
           const cardDiv = document.createElement("div");
           cardDiv.classList.add("card");
