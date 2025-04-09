@@ -168,7 +168,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       const response = await fetch(`/api/cart/deleteCartItem/${product_id}`, {
         method: 'DELETE'
       });
-      console.log(`/api/cart/deleteCartItem/${product_id} eredménye: ${response}`);
+      console.log('/api/cart/deleteCartItem/${product_id} eredménye:');
+      console.log(response);
       
       const data = await response.json();
       console.log(data);
