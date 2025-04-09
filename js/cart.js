@@ -166,13 +166,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   async function removeItemFromCart(product_id) {
     try {
       const response = await fetch(`/api/cart/deleteCartItem/${product_id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        method: 'DELETE'
       });
+      console.log(`/api/cart/deleteCartItem/${product_id} eredménye: ${response}`);
       
       const data = await response.json();
+      console.log(data);
       
       if (!response.ok) {
         throw new Error(data.error || 'Failed to remove item from cart');
