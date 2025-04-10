@@ -68,7 +68,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const isLoggedIn = true; // Replace this with your actual login check
 
   if (isLoggedIn) {
-      fetch("/api/user/profile-pic") // Your backend endpoint
+      fetch("/api/profile/pic") // Your backend endpoint
           .then(response => response.json())
           .then(data => {
               if (data && data.profilePicUrl) {
