@@ -214,33 +214,67 @@ document.addEventListener("DOMContentLoaded", () => {
   const buyButton = document.querySelector(".submit-btn");
 
   buyButton.addEventListener("click", () => {
-      fetch("/api/checkout", {
-          method: "POST",
-          credentials: "include", // Ha autentikációt használsz
-      })
-      .then(response => response.json())
-      .then(data => {
-          if (data.error) {
-              Swal.fire({
-                  icon: "error",
-                  title: "Hiba!",
-                  text: data.error,
-                  confirmButtonText: "OK"
-              });
-              return;
-          }
+      Swal.fire({
+          title: 'Checkout Information',
+          html:
+              `<input type="text" id="card-name" class="swal2-input" placeholder="Cardholder Name">
+               <input type="text" id="card-number" class="swal2-input" placeholder="Card Number">
+               <input type="text" id="expiry" class="swal2-input" placeholder="MM/YY">
+               <input type="text" id="cvv" class="swal2-input" placeholder="CVV">
+               <input type="text" id="address" class="swal2-input" placeholder="Shipping Address">`,
+          confirmButtonText: 'Buy Now',
+          focusConfirm: false,
+          preConfirm: () => {
+              const name = document.getElementById('card-name').value.trim();
+              const number = document.getElementById('card-number').value.trim();
+              const expiry = document.getElementById('expiry').value.trim();
+              const cvv = document.getElementById('cvv').value.trim();
+              const address = document.getElementById('address').value.trim();
 
-          // SweetAlert sikeres vásárlás üzenet
-          Swal.fire({
-              icon: "success",
-              title: "Sikeres vásárlás!",
-              text: "Köszönjük a vásárlást!",
-              confirmButtonText: "OK"
-          }).then(() => {
-              // Átirányítás a home.html oldalra
-              window.location.href = "home.html";
-          });
-      })
-      .catch(error => console.error("Hiba a vásárlás során:", error));
+              if (!name || !number || !expiry || !cvv || !address) {
+                  Swal.showValidationMessage('Please fill out all fields');
+                  return false;
+              }
+
+              return { name, number, expiry, cvv, address };
+          }
+      }).then((result) => {
+          if (result.isConfirmed) {
+              // You can send result.value to your backend with the fetch
+              fetch("/api/checkout", {
+                  method: "POST",
+                  credentials: "include", // if using authentication
+                  headers: {
+                      "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify(result.value)
+              })
+              .then(response => response.json())
+              .then(data => {
+                  if (data.error) {
+                      Swal.fire({
+                          icon: "error",
+                          title: "Hiba!",
+                          text: data.error,
+                          confirmButtonText: "OK"
+                      });
+                      return;
+                  }
+
+                  Swal.fire({
+                      icon: "success",
+                      title: "Sikeres vásárlás!",
+                      text: "Köszönjük a vásárlást!",
+                      confirmButtonText: "OK"
+                  }).then(() => {
+                      window.location.href = "home.html";
+                  });
+              })
+              .catch(error => {
+                  console.error("Hiba a vásárlás során:", error);
+                  Swal.fire("Hiba!", "Valami hiba történt a vásárlás során.", "error");
+              });
+          }
+      });
   });
 });
