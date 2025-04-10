@@ -236,6 +236,15 @@ document.addEventListener("DOMContentLoaded", () => {
           }
       }).then((result) => {
           if (result.isConfirmed) {
+              // Save customer details for mail.html page
+              const customerInfo = {
+                  email: result.value.email,
+                  address: result.value.shipping_address
+              };
+              
+              // Get cart items to save for the confirmation page
+              const cartItems = getCartItems();
+              
               fetch("/api/checkout", {
                   method: "POST",
                   credentials: "include",
@@ -256,14 +265,17 @@ document.addEventListener("DOMContentLoaded", () => {
                       return;
                   }
 
+                  // Save purchase data to localStorage for the mail.html page
+                  savePurchaseData(cartItems, customerInfo);
+
                   Swal.fire({
                       icon: "success",
                       title: "Sikeres vásárlás!",
                       text: "Köszönjük a vásárlást!",
                       confirmButtonText: "OK"
                   }).then(() => {
-                    localStorage.setItem("purchaseMessage", "success");
-                    window.location.href = "mail.html";
+                      localStorage.setItem("purchaseMessage", "success");
+                      window.location.href = "mail.html";
                   });
               })
               .catch(error => {
@@ -273,4 +285,55 @@ document.addEventListener("DOMContentLoaded", () => {
           }
       });
   });
+  
+  // Function to get all items from the cart
+  function getCartItems() {
+      const cartItems = [];
+      const cartItemElements = document.querySelectorAll(".cart-item");
+      
+      cartItemElements.forEach(item => {
+          // Get product name
+          const productName = item.querySelector(".cart-item-title")?.textContent || "Termék";
+          
+          // Get product image URL
+          const productImage = item.querySelector(".cart-item-image")?.src || "";
+          
+          // Get product price
+          const priceText = item.querySelector(".cart-item-price")?.textContent || "";
+          const price = parseFloat(priceText.replace(/[^\d]/g, "")) || 0;
+          
+          // Get quantity
+          const quantityInput = item.querySelector(".quantity-input");
+          const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
+          
+          cartItems.push({
+              name: productName,
+              imageUrl: productImage,
+              price: price,
+              quantity: quantity
+          });
+      });
+      
+      return cartItems;
+  }
+  
+  // Function to save purchase data for mail.html
+  function savePurchaseData(products, customerInfo) {
+      const purchaseData = {
+          products: products,
+          customer: customerInfo,
+          purchaseDate: new Date().toISOString(),
+          totalAmount: calculateTotal(products)
+      };
+      
+      // Save to localStorage for use in mail.html
+      localStorage.setItem("purchaseData", JSON.stringify(purchaseData));
+  }
+  
+  // Calculate total amount
+  function calculateTotal(products) {
+      return products.reduce((total, product) => {
+          return total + (product.price * product.quantity);
+      }, 0);
+  }
 });
