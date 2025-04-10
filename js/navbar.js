@@ -60,3 +60,23 @@ async function handleAccountClick() {
     });
   }
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  const accountIcon = document.getElementById("accountIcon");
+
+  // Make sure user is logged in (you could also use a cookie or another flag)
+  const isLoggedIn = true; // Replace this with your actual login check
+
+  if (isLoggedIn) {
+      fetch("/api/user/profile-pic") // Your backend endpoint
+          .then(response => response.json())
+          .then(data => {
+              if (data && data.profilePicUrl) {
+                  accountIcon.src = data.profilePicUrl;
+              }
+          })
+          .catch(err => {
+              console.error("Failed to load profile pic:", err);
+          });
+  }
+});
