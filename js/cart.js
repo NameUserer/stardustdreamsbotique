@@ -218,21 +218,21 @@ document.addEventListener("DOMContentLoaded", () => {
           title: 'Checkout Information',
           html:
               `<input type="email" id="email" class="swal2-input" placeholder="Email">
-               <input type="text" id="card-number" class="swal2-input" placeholder="Credit Card Number">
+               <input type="text" id="card_token" class="swal2-input" placeholder="Credit Card Number">
                <input type="text" id="address" class="swal2-input" placeholder="Shipping Address">`,
           confirmButtonText: 'Buy Now',
           focusConfirm: false,
           preConfirm: () => {
               const email = document.getElementById('email').value.trim();
-              const cardNumber = document.getElementById('card-number').value.trim();
-              const address = document.getElementById('address').value.trim();
+              const card_token = document.getElementById('card_token').value.trim();
+              const shipping_address = document.getElementById('address').value.trim();
 
-              if (!email || !cardNumber || !address) {
+              if (!email || !card_token || !shipping_address) {
                   Swal.showValidationMessage('Please fill out all fields');
                   return false;
               }
 
-              return { email, cardNumber, address };
+              return { email, card_token, shipping_address };
           }
       }).then((result) => {
           if (result.isConfirmed) {
