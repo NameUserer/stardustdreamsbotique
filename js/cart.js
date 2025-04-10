@@ -262,7 +262,8 @@ document.addEventListener("DOMContentLoaded", () => {
                       text: "Köszönjük a vásárlást!",
                       confirmButtonText: "OK"
                   }).then(() => {
-                      window.location.href = "home.html";
+                    localStorage.setItem("purchaseMessage", "success");
+                    window.location.href = "mail.html";
                   });
               })
               .catch(error => {
