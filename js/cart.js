@@ -217,33 +217,28 @@ document.addEventListener("DOMContentLoaded", () => {
       Swal.fire({
           title: 'Checkout Information',
           html:
-              `<input type="text" id="card-name" class="swal2-input" placeholder="Cardholder Name">
-               <input type="text" id="card-number" class="swal2-input" placeholder="Card Number">
-               <input type="text" id="expiry" class="swal2-input" placeholder="MM/YY">
-               <input type="text" id="cvv" class="swal2-input" placeholder="CVV">
+              `<input type="email" id="email" class="swal2-input" placeholder="Email">
+               <input type="text" id="card-number" class="swal2-input" placeholder="Credit Card Number">
                <input type="text" id="address" class="swal2-input" placeholder="Shipping Address">`,
           confirmButtonText: 'Buy Now',
           focusConfirm: false,
           preConfirm: () => {
-              const name = document.getElementById('card-name').value.trim();
-              const number = document.getElementById('card-number').value.trim();
-              const expiry = document.getElementById('expiry').value.trim();
-              const cvv = document.getElementById('cvv').value.trim();
+              const email = document.getElementById('email').value.trim();
+              const cardNumber = document.getElementById('card-number').value.trim();
               const address = document.getElementById('address').value.trim();
 
-              if (!name || !number || !expiry || !cvv || !address) {
+              if (!email || !cardNumber || !address) {
                   Swal.showValidationMessage('Please fill out all fields');
                   return false;
               }
 
-              return { name, number, expiry, cvv, address };
+              return { email, cardNumber, address };
           }
       }).then((result) => {
           if (result.isConfirmed) {
-              // You can send result.value to your backend with the fetch
               fetch("/api/checkout", {
                   method: "POST",
-                  credentials: "include", // if using authentication
+                  credentials: "include",
                   headers: {
                       "Content-Type": "application/json"
                   },
