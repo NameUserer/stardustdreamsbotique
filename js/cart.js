@@ -288,70 +288,48 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Function to get all items from the cart
   function getCartItems() {
-      const cartItems = [];
-      const cartItemElements = document.querySelectorAll(".cart-item");
-      
-      cartItemElements.forEach(item => {
-          // Get product name
-          const productName = item.querySelector(".cart-item-title")?.textContent || "Termék";
-          
-          // Get product image URL
-          const productImage = item.querySelector(".cart-item-image")?.src || "";
-          
-          // Get product price
-          const priceText = item.querySelector(".cart-item-price")?.textContent || "";
-          const price = parseFloat(priceText.replace(/[^\d]/g, "")) || 0;
-          
-          // Get quantity
-          const quantityInput = item.querySelector(".quantity-input");
-          const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
-          
-          cartItems.push({
-              name: productName,
-              imageUrl: productImage,
-              price: price,
-              quantity: quantity
-          });
-      });
-      
-      return cartItems;
-  }
-  
-  // Function to save purchase data for mail.html
-  function savePurchaseData(products, customerInfo) {
-      // Get existing purchase history or create a new one
-      let purchaseHistory = [];
-      try {
-          const existingData = localStorage.getItem("purchaseHistory");
-          if (existingData) {
-              purchaseHistory = JSON.parse(existingData);
-          }
-      } catch (e) {
-          console.error("Error parsing existing purchase history:", e);
-      }
-      
-      // Create new purchase record
-      const newPurchase = {
-          products: products,
-          customer: customerInfo,
-          purchaseDate: new Date().toISOString(),
-          totalAmount: calculateTotal(products)
-      };
-      
-      // Add to purchase history
-      purchaseHistory.push(newPurchase);
-      
-      // Save current purchase data for immediate display
-      localStorage.setItem("purchaseData", JSON.stringify(newPurchase));
-      
-      // Save entire purchase history
-      localStorage.setItem("purchaseHistory", JSON.stringify(purchaseHistory));
-  }
-  
-  // Calculate total amount
-  function calculateTotal(products) {
-      return products.reduce((total, product) => {
-          return total + (product.price * product.quantity);
-      }, 0);
-  }
-});
+    const cartItems = [];
+    const cartItemElements = document.querySelectorAll(".cart-item");
+    
+    cartItemElements.forEach(item => {
+        // Get product name
+        const product_name = item.querySelector(".cart-item-title")?.textContent || "Product";
+        
+        // Get product image URL - make sure we get a relative path
+        let product = item.querySelector(".cart-item-image")?.src || "";
+        // Convert absolute URLs to relative paths if needed
+        try {
+            if (product.includes("://")) {
+                const url = new URL(product);
+                // Extract path from current domain
+                const currentPath = window.location.pathname;
+                const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+                product = product.replace(url.origin, '');
+                // Ensure the path is relative to the current page
+                if (!product.startsWith('/')) {
+                    product = '/' + product;
+                }
+            }
+        } catch (e) {
+            console.error("Error processing image URL:", e);
+        }
+        
+        // Get product price
+        const priceText = item.querySelector(".cart-item-price")?.textContent || "";
+        const price = parseFloat(priceText.replace(/[^\d]/g, "")) || 0;
+        
+        // Get quantity
+        const quantityInput = item.querySelector(".quantity-input");
+        const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
+        
+        cartItems.push({
+            name: product_name,
+            imageUrl: product,
+            price: price,
+            quantity: quantity
+        });
+    });
+    
+    console.log("Cart items being saved:", cartItems); // Debug log
+    return cartItems;
+}
