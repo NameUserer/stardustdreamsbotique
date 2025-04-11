@@ -21,9 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <h2>Successful Purchase</h2>
         <p>Your package will deliver in 10–12 business days!</p>
         <div class="product-container d-flex flex-wrap gap-3"></div>
-        <button class="delete-btn" title="Delete">
-          <img src="./img/bin.png" alt="Delete" class="delete-icon">
-        </button>
+        <img src="./img/bin.png" alt="Delete" class="delete-icon">
       `;
   
       const productsContainer = messageBox.querySelector(".product-container");
