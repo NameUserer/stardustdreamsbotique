@@ -43,14 +43,19 @@ body {
     position: absolute;
     right: 10px;
     bottom: 10px;
-    background-color: #f44336;
-    color: white;
+    background: none;
     border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
     cursor: pointer;
+    padding: 0;
   }
-
-  .delete-btn:hover {
-    background-color: #d32f2f;
+  
+  .delete-icon {
+    width: 24px;
+    height: 24px;
+    filter: grayscale(100%);
+    transition: filter 0.2s;
+  }
+  
+  .delete-icon:hover {
+    filter: grayscale(0%);
   }
