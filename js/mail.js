@@ -35,8 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
         cardDiv.style.border = "1px solid #ddd";
         cardDiv.style.borderRadius = "8px";
         cardDiv.style.overflow = "hidden";
-        cardDiv.style.textAlign = "center";
-        cardDiv.style.background = "#fff";
   
         const cardImg = document.createElement("img");
         cardImg.src = `/uploads/${product.product}`;
