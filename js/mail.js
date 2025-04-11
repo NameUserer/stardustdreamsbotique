@@ -37,15 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
         cardDiv.style.overflow = "hidden";
   
         const cardImg = document.createElement("img");
-        cardImg.src = `/uploads/${product.product}`;
-        cardImg.alt = product.product_name;
-        cardImg.style.width = "100%";
-        cardImg.style.height = "auto";
-  
+        cardImg.src = product.imageUrl || ""; // Safe fallback
+        cardImg.alt = product.name;
+
         const cardTitle = document.createElement("h6");
-        cardTitle.textContent = product.product_name;
-        cardTitle.style.margin = "10px 0";
-        cardTitle.style.fontSize = "1rem";
+        cardTitle.textContent = product.name;
   
         cardDiv.append(cardImg, cardTitle);
         productsContainer.appendChild(cardDiv);
