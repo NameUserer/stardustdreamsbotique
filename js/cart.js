@@ -288,7 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Function to get all items from the cart
   function getCartItems() {
-    const items = []; // Create a local variable to store cart items
+    const items = [];
     const cartItemElements = document.querySelectorAll(".cart-item");
     
     console.log("Found cart items:", cartItemElements.length);
@@ -302,7 +302,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Get product price
         const priceText = item.querySelector(".cart-item-price")?.textContent || "";
-        const price = parseFloat(priceText.replace(/[^\d]/g, "")) || 0;
+        const price = parseFloat(priceText.replace(/[^\d,.]/g, "")) || 0;
         
         // Get quantity
         const quantityInput = item.querySelector(".quantity-input");
@@ -317,5 +317,130 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     console.log("Cart items found:", items);
-    return items; // Return the local variable
+    return items;
 }
+
+// Function to save purchase data for mail.html
+function savePurchaseData(products, customerInfo) {
+    // Get existing purchase history or create a new one
+    let purchaseHistory = [];
+    try {
+        const existingData = localStorage.getItem("purchaseHistory");
+        if (existingData) {
+            purchaseHistory = JSON.parse(existingData);
+        }
+    } catch (e) {
+        console.error("Error parsing existing purchase history:", e);
+    }
+    
+    console.log("Products being saved:", products);
+    
+    // Create new purchase record
+    const newPurchase = {
+        products: products,
+        customer: customerInfo,
+        purchaseDate: new Date().toISOString(),
+        totalAmount: calculateTotal(products)
+    };
+    
+    console.log("New purchase being saved:", newPurchase);
+    
+    // Add to purchase history
+    purchaseHistory.push(newPurchase);
+    
+    // Save current purchase data for immediate display
+    localStorage.setItem("purchaseData", JSON.stringify(newPurchase));
+    
+    // Save entire purchase history
+    localStorage.setItem("purchaseHistory", JSON.stringify(purchaseHistory));
+}
+
+// Calculate total amount
+function calculateTotal(products) {
+    return products.reduce((total, product) => {
+        return total + (product.price * product.quantity);
+    }, 0);
+}
+
+// Main event listener
+document.addEventListener("DOMContentLoaded", () => {
+    const buyButton = document.querySelector(".submit-btn");
+    
+    if (!buyButton) {
+        console.warn("Buy button not found!");
+        return;
+    }
+
+    buyButton.addEventListener("click", () => {
+        Swal.fire({
+            title: 'Checkout Information',
+            html:
+                `<input type="email" id="email" class="swal2-input" placeholder="Email">
+                 <input type="text" id="card_token" class="swal2-input" placeholder="Credit Card Number">
+                 <input type="text" id="address" class="swal2-input" placeholder="Shipping Address">`,
+            confirmButtonText: 'Buy Now',
+            focusConfirm: false,
+            preConfirm: () => {
+                const email = document.getElementById('email').value.trim();
+                const card_token = document.getElementById('card_token').value.trim();
+                const shipping_address = document.getElementById('address').value.trim();
+
+                if (!email || !card_token || !shipping_address) {
+                    Swal.showValidationMessage('Please fill out all fields');
+                    return false;
+                }
+
+                return { email, card_token, shipping_address };
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Save customer details for mail.html page
+                const customerInfo = {
+                    email: result.value.email,
+                    address: result.value.shipping_address
+                };
+                
+                // Get cart items to save for the confirmation page
+                const cartItems = getCartItems();
+                
+                fetch("/api/checkout", {
+                    method: "POST",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(result.value)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Hiba!",
+                            text: data.error,
+                            confirmButtonText: "OK"
+                        });
+                        return;
+                    }
+
+                    // Save purchase data to localStorage for the mail.html page
+                    savePurchaseData(cartItems, customerInfo);
+
+                    Swal.fire({
+                        icon: "success",
+                        title: "Sikeres vásárlás!",
+                        text: "Köszönjük a vásárlást!",
+                        confirmButtonText: "OK"
+                    }).then(() => {
+                        localStorage.setItem("purchaseMessage", "success");
+                        window.location.href = "mail.html";
+                    });
+                })
+                .catch(error => {
+                    console.error("Hiba a vásárlás során:", error);
+                    Swal.fire("Hiba!", "Valami hiba történt a vásárlás során.", "error");
+                });
+            }
+        });
+    });
+});
