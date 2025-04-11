@@ -264,7 +264,6 @@ document.addEventListener("DOMContentLoaded", () => {
                       });
                       return;
                   }
-
                   // Save purchase data to localStorage for the mail.html page
                   savePurchaseData(cartItems, customerInfo);
 
@@ -285,6 +284,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
       });
   });
+});
   
   // Function to get all items from the cart
   function getCartItems() {
@@ -293,21 +293,21 @@ document.addEventListener("DOMContentLoaded", () => {
     
     cartItemElements.forEach(item => {
         // Get product name
-        const product_name = item.querySelector(".cart-item-title")?.textContent || "Product";
+        const productName = item.querySelector(".cart-item-title")?.textContent || "Product";
         
         // Get product image URL - make sure we get a relative path
-        let product = item.querySelector(".cart-item-image")?.src || "";
+        let productImage = item.querySelector(".cart-item-image")?.src || "";
         // Convert absolute URLs to relative paths if needed
         try {
-            if (product.includes("://")) {
-                const url = new URL(product);
+            if (productImage.includes("://")) {
+                const url = new URL(productImage);
                 // Extract path from current domain
                 const currentPath = window.location.pathname;
                 const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
-                product = product.replace(url.origin, '');
+                productImage = productImage.replace(url.origin, '');
                 // Ensure the path is relative to the current page
-                if (!product.startsWith('/')) {
-                    product = '/' + product;
+                if (!productImage.startsWith('/')) {
+                    productImage = '/' + productImage;
                 }
             }
         } catch (e) {
@@ -323,8 +323,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
         
         cartItems.push({
-            name: product_name,
-            imageUrl: product,
+            name: productName,
+            imageUrl: productImage,
             price: price,
             quantity: quantity
         });
