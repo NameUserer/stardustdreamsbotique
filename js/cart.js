@@ -288,37 +288,17 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Function to get all items from the cart
   function getCartItems() {
+    const items = []; // Create a local variable to store cart items
     const cartItemElements = document.querySelectorAll(".cart-item");
+    
     console.log("Found cart items:", cartItemElements.length);
     
-    if (cartItemElements.length > 0) {
-      console.log("First cart item HTML:", cartItemElements[0].outerHTML);
-  } else {
-      console.log("No cart items found - check your HTML class names");
-  }
-  
     cartItemElements.forEach(item => {
         // Get product name
         const productName = item.querySelector(".cart-item-title")?.textContent || "Product";
         
-        // Get product image URL - make sure we get a relative path
-        let productImage = item.querySelector(".cart-item-image")?.src || "";
-        // Convert absolute URLs to relative paths if needed
-        try {
-            if (productImage.includes("://")) {
-                const url = new URL(productImage);
-                // Extract path from current domain
-                const currentPath = window.location.pathname;
-                const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
-                productImage = productImage.replace(url.origin, '');
-                // Ensure the path is relative to the current page
-                if (!productImage.startsWith('/')) {
-                    productImage = '/' + productImage;
-                }
-            }
-        } catch (e) {
-            console.error("Error processing image URL:", e);
-        }
+        // Get product image URL
+        const productImage = item.querySelector(".cart-item-image")?.src || "";
         
         // Get product price
         const priceText = item.querySelector(".cart-item-price")?.textContent || "";
@@ -328,7 +308,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const quantityInput = item.querySelector(".quantity-input");
         const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
         
-        cartItems.push({
+        items.push({
             name: productName,
             imageUrl: productImage,
             price: price,
@@ -336,6 +316,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     
-    console.log("Cart items being saved:", cartItems); // Debug log
-    return cartItems;
+    console.log("Cart items found:", items);
+    return items; // Return the local variable
 }
