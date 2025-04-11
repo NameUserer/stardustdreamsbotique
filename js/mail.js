@@ -26,40 +26,33 @@ document.addEventListener("DOMContentLoaded", () => {
         </button>
       `;
   
-      // Add styling to product container
       const productsContainer = messageBox.querySelector(".product-container");
   
       purchase.products.forEach(product => {
         const cardDiv = document.createElement("div");
         cardDiv.classList.add("card");
-        cardDiv.style.width = "18rem";
+        cardDiv.style.width = "12rem";
+        cardDiv.style.border = "1px solid #ddd";
+        cardDiv.style.borderRadius = "8px";
+        cardDiv.style.overflow = "hidden";
+        cardDiv.style.textAlign = "center";
+        cardDiv.style.background = "#fff";
   
         const cardImg = document.createElement("img");
         cardImg.src = `/uploads/${product.product}`;
-        cardImg.classList.add("pic-div");
         cardImg.alt = product.product_name;
+        cardImg.style.width = "100%";
+        cardImg.style.height = "auto";
   
-        const cardBodyDiv = document.createElement("div");
-        cardBodyDiv.classList.add("card-body", "d-flex", "flex-column");
-  
-        const cardTitle = document.createElement("h5");
-        cardTitle.classList.add("card-title");
+        const cardTitle = document.createElement("h6");
         cardTitle.textContent = product.product_name;
+        cardTitle.style.margin = "10px 0";
+        cardTitle.style.fontSize = "1rem";
   
-        const cardText = document.createElement("p");
-        cardText.classList.add("card-text");
-        cardText.textContent = product.description;
-  
-        const priceText = document.createElement("p");
-        priceText.textContent = `$${product.price}`;
-  
-        cardBodyDiv.append(cardTitle, cardText, priceText);
-        cardDiv.append(cardImg, cardBodyDiv);
-  
+        cardDiv.append(cardImg, cardTitle);
         productsContainer.appendChild(cardDiv);
       });
   
-      // Delete button logic
       messageBox.querySelector(".delete-btn").addEventListener("click", () => {
         purchaseHistory.splice(index, 1);
         localStorage.setItem("purchaseHistory", JSON.stringify(purchaseHistory));
