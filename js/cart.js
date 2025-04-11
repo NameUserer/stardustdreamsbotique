@@ -319,15 +319,33 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Function to save purchase data for mail.html
   function savePurchaseData(products, customerInfo) {
-      const purchaseData = {
+      // Get existing purchase history or create a new one
+      let purchaseHistory = [];
+      try {
+          const existingData = localStorage.getItem("purchaseHistory");
+          if (existingData) {
+              purchaseHistory = JSON.parse(existingData);
+          }
+      } catch (e) {
+          console.error("Error parsing existing purchase history:", e);
+      }
+      
+      // Create new purchase record
+      const newPurchase = {
           products: products,
           customer: customerInfo,
           purchaseDate: new Date().toISOString(),
           totalAmount: calculateTotal(products)
       };
       
-      // Save to localStorage for use in mail.html
-      localStorage.setItem("purchaseData", JSON.stringify(purchaseData));
+      // Add to purchase history
+      purchaseHistory.push(newPurchase);
+      
+      // Save current purchase data for immediate display
+      localStorage.setItem("purchaseData", JSON.stringify(newPurchase));
+      
+      // Save entire purchase history
+      localStorage.setItem("purchaseHistory", JSON.stringify(purchaseHistory));
   }
   
   // Calculate total amount

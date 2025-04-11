@@ -6,6 +6,7 @@
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     text-align: center;
+    position: relative;
 }
 
 .confirmation-header {
@@ -55,8 +56,8 @@
     margin: 10px 0 5px;
 }
 
-.return-button {
-    background-color: #007bff;
+.delete-button {
+    background-color: #dc3545;
     color: white;
     border: none;
     padding: 12px 25px;
@@ -67,6 +68,6 @@
     transition: background-color 0.2s;
 }
 
-.return-button:hover {
-    background-color: #0069d9;
+.delete-button:hover {
+    background-color: #c82333;
 }
