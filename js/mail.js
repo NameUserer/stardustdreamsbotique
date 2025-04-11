@@ -1,128 +1,41 @@
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("mail.js loaded");
-    console.log("Purchase message:", localStorage.getItem("purchaseMessage"));
-    
-    // Check if we have a purchase message
-    const purchaseMessage = localStorage.getItem("purchaseMessage");
-    
-    if (purchaseMessage === "success") {
-        console.log("Displaying purchase confirmation");
-        displayPurchaseConfirmation();
-        
-        // We don't remove the purchaseMessage so multiple purchases can be displayed
-    } else {
-        console.log("No purchase detected, should redirect");
-        // Comment this out for testing if needed
-        // window.location.href = "index.html";
+    const container = document.getElementById("messages-container");
+  
+    // Load latest purchase data
+    const purchaseData = JSON.parse(localStorage.getItem("purchaseData"));
+  
+    if (!purchaseData || !purchaseData.products || purchaseData.products.length === 0) {
+      container.innerHTML = "<p>No recent purchase found.</p>";
+      return;
     }
-});
-
-// Function to display purchase confirmation
-function displayPurchaseConfirmation() {
-    // Get the main container
-    let mainContainer = document.querySelector(".main-container");
-    
-    if (!mainContainer) {
-        console.error("Main container not found. Creating one.");
-        const newContainer = document.createElement("div");
-        newContainer.className = "main-container";
-        document.body.appendChild(newContainer);
-        mainContainer = newContainer;
-    }
-    
-    // Get all purchase data from localStorage
-    let purchaseData;
-    try {
-        purchaseData = JSON.parse(localStorage.getItem("purchaseData")) || {
-            products: [],
-            customer: {},
-            totalAmount: 0
-        };
-        console.log("Purchase data loaded:", purchaseData);
-    } catch (e) {
-        console.error("Error parsing purchase data:", e);
-        purchaseData = {
-            products: [],
-            customer: {},
-            totalAmount: 0
-        };
-    }
-    
-    // Create confirmation container
-    const confirmationContainer = document.createElement("div");
-    confirmationContainer.className = "confirmation-container";
-    
-    // Create and add confirmation message
-    const messageHeader = document.createElement("h2");
-    messageHeader.className = "confirmation-header";
-    messageHeader.textContent = "Sikeres vásárlás!";
-    
-    const messageText = document.createElement("p");
-    messageText.className = "confirmation-message";
-    messageText.textContent = "Köszönjük, hogy nálunk vásároltál! A csomagod 10-12 munkanapon belül megérkezik.";
-    
-    // Add header and message to container
-    confirmationContainer.appendChild(messageHeader);
-    confirmationContainer.appendChild(messageText);
-    
-    // Create products container
-    const productsContainer = document.createElement("div");
-    productsContainer.className = "products-container";
-    
-    // Add product cards
-    if (purchaseData.products && purchaseData.products.length > 0) {
-        purchaseData.products.forEach(product => {
-            const productCard = createProductCard(product);
-            productsContainer.appendChild(productCard);
-        });
-    } else {
-        console.warn("You have no messages");
-    }
-    
-    // Add products container to main container
-    confirmationContainer.appendChild(productsContainer);
-    
-    // Add delete button
-    const deleteButton = document.createElement("button");
-    deleteButton.className = "delete-button";
-    deleteButton.textContent = "Törlés";
-    deleteButton.addEventListener("click", () => {
-        // Remove this confirmation container
-        mainContainer.removeChild(confirmationContainer);
-        
-        // Clear the purchase data
-        localStorage.removeItem("purchaseData");
-        localStorage.removeItem("purchaseMessage");
+  
+    const messageBox = document.createElement("div");
+    messageBox.classList.add("message-box");
+  
+    messageBox.innerHTML = `
+      <h2>Successful Purchase</h2>
+      <p>Your package will deliver in 10–12 business days!</p>
+      <div class="products"></div>
+      <button class="delete-btn">Delete</button>
+    `;
+  
+    const productsContainer = messageBox.querySelector(".products");
+  
+    purchaseData.products.forEach(product => {
+      const productDiv = document.createElement("div");
+      productDiv.className = "product";
+      productDiv.innerHTML = `
+        <img src="${product.imageUrl}" alt="${product.name}">
+        <p>${product.name}</p>
+      `;
+      productsContainer.appendChild(productDiv);
     });
-    
-    confirmationContainer.appendChild(deleteButton);
-    
-    // Add the entire confirmation container to the page
-    mainContainer.appendChild(confirmationContainer);
-    console.log("Confirmation display complete");
-}
-
-// Function to create a product card
-function createProductCard(product) {
-    console.log("Creating product card for:", product);
-    
-    const card = document.createElement("div");
-    card.className = "product-card";
-    
-    // Product image - use productIMG instead of imageUrl
-    const productImage = document.createElement("img");
-    productImage.src = product.product || "images/placeholder.jpg";
-    productImage.alt = product.product_name
-    productImage.className = "product-image";
-    
-    // Product name - use product_name instead of name
-    const productName = document.createElement("p");
-    productName.textContent = product.product_name;
-    productName.className = "product-name";
-    
-    // Add all elements to card
-    card.appendChild(productImage);
-    card.appendChild(productName);
-    
-    return card;
-}
+  
+    // Delete message on click
+    messageBox.querySelector(".delete-btn").addEventListener("click", () => {
+      messageBox.remove();
+      localStorage.removeItem("purchaseData"); // optionally clear the last purchase
+    });
+  
+    container.appendChild(messageBox);
+  });
