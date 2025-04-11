@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
         <h2>Successful Purchase</h2>
         <p>Your package will deliver in 10–12 business days!</p>
         <div class="product-container d-flex flex-wrap gap-3"></div>
-        <button class="delete-btn" title="Delete">
-          <img src="./img/bin.png" alt="Delete" class="delete-icon">
+        <button class="delete-btn" title="Delete" style="position: absolute; top: 10px; right: 10px; background: none; border: none; cursor: pointer;">
+          <img src="./img/bin.png" alt="Delete" class="delete-icon" style="width: 20px; height: 20px;">
         </button>
       `;
   
@@ -34,15 +34,39 @@ document.addEventListener("DOMContentLoaded", () => {
         cardDiv.style.border = "1px solid #ddd";
         cardDiv.style.borderRadius = "8px";
         cardDiv.style.overflow = "hidden";
+        cardDiv.style.marginBottom = "10px";
   
         const cardImg = document.createElement("img");
-        cardImg.src = product.imageUrl || ""; // Safe fallback
+        cardImg.src = product.imageUrl || "./img/placeholder.png"; // Added placeholder fallback
         cardImg.alt = product.name;
-
+        cardImg.classList.add("card-img-top");
+        cardImg.style.width = "100%";
+        cardImg.style.height = "120px";
+        cardImg.style.objectFit = "cover";
+  
+        const cardBody = document.createElement("div");
+        cardBody.classList.add("card-body");
+        cardBody.style.padding = "10px";
+  
         const cardTitle = document.createElement("h6");
+        cardTitle.classList.add("card-title");
+        cardTitle.style.margin = "0";
+        cardTitle.style.fontSize = "14px";
         cardTitle.textContent = product.name;
   
-        cardDiv.append(cardImg, cardTitle);
+        // Add price if available
+        if (product.price) {
+          const priceText = document.createElement("p");
+          priceText.classList.add("card-text");
+          priceText.style.margin = "5px 0 0 0";
+          priceText.style.fontSize = "12px";
+          priceText.textContent = `$${product.price.toFixed(2)}`;
+          cardBody.appendChild(priceText);
+        }
+  
+        cardBody.appendChild(cardTitle);
+        cardDiv.appendChild(cardImg);
+        cardDiv.appendChild(cardBody);
         productsContainer.appendChild(cardDiv);
       });
   
