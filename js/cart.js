@@ -288,9 +288,15 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Function to get all items from the cart
   function getCartItems() {
-    const cartItems = [];
     const cartItemElements = document.querySelectorAll(".cart-item");
+    console.log("Found cart items:", cartItemElements.length);
     
+    if (cartItemElements.length > 0) {
+      console.log("First cart item HTML:", cartItemElements[0].outerHTML);
+  } else {
+      console.log("No cart items found - check your HTML class names");
+  }
+  
     cartItemElements.forEach(item => {
         // Get product name
         const productName = item.querySelector(".cart-item-title")?.textContent || "Product";
