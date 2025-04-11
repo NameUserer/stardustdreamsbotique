@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const purchaseHistory = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
   
     if (purchaseHistory.length === 0) {
-      container.innerHTML = "<p>No purchases found.</p>";
+      container.innerHTML = "<p>No messages found.</p>";
       return;
     }
   
@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
       messageBox.style.borderRadius = "10px";
       messageBox.style.padding = "20px";
       messageBox.style.marginBottom = "30px";
-      messageBox.style.background = "#f9f9f9";
   
       messageBox.innerHTML = `
         <h2>Successful Purchase</h2>
