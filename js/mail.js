@@ -76,18 +76,7 @@ function displayPurchaseConfirmation() {
             productsContainer.appendChild(productCard);
         });
     } else {
-        console.warn("No products found in purchase data");
-        
-        // Use some sample data for testing - THIS IS JUST FOR FALLBACK
-        const sampleProducts = [
-            { product_name: "Teszt termék 1", productIMG: "images/product1.jpg", quantity: 1, price: 5900 },
-            { product_name: "Teszt termék 2", productIMG: "images/product2.jpg", quantity: 2, price: 3500 }
-        ];
-        
-        sampleProducts.forEach(product => {
-            const productCard = createProductCard(product);
-            productsContainer.appendChild(productCard);
-        });
+        console.warn("You have no messages");
     }
     
     // Add products container to main container
@@ -122,13 +111,13 @@ function createProductCard(product) {
     
     // Product image - use productIMG instead of imageUrl
     const productImage = document.createElement("img");
-    productImage.src = product.productIMG || product.imageUrl || "images/placeholder.jpg";
-    productImage.alt = product.product_name || product.name;
+    productImage.src = product.product || "images/placeholder.jpg";
+    productImage.alt = product.product_name
     productImage.className = "product-image";
     
     // Product name - use product_name instead of name
     const productName = document.createElement("p");
-    productName.textContent = product.product_name || product.name;
+    productName.textContent = product.product_name;
     productName.className = "product-name";
     
     // Add all elements to card
