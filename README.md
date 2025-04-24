@@ -36,22 +36,98 @@ A Bootstrap framework segítségével gyorsan és hatékonyan hoztam létre resz
 
 ## Oldalak bemutatása
 Ez a weboldal 17 html oldalt vett igénybe:
-  1. index.html
-  2. home.html
-  3. mail.html
-  4. wishlist.html
-  5. cart.html
-  6. login.html
-  7. registration.html
-  8. profile.html
-  9. profileAddress.html
-  10. profileName.html
-  11. profilePic.html
-  12. profilePsw.html
-  13. setting.html
-  14. admin.html
-  15. add.html
-  16. pcp.html
-  17. tc.html
+  <details>
+  <summary><code>index.html</code></summary>
+  <p>Ez az oldal bevezeti a vásárlót a főoldalra. Innen lehet eljutni a home.html-re. Áttekintő, bevezető oldal, amely bemutatja a webáruház stílusát.</p>
+</details>
+
+<details>
+  <summary><code>home.html</code></summary>
+  <p>A termékek főoldala, ahol kategóriák és típusok szerint listázva jelennek meg a termékkártyák. Innen lehet hozzáadni a termékeket a kosárba vagy a kívánságlistába.</p>
+</details>
+
+<details>
+  <summary><code>mail.html</code></summary>
+  <p>Itt tekintheti meg a felhasználó az eddigi vásárlásait, minden rendelés eltárolásra kerül. A legújabbak felül jelennek meg.</p>
+</details>
+
+<details>
+  <summary><code>wishlist.html</code></summary>
+  <p>A felhasználó kívánságlistája. Bejelentkezés után itt gyűjtheti össze azokat a termékeket, amiket meg szeretne vásárolni később.</p>
+</details>
+
+<details>
+  <summary><code>cart.html</code></summary>
+  <p>A kosár oldala, ahol a kiválasztott termékek láthatók. Innen lehet továbblépni a vásárlásra vagy a termékek szerkesztésére.</p>
+</details>
+
+<details>
+  <summary><code>login.html</code></summary>
+  <p>A bejelentkezés felülete. A felhasználók itt tudnak belépni meglévő fiókjukkal.</p>
+</details>
+
+<details>
+  <summary><code>registration.html</code></summary>
+  <p>Új fiók létrehozása ezen az oldalon történik, név, email és jelszó megadásával.</p>
+</details>
+
+<details>
+  <summary><code>profile.html</code></summary>
+  <p>A felhasználó profiljának áttekintése. Innen elérhetők a profilbeállításokat kezelő oldalak.</p>
+</details>
+
+<details>
+  <summary><code>profileAddress.html</code></summary>
+  <p>A szállítási cím módosítására szolgáló oldal.</p>
+</details>
+
+<details>
+  <summary><code>profileName.html</code></summary>
+  <p>A felhasználónév módosítása ezen az oldalon történik.</p>
+</details>
+
+<details>
+  <summary><code>profilePic.html</code></summary>
+  <p>A profilkép kiválasztására és frissítésére szolgáló oldal. A változtatások azonnal megjelennek.</p>
+</details>
+
+<details>
+  <summary><code>profilePsw.html</code></summary>
+  <p>A jelszó módosítása biztonságos mezőkön keresztül történik. Jelenlegi és új jelszót is meg kell adni.</p>
+</details>
+
+<details>
+  <summary><code>setting.html</code></summary>
+  <p>Felhasználói beállítások áttekintése és módosítása.</p>
+</details>
+
+<details>
+  <summary><code>admin.html</code></summary>
+  <p>Az adminisztrátor számára készült oldal, ahonnan kezelheti a webshop termékeit.</p>
+</details>
+
+<details>
+  <summary><code>add.html</code></summary>
+  <p>Új termék hozzáadása az adatbázishoz. Az admin innen tölthet fel új cosplay vagy merch cikkeket.</p>
+</details>
+
+<details>
+  <summary><code>pcp.html</code></summary>
+  <p>Adatkezelési nyilatkozat – itt olvasható, hogyan kezeljük a felhasználók adatait.</p>
+</details>
+
+<details>
+  <summary><code>tc.html</code></summary>
+  <p>Felhasználási feltételek – a webshop használatára vonatkozó szabályzat.</p>
+</details>
 
 ## Funkcionalitások
+
+| Funkció                           | Leírás                                                                 |
+|----------------------------------|------------------------------------------------------------------------|
+| Kosárba helyezés                 | A felhasználó kiválaszthat termékeket, amiket a kosárba tehet.        |
+| Kívánságlistára helyezés         | Bejelentkezett felhasználók kívánságlistára tehetik a kiszemelt termékeket. |
+| Popup visszajelzések             | A SweetAlert2 használatával megjelenő üzenetek sikeres vagy hibás műveletekről. |
+| Profilkép frissítése             | A felhasználó módosíthatja a profilképét, amely azonnal frissül a profil oldalon. |
+| Bejelentkezés / Regisztráció figyelés | A rendszer figyeli, hogy be van-e jelentkezve a felhasználó, és ennek megfelelően ad hozzáférést funkciókhoz. |
+| Admin termék hozzáadás           | Az admin felület lehetőséget biztosít új termékek feltöltésére.       |
