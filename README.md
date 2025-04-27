@@ -131,3 +131,14 @@ Ez a weboldal 17 html oldalt vett igénybe:
 | Profilkép frissítése             | A felhasználó módosíthatja a profilképét, amely azonnal frissül a profil oldalon. |
 | Bejelentkezés / Regisztráció figyelés | A rendszer figyeli, hogy be van-e jelentkezve a felhasználó, és ennek megfelelően ad hozzáférést funkciókhoz. |
 | Admin termék hozzáadás           | Az admin felület lehetőséget biztosít új termékek feltöltésére.       |
+
+### Reszponzív dizájn
+
+<p>Az oldal mobilról és tabletről is könnyen kezelhető a Bootstrap és egyéni CSS megoldások segítségével.</p>
+
+Media Query-k használata (CSS3)
+* Olyan szabályokat írtam, amelyek csak bizonyos képernyőszélesség esetén érvényesülnek. Például mobilnézetnél a termékkártyák egymás alá rendeződnek, míg asztali nézetben rácsszerű elrendezést kapnak.
+* 768px, 1024px figyelembevételével alakítottam a nézeteket.
+
+Grid elrendezések
+* A rugalmas elrendezések lehetővé teszik, hogy az elemek helyezkedése dinamikusan változzon a képernyőmérettől függően.
