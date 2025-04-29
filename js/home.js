@@ -228,7 +228,7 @@ const purchaseProduct = async (product_id, quantity) => {
 // Toggle wishlist function
 async function toggleWishlist(id, name) {
   try {
-    const res = await fetch(`/api/wishlist/toggle/${id}`, {
+    const res = await fetch(`/api/wishlist/${id}`, {
       method: "POST", // vagy külön GET/POST/DELETE is lehet
       credentials: "include"
     });
