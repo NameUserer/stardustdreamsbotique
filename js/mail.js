@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById("messages-container");
     
     // For debugging - let's check what's in localStorage
-    console.log("Purchase History:", JSON.parse(localStorage.getItem("purchaseHistory") || "[]"));
+    console.log("Full Purchase Object:", purchase);
+    console.log("Products Array:", purchase.products);
     
     const purchaseHistory = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
   

@@ -294,20 +294,17 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Found cart items:", cartItemElements.length);
     
     cartItemElements.forEach(item => {
-        // Get product name
-        const productName = item.querySelector(".cart-item-title")?.textContent || "Product";
-        
-        // Get product image URL
+        const productName = item.querySelector(".cart-item-title")?.textContent.trim() || "Product";
         const productImage = item.querySelector(".cart-item-image")?.src || "";
-        
-        // Get product price
+
         const priceText = item.querySelector(".cart-item-price")?.textContent || "";
-        const price = parseFloat(priceText.replace(/[^\d,.]/g, "")) || 0;
-        
-        // Get quantity
+        const price = parseFloat(
+            priceText.replace(/[^\d,\.]/g, "").replace(",", ".")
+        ) || 0;
+
         const quantityInput = item.querySelector(".quantity-input");
         const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
-        
+
         items.push({
             name: productName,
             imageUrl: productImage,
