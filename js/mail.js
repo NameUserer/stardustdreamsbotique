@@ -116,14 +116,23 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   
       messageBox.querySelector(".delete-btn").addEventListener("click", () => {
-        purchaseHistory.splice(index, 1);
-        localStorage.setItem("purchaseHistory", JSON.stringify(purchaseHistory));
+        // Reload from localStorage
+        let updatedPurchaseHistory = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
+        
+        // Find the matching purchase by date
+        updatedPurchaseHistory = updatedPurchaseHistory.filter(p => p.purchaseDate !== purchase.purchaseDate);
+        
+        // Save back to localStorage
+        localStorage.setItem("purchaseHistory", JSON.stringify(updatedPurchaseHistory));
+        
+        // Remove the message box from the DOM
         messageBox.remove();
-  
-        if (purchaseHistory.length === 0) {
-          container.innerHTML = "<p>No purchases found.</p>";
+    
+        // If no purchases left, show "No purchases found."
+        if (updatedPurchaseHistory.length === 0) {
+            container.innerHTML = "<p>No purchases found.</p>";
         }
-      });
+    });
   
       container.appendChild(messageBox);
     });
