@@ -182,7 +182,7 @@ async function likeProduct(product_id) {
 
 async function unlikeProduct(product_id) {
   try {
-    const res = await fetch(`/api/like/${product_id}`, {
+    const res = await fetch(`/api/likes/${product_id}`, {
       method: "DELETE",
       credentials: "include",
     });
