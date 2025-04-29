@@ -2,8 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById("messages-container");
     
     // For debugging - let's check what's in localStorage
-    console.log("Full Purchase Object:", purchase);
-    console.log("Products Array:", purchase.products);
+    console.log("Purchase History:", JSON.parse(localStorage.getItem("purchaseHistory") || "[]"));
     
     const purchaseHistory = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
   
@@ -116,23 +115,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   
       messageBox.querySelector(".delete-btn").addEventListener("click", () => {
-        // Reload from localStorage
-        let updatedPurchaseHistory = JSON.parse(localStorage.getItem("purchaseHistory")) || [];
-        
-        // Find the matching purchase by date
-        updatedPurchaseHistory = updatedPurchaseHistory.filter(p => p.purchaseDate !== purchase.purchaseDate);
-        
-        // Save back to localStorage
-        localStorage.setItem("purchaseHistory", JSON.stringify(updatedPurchaseHistory));
-        
-        // Remove the message box from the DOM
+        purchaseHistory.splice(index, 1);
+        localStorage.setItem("purchaseHistory", JSON.stringify(purchaseHistory));
         messageBox.remove();
-    
-        // If no purchases left, show "No purchases found."
-        if (updatedPurchaseHistory.length === 0) {
-            container.innerHTML = "<p>No purchases found.</p>";
+  
+        if (purchaseHistory.length === 0) {
+          container.innerHTML = "<p>No purchases found.</p>";
         }
-    });
+      });
   
       container.appendChild(messageBox);
     });
