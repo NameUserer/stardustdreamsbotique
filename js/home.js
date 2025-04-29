@@ -228,40 +228,18 @@ const purchaseProduct = async (product_id, quantity) => {
 // Toggle wishlist function
 async function toggleWishlist(id, name) {
   try {
-    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-    const index = wishlist.findIndex((item) => String(item.id) === String(id));
-    console.log(`Toggling wishlist for product ${id}, found at index ${index}`);
+    const res = await fetch(`/api/wishlist/toggle/${id}`, {
+      method: "POST", // vagy külön GET/POST/DELETE is lehet
+      credentials: "include"
+    });
 
-    if (index > -1) {
-      // Remove from wishlist
-      wishlist.splice(index, 1);
-      try {
-        await fetch(`/api/like/${id}`, { method: "DELETE", credentials: "include" });
-      } catch (apiError) {
-        console.warn("API error when removing from wishlist:", apiError);
-        // Continue anyway - we'll at least update localStorage
-      }
-      console.log(`Removed product ${id} from wishlist`);
-    } else {
-      // Add to wishlist
-      wishlist.push({ id, name });
-      try {
-        await fetch(`/api/likes/${id}`, { method: "POST", credentials: "include" });
-      } catch (apiError) {
-        console.warn("API error when adding to wishlist:", apiError);
-        // Continue anyway - we'll at least update localStorage
-      }
-      console.log(`Added product ${id} to wishlist`);
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.error || "Toggle failed");
     }
 
-    // Update localStorage with the latest wishlist
-    localStorage.setItem("wishlist", JSON.stringify(wishlist));
-    console.log("Updated wishlist:", wishlist);
-    
-    // Return the updated wishlist
-    return wishlist;
+    return true;
   } catch (error) {
-    console.error("Error toggling wishlist:", error);
-    throw error;
+    console.error("Wishlist toggle error:", error);
   }
 }

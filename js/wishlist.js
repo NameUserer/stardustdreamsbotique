@@ -122,16 +122,47 @@ async function removeFromWishlist(productId) {
 
 // Toggle wishlist function
 async function toggleWishlist(id, name) {
-  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-  const index = wishlist.findIndex((item) => item.id === id);
+  try {
+    const res = await fetch(`/api/wishlist/toggle/${id}`, {
+      method: "POST", // vagy külön GET/POST/DELETE is lehet
+      credentials: "include"
+    });
 
-  if (index > -1) {
-    wishlist.splice(index, 1);
-    await fetch(`/api/likes/${id}`, { method: "DELETE", credentials: "include" });
-  } else {
-    wishlist.push({ id, name });
-    await fetch(`/api/likes/${id}`, { method: "POST", credentials: "include" });
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.error || "Toggle failed");
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Wishlist toggle error:", error);
   }
-
-  localStorage.setItem("wishlist", JSON.stringify(wishlist));
 }
+
+
+//add to cart/buy
+const purchaseProduct = async (product_id, quantity) => {
+  try {
+    const response = await fetch('/api/cart/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`,
+      },
+      body: JSON.stringify({
+        product_id: product_id,
+        quantity: 1,
+      }),
+    });
+
+    const result = await response.json();
+    if (response.ok) {
+      console.log("Product added to cart:", result);
+    } else {
+      console.error("Error:", result.error);
+      console.log(product_id, quantity);
+    }
+  } catch (error) {
+    console.error("Request failed:", error);
+  }
+};
