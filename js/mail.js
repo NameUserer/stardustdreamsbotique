@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
       messageBox.style.borderRadius = "10px";
       messageBox.style.padding = "20px";
       messageBox.style.marginBottom = "30px";
-      messageBox.style.backgroundColor = "#f9f9f9";
+      messageBox.style.backgroundColor = "#ffffff";
       
       // Format purchase date if available
       let dateString = "";
@@ -47,73 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <img src="./img/bin.png" alt="Delete" class="delete-icon" style="width: 20px; height: 20px;">
         </button>
       `;
-  
-      const productsContainer = messageBox.querySelector(".product-container");
       
-      // Check if products exist and is an array
-      if (!purchase.products || !Array.isArray(purchase.products) || purchase.products.length === 0) {
-        productsContainer.innerHTML = "<p>No product details available</p>";
-      } else {
-        purchase.products.forEach(product => {
-          console.log("Processing product:", product); // Debug log
-          
-          const cardDiv = document.createElement("div");
-          cardDiv.classList.add("card");
-          cardDiv.style.width = "12rem";
-          cardDiv.style.border = "1px solid #ddd";
-          cardDiv.style.borderRadius = "8px";
-          cardDiv.style.overflow = "hidden";
-          cardDiv.style.marginBottom = "10px";
-          cardDiv.style.backgroundColor = "#fff";
-  
-          const cardImg = document.createElement("img");
-          // Check if image path is valid and exists
-          const imagePath = product.imageUrl || "";
-          cardImg.onerror = () => {
-            cardImg.src = "./img/placeholder.png"; // Fallback if image doesn't load
-            console.log("Image failed to load:", imagePath);
-          };
-          cardImg.src = imagePath;
-          cardImg.alt = product.name || "Product";
-          cardImg.classList.add("card-img-top");
-          cardImg.style.width = "100%";
-          cardImg.style.height = "120px";
-          cardImg.style.objectFit = "cover";
-  
-          const cardBody = document.createElement("div");
-          cardBody.classList.add("card-body");
-          cardBody.style.padding = "10px";
-  
-          const cardTitle = document.createElement("h6");
-          cardTitle.classList.add("card-title");
-          cardTitle.style.margin = "0";
-          cardTitle.style.fontSize = "14px";
-          cardTitle.textContent = product.name || "Product";
-  
-          cardBody.appendChild(cardTitle);
-  
-          // Add price if available
-          if (product.price) {
-            const priceText = document.createElement("p");
-            priceText.classList.add("card-text");
-            priceText.style.margin = "5px 0 0 0";
-            priceText.style.fontSize = "12px";
-            priceText.textContent = `$${product.price.toFixed(2)}`;
-            
-            // Add quantity if available
-            if (product.quantity && product.quantity > 1) {
-              priceText.textContent += ` × ${product.quantity}`;
-            }
-            
-            cardBody.appendChild(priceText);
-          }
-  
-          cardDiv.appendChild(cardImg);
-          cardDiv.appendChild(cardBody);
-          productsContainer.appendChild(cardDiv);
-        });
-      }
-  
       messageBox.querySelector(".delete-btn").addEventListener("click", () => {
         purchaseHistory.splice(index, 1);
         localStorage.setItem("purchaseHistory", JSON.stringify(purchaseHistory));
