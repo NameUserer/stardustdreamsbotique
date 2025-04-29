@@ -122,23 +122,19 @@ async function removeFromWishlist(productId) {
 
 // Toggle wishlist function
 async function toggleWishlist(id, name) {
-  try {
-    const res = await fetch(`/api/wishlist/toggle/${id}`, {
-      method: "POST", // vagy külön GET/POST/DELETE is lehet
-      credentials: "include"
-    });
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  const index = wishlist.findIndex((item) => item.id === id);
 
-    if (!res.ok) {
-      const data = await res.json();
-      throw new Error(data.error || "Toggle failed");
-    }
-
-    return true;
-  } catch (error) {
-    console.error("Wishlist toggle error:", error);
+  if (index > -1) {
+    wishlist.splice(index, 1);
+    await fetch(`/api/likes/${id}`, { method: "DELETE", credentials: "include" });
+  } else {
+    wishlist.push({ id, name });
+    await fetch(`/api/likes/${id}`, { method: "POST", credentials: "include" });
   }
-}
 
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+}
 
 //add to cart/buy
 const purchaseProduct = async (product_id, quantity) => {

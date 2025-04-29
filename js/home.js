@@ -224,3 +224,18 @@ const purchaseProduct = async (product_id, quantity) => {
     console.error("Request failed:", error);
   }
 };
+
+async function toggleWishlist(id, name) {
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  const index = wishlist.findIndex((item) => item.id === id);
+
+  if (index > -1) {
+    wishlist.splice(index, 1);
+    await fetch(`/api/likes/${id}`, { method: "DELETE", credentials: "include" });
+  } else {
+    wishlist.push({ id, name });
+    await fetch(`/api/likes/${id}`, { method: "POST", credentials: "include" });
+  }
+
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+}
