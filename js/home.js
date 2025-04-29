@@ -224,22 +224,3 @@ const purchaseProduct = async (product_id, quantity) => {
     console.error("Request failed:", error);
   }
 };
-
-// Toggle wishlist function
-async function toggleWishlist(id, name) {
-  try {
-    const res = await fetch(`/api/wishlist/${id}`, {
-      method: "POST", // vagy külön GET/POST/DELETE is lehet
-      credentials: "include"
-    });
-
-    if (!res.ok) {
-      const data = await res.json();
-      throw new Error(data.error || "Toggle failed");
-    }
-
-    return true;
-  } catch (error) {
-    console.error("Wishlist toggle error:", error);
-  }
-}
