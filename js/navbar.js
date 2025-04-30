@@ -53,9 +53,9 @@ async function handleAccountClick() {
       cancelButtonColor: "#D6AEE9"
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = 'login.html'; // Redirect to login page
+        window.location.href = 'login.html';
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        window.location.href = 'registration.html'; // Redirect to sign up page
+        window.location.href = 'registration.html';
       }
     });
   }
@@ -64,11 +64,10 @@ async function handleAccountClick() {
 window.addEventListener("DOMContentLoaded", () => {
   const accountIcon = document.getElementById("accountIcon");
 
-  // Make sure user is logged in (you could also use a cookie or another flag)
-  const isLoggedIn = true; // Replace this with your actual login check
+  const isLoggedIn = true;
 
   if (isLoggedIn) {
-      fetch("/api/profile/pic") // Your backend endpoint
+      fetch("/api/profile/pic")
           .then(response => response.json())
           .then(data => {
               if (data && data.profilePicUrl) {
