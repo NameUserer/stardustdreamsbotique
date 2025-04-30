@@ -22,10 +22,12 @@ async function getProfilPic() {
     const data = await res.json();
     console.log(data);
 
-    if (res.ok && Array.isArray(data) && data.length > 0 && data[0].profile_pic) {
-        const editPic = document.getElementsByClassName('edit-pic')[0];
-        editPic.style.backgroundImage = `url('/uploads/${data[0].profile_pic}')`;
-    }
+    // if (res.ok && Array.isArray(data) && data.length > 0 && data[0].profile_pic) {
+    //     const editPic = document.getElementsByClassName('edit-pic')[0];
+    //     editPic.style.backgroundImage = `url('/uploads/${data[0].profile_pic}')`;
+    // }
+    const profilePicture = document.querySelector('.edit-pic');
+    profilePicture.style.backgroundImage = `url(${data.profile_pic})`;
 }
 
 async function getUsername() {
