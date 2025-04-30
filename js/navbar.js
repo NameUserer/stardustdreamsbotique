@@ -90,6 +90,6 @@ async function getProfilPic() {
   const data = await res.json();
   console.log(data);
 
-  const navIcon = document.querySelector('#navIcon');
-  navIcon.src = `/uploads/${data.profile_pic}`;
+  const accountIcon = document.querySelector('#accountIcon');
+  accountIcon.src = `/uploads/${data.profile_pic}`;
 }
