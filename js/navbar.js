@@ -28,6 +28,7 @@ async function restrictedNav(page) {
 mail.addEventListener('click', () => restrictedNav('mail'));
 wl.addEventListener('click', () => restrictedNav('wishlist'));
 cart.addEventListener('click', () => restrictedNav('cart'));
+window.addEventListener('DOMContentLoaded', getProfilPic);
 
 // Home is always accessible
 home.addEventListener('click', () => {
