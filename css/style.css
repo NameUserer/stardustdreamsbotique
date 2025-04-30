@@ -247,6 +247,10 @@ body {
     cursor: pointer;
 }
 
+.navbar #menu {
+    cursor: pointer;
+}
+
 .navbar .icon:hover {
     background-color: var(--delivered);
 }
