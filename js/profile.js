@@ -27,7 +27,7 @@ async function getProfilPic() {
     //     editPic.style.backgroundImage = `url('/uploads/${data[0].profile_pic}')`;
     // }
     const profilePicture = document.querySelector('.edit-pic');
-    profilePicture.style.backgroundImage = `url(${data.profile_pic})`;
+    profilePicture.style.backgroundImage = `url(/uploads/${data.profile_pic})`;
 }
 
 async function getUsername() {
