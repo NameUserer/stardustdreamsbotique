@@ -24,8 +24,6 @@ async function getProfilPic() {
 
     const profilePicture = document.querySelector('.edit-pic');
     profilePicture.style.backgroundImage = `url(/uploads/${data.profile_pic})`;
-    const navIcon = document.querySelector('#navIcon');
-    navIcon.src = `/uploads/${data.profile_pic}`;
 }
 
 async function getUsername() {
