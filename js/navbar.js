@@ -79,3 +79,18 @@ window.addEventListener("DOMContentLoaded", () => {
           });
   }
 });
+
+async function getProfilPic() {
+  const res = await fetch('/api/profile/pic', {
+      method: 'GET',
+      credentials: 'include'
+  });
+
+  const data = await res.json();
+  console.log(data);
+
+  const profilePicture = document.querySelector('.edit-pic');
+  profilePicture.style.backgroundImage = `url(/uploads/${data.profile_pic})`;
+  const navIcon = document.querySelector('#navIcon');
+  navIcon.src = `/uploads/${data.profile_pic}`;
+}
