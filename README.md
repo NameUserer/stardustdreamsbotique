@@ -39,7 +39,7 @@ Ez a weboldal 17 html oldalt vett igénybe:
   <details>
   <summary><code>index.html</code></summary>
   <p>Ez az oldal bevezeti a vásárlót a főoldalra. Innen lehet eljutni a home.html-re. Áttekintő, bevezető oldal, amely bemutatja a webáruház stílusát.</p>
-  ![Index](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/welcomepage.png)
+  ![wellcomepage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/welcomepage.png)
 </details>
 
 <details>
