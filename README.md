@@ -39,6 +39,7 @@ Ez a weboldal 17 html oldalt vett igénybe:
   <details>
   <summary><code>index.html</code></summary>
   <p>Ez az oldal bevezeti a vásárlót a főoldalra. Innen lehet eljutni a home.html-re. Áttekintő, bevezető oldal, amely bemutatja a webáruház stílusát.</p>
+  ![Welcome Page](img/wellcomepage.png)
 </details>
 
 <details>
@@ -142,3 +143,96 @@ Media Query-k használata (CSS3)
 
 Grid elrendezések
 * A rugalmas elrendezések lehetővé teszik, hogy az elemek helyezkedése dinamikusan változzon a képernyőmérettől függően.
+
+```css
+@media (max-width: 768px) {
+    .box {
+        width: 80%;
+    }
+    .table {
+        border-bottom-left-radius: 40px;
+        border-bottom-right-radius: 40px;
+    }
+    .web p {
+        margin-top: 7%;
+        margin-bottom: 7%;
+    }
+    .app p {
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+    .web{
+        margin-top: 15px;
+    }
+    .form-group input{
+        width: 100%;
+    }
+    .search{
+        width: 90%;
+        height: 60px;
+        top: 75px;
+        justify-content: space-around;
+    }
+    .searchbar{
+        width: 70%;
+        height: 50px;
+    }
+    .searchbar input {
+        width: 60%;
+    }
+    .filterbutton {
+        width: 50px;
+        height: 50px;
+    }
+    .search img {
+        width: 30px;
+        height: 30px;
+    }
+    .navbar{
+        flex-direction: row;
+        justify-content: space-around;
+        width: 90%;
+        height: 60px;
+        top: 10px;
+    }
+    .navbar img {
+        width: 30px;
+        height: 30px;
+        object-fit: fill;
+    }
+    .navbar .icon {
+        width: 45px;
+        height: 45px;
+        align-items: center;
+        justify-content: center;
+        margin-top: -15px;
+    }
+
+    .info{
+        flex-direction: row;
+        justify-content: space-around;
+        width: 95%;
+        height: 70px;
+        bottom: 20px;
+    }
+
+    .info div {
+        margin-top: 5%;
+    }
+
+    .info button {
+        margin: 1%;
+    }
+    .add button {
+        font-size: 20px;
+        border-radius: 30px;
+        width: 100px;
+        height: 50px;
+        position: fixed;
+        bottom: auto;
+        top: 1%;
+        right: 5%;
+    }
+}
+```
+[Frontend elérhetősége](https://stardustdreams.netlify.app/home.html)
