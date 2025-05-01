@@ -39,8 +39,6 @@ Ez a weboldal 17 html oldalt vett igénybe:
   <details>
   <summary><code>index.html</code></summary>
   <p>Ez az oldal bevezeti a vásárlót a főoldalra. Innen lehet eljutni a home.html-re. Áttekintő, bevezető oldal, amely bemutatja a webáruház stílusát.</p>
-  ![Welcome Page](img/wellcomepage.png)
-  ![image](https://github.com/user-attachments/assets/6c6eae4a-7bef-4b0f-9fd1-bb444832d28d)
 </details>
 
 <details>
