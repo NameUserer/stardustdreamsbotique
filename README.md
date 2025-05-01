@@ -39,8 +39,9 @@ Ez a weboldal 17 html oldalt vett igénybe:
   <details>
   <summary><code>index.html</code></summary>
   <p>Ez az oldal bevezeti a vásárlót a főoldalra. Innen lehet eljutni a home.html-re. Áttekintő, bevezető oldal, amely bemutatja a webáruház stílusát.</p>
+  
 </details>
-
+![index](https://github.com/wellcomepage.png)
 <details>
   <summary><code>home.html</code></summary>
   <p>A termékek főoldala, ahol kategóriák és típusok szerint listázva jelennek meg a termékkártyák. Innen lehet hozzáadni a termékeket a kosárba vagy a kívánságlistába.</p>
