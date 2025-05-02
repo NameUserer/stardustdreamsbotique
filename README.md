@@ -40,7 +40,6 @@ Ez a weboldal 17 html oldalt vett igénybe:
   <summary><code>index.html</code></summary>
   <p>Ez az oldal bevezeti a vásárlót a főoldalra. Innen lehet eljutni a home.html-re. Áttekintő, bevezető oldal, amely bemutatja a webáruház stílusát.</p>
   ![wellcomepage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/welcomepage.png)
-  ![image](https://github.com/NameUserer/stardustdreamsbotique/master/img/welcomepage.png)
 </details>
 
 <details>
@@ -66,11 +65,13 @@ Ez a weboldal 17 html oldalt vett igénybe:
 <details>
   <summary><code>login.html</code></summary>
   <p>A bejelentkezés felülete. A felhasználók itt tudnak belépni meglévő fiókjukkal.</p>
+  ![loginpage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/loginpage.png)
 </details>
 
 <details>
   <summary><code>registration.html</code></summary>
   <p>Új fiók létrehozása ezen az oldalon történik, név, email és jelszó megadásával.</p>
+  ![singuppage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/singuppage.png)
 </details>
 
 <details>
@@ -116,11 +117,13 @@ Ez a weboldal 17 html oldalt vett igénybe:
 <details>
   <summary><code>pcp.html</code></summary>
   <p>Adatkezelési nyilatkozat – itt olvasható, hogyan kezeljük a felhasználók adatait.</p>
+  ![pcppage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/pcppage.png)
 </details>
 
 <details>
   <summary><code>tc.html</code></summary>
   <p>Felhasználási feltételek – a webshop használatára vonatkozó szabályzat.</p>
+  ![tcpage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/tcpage.png)
 </details>
 
 ## Funkcionalitások
