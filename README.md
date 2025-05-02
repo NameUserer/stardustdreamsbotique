@@ -45,97 +45,97 @@ Ez a weboldal 17 html oldalt vett igénybe:
 <details>
   <summary><code>home.html</code></summary>
   <p>A termékek főoldala, ahol kategóriák és típusok szerint listázva jelennek meg a termékkártyák. Innen lehet hozzáadni a termékeket a kosárba vagy a kívánságlistába.</p>
-  ![homepage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/homepage.png)
+  <img src="https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/homepage.png" alt="wellcomepage" width="1000" />
 </details>
 
 <details>
   <summary><code>mail.html</code></summary>
   <p>Itt tekintheti meg a felhasználó az eddigi vásárlásait, minden rendelés eltárolásra kerül. A legújabbak felül jelennek meg.</p>
-  ![mailpage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/mailpage.png)
+  <img src="https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/mailpage.png" alt="wellcomepage" width="1000" />
 </details>
 
 <details>
   <summary><code>wishlist.html</code></summary>
   <p>A felhasználó kívánságlistája. Bejelentkezés után itt gyűjtheti össze azokat a termékeket, amiket meg szeretne vásárolni később.</p>
-  ![wishlistpage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/wishlistpage.png)
+  <img src="https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/wishlistpage.png" alt="wellcomepage" width="1000" />
 </details>
 
 <details>
   <summary><code>cart.html</code></summary>
   <p>A kosár oldala, ahol a kiválasztott termékek láthatók. Innen lehet továbblépni a vásárlásra vagy a termékek szerkesztésére.</p>
-  ![cartpage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/cartpage.png)
+  <img src="https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/cartpage.png" alt="wellcomepage" width="1000" />
 </details>
 
 <details>
   <summary><code>login.html</code></summary>
   <p>A bejelentkezés felülete. A felhasználók itt tudnak belépni meglévő fiókjukkal.</p>
-  ![loginpage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/loginpage.png)
+  <img src="https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/loginpage.png" alt="wellcomepage" width="1000" />
 </details>
 
 <details>
   <summary><code>registration.html</code></summary>
   <p>Új fiók létrehozása ezen az oldalon történik, név, email és jelszó megadásával.</p>
-  ![singuppage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/singuppage.png)
+  <img src="https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/singuppage.png" alt="wellcomepage" width="1000" />
 </details>
 
 <details>
   <summary><code>profile.html</code></summary>
   <p>A felhasználó profiljának áttekintése. Innen elérhetők a profilbeállításokat kezelő oldalak.</p>
-  ![profilepage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/profilepage.png)
+  <img src="https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/profilepage.png" alt="wellcomepage" width="1000" />
 </details>
 
 <details>
   <summary><code>profileAddress.html</code></summary>
   <p>A szállítási cím módosítására szolgáló oldal.</p>
-  ![addresspage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/addresspage.png)
+  <img src="https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/addresspage.png" alt="wellcomepage" width="1000" />
 </details>
 
 <details>
   <summary><code>profileName.html</code></summary>
   <p>A felhasználónév módosítása ezen az oldalon történik.</p>
-  ![usernamepage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/usernamepage.png)
+  <img src="https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/usernamepage.png" alt="wellcomepage" width="1000" />
 </details>
 
 <details>
   <summary><code>profilePic.html</code></summary>
   <p>A profilkép kiválasztására és frissítésére szolgáló oldal. A változtatások azonnal megjelennek.</p>
-  ![profilepicpage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/profilepicpage.png)
+  <img src="https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/profilepicpage.png" alt="wellcomepage" width="1000" />
 </details>
 
 <details>
   <summary><code>profilePsw.html</code></summary>
   <p>A jelszó módosítása biztonságos mezőkön keresztül történik. Jelenlegi és új jelszót is meg kell adni.</p>
-  ![passwordpage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/passwordpage.png)
+  <img src="https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/passwordpage.png" alt="wellcomepage" width="1000" />
 </details>
 
 <details>
   <summary><code>setting.html</code></summary>
   <p>Felhasználói beállítások áttekintése és módosítása.</p>
-  ![settingpage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/settingpage.png)
+  <img src="https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/settingpage.png" alt="wellcomepage" width="1000" />
 </details>
 
 <details>
   <summary><code>admin.html</code></summary>
   <p>Az adminisztrátor számára készült oldal, ahonnan kezelheti a webshop termékeit.</p>
-  ![adminpage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/adminpage.png)
+  <img src="https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/adminpage.png" alt="wellcomepage" width="1000" />
 </details>
 
 <details>
   <summary><code>add.html</code></summary>
   <p>Új termék hozzáadása az adatbázishoz. Az admin innen tölthet fel új cosplay vagy merch cikkeket.</p>
-  ![addpage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/addpage.png)
+  <img src="https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/addpage.png" alt="wellcomepage" width="1000" />
 </details>
 
 <details>
   <summary><code>pcp.html</code></summary>
   <p>Adatkezelési nyilatkozat – itt olvasható, hogyan kezeljük a felhasználók adatait.</p>
-  ![pcppage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/pcppage.png)
+  <img src="https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/pcppage.png" alt="wellcomepage" width="1000" />
 </details>
 
 <details>
   <summary><code>tc.html</code></summary>
   <p>Felhasználási feltételek – a webshop használatára vonatkozó szabályzat.</p>
-  ![tcpage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/tcpage.png)
+  <img src="https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/tcpage.png" alt="wellcomepage" width="1000" />
 </details>
 
 ## Funkcionalitások
