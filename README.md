@@ -111,7 +111,7 @@ Ez a weboldal 17 html oldalt vett igénybe:
 <details>
   <summary><code>setting.html</code></summary>
   <p>Felhasználói beállítások áttekintése és módosítása.</p>
-  ![singuppage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/singuppage.png)
+  ![settingpage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/settingpage.png)
 </details>
 
 <details>
