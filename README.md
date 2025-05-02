@@ -6,7 +6,6 @@
 
 
 ## Rövid leírás:
-![wellcomepage](https://raw.githubusercontent.com/NameUserer/stardustdreamsbotique/master/img/welcomepage.png)
 A Stardust Dream Boutique egy olyan online webáruház, amely elsősorban Hoyo-verse témájú jelmezekre és merch termékekre specializálódik.
 A célközönség főként cosplay-rajongók, szerepjátékosok és azok, akik különleges ruhákat és kiegészítőket keresnek rendezvényekre vagy saját örömükre.
 A weboldal letisztult dizájnnal, felhasználóbarát felépítéssel készült, hogy a vásárlási élmény egyszerű legyen.
